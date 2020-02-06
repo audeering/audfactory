@@ -61,7 +61,7 @@ docs:
   script:
     - pip install -r docs/requirements.txt
     - python -m sphinx -W docs/ build/html -b html
-    - python -m sphinx -W docs/ build/linkcheck -b linkcheck
+    # - python -m sphinx -W docs/ build/linkcheck -b linkcheck
   artifacts:
     paths:
       - build/
@@ -88,14 +88,18 @@ pypi:
   image: docker.audeering.com/python:3.6
   variables:
     TWINE_REPOSITORY_URL: https://artifactory.audeering.com/artifactory/api/pypi/pypi
-    TWINE_USERNAME: ARTIFACTORY_USERNAME
-    TWINE_PASSWORD: ARTIFACTORY_API_KEY
+  before_script:
+    - apt-get update
+    - apt-get install -y sox curl jq pandoc
+    - export TWINE_USERNAME=${GITLAB_USER_LOGIN}
+    - export TWINE_PASSWORD=$(cat token.json | jq -r '.access_token')
+    - python -V
   script:
     - pip install twine
     - python setup.py sdist bdist_wheel
     - python -m twine upload --repository local dist/*
   dependencies:
-    - docs  # is this needed?
+    - generate-token
   only:
     refs:
       - tags
