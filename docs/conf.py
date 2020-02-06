@@ -1,4 +1,8 @@
+import os
 from subprocess import check_output
+import sys
+
+import audeer
 
 
 # Project -----------------------------------------------------------------
@@ -41,3 +45,26 @@ html_theme_options = {
     'logo_only': False,
 }
 html_title = title
+
+
+# Run examples ------------------------------------------------------------
+# Execute all Python files stored under docs/examples/
+# and store the resulting output under docs/examples/output/
+input_dir = os.path.abspath('./examples')
+output_dir = os.path.abspath('./examples/output')
+audeer.mkdir(output_dir)
+examples = audeer.list_file_names(input_dir)
+orig_stdout = sys.stdout
+for example in examples:
+    output_file = os.path.join(
+        output_dir,
+        audeer.basename_wo_ext(example) + '.txt',
+    )
+    with open(output_file, 'w') as f:
+        sys.stdout = f
+        try:
+            exec(open(example).read())
+        except Exception as e:
+            raise(e)
+        finally:
+            sys.stdout = orig_stdout

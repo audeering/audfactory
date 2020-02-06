@@ -21,105 +21,56 @@ Alternatively, they can provide them as environment variables:
     export ARTIFACTORY_API_KEY="MY_API_KEY"
 
 
-Quickstart
-----------
+Artifactory
+-----------
 
-To use a database (e.g. emodb_) in your project do:
+Artifacts are stored under the following name space on Artifactory:
 
-.. code-block:: python
+* ``group_id``: group ID of an artifact, e.g. ``'com.audeering.data.timit'``
+* ``name``: name of an artifact, e.g. ``'timit'``
+* ``version``: version of an artifact, e.g. ``1.0.1``
 
-    >>> import audb
-    >>> db = audb.load('emodb')  # load database
-    >>> db['emotion'].get()  # access annotations
-                       emotion speaker sentence
-    file
-    wav/03a01Fa.wav  happiness       3      a01
-    wav/03a01Nc.wav    neutral       3      a01
-    wav/03a01Wa.wav      anger       3      a01
-    ...
-    >>> audb.exists('emodb')  # get root of database
-    /home/user/audb/emodb/1
-    >>> audb.remove('emodb')  # remove database
+Those three parts are arguments to most of the functions
+inside :mod:`audfactory`.
+They are also used in a slightly modified way to specify dependencies:
 
-Note that when you request a database for the first time,
-the following steps will be executed:
+* ``group_id:name:version``, e.g. ``'com.audeering.data.timit:timit:1.0.1'``
 
-1. Annotations and audio files are loaded from Artifactory to
-   ``<cache_root>/.archive``.
+Dependencies are arguments or return arguments of some functions as well.
 
-2. Annotations and data are unpacked and converted to
-   ``<cache_root>/1/<name>``.
-
-.. _emodb:
-    https://gitlab.audeering.com/data/emodb
+For every artifact a POM file is stored on Artifactory as well.
+It contains metadata and dependency information.
 
 
-Data conversion
----------------
+Examples
+--------
 
-When loading a database, audio files can be automatically converted.
-This creates a new *flavor* of the database.
-The following properties can be changed:
+You can query the available versions of an artifact:
 
-.. code-block::
+.. literalinclude:: examples/versions.py
 
-    File format: ['wav', 'flac']
-    Sampling rate: [8000, 16000, 2250, 44100, 48000]
-    Remix strategy: ['mono', 'left', 'right', 'stereo']
+.. literalinclude:: examples/output/versions.txt
 
-Example:
+Can get a dictionary containing the `transitive dependencies`_
+of an artifact:
 
-.. code-block:: python
+.. literalinclude:: examples/get-deps.py
 
-    >>> db = audb.load('emodb', format='flac', mix='stereo')
-    >>> audb.exists('emodb', format='flac', mix='stereo')
-    /home/user/audb/emodb/2
+.. literalinclude:: examples/output/get-deps.txt
 
-This will convert the original files to FLAC
-with a sampling rate of 44100 Hz.
-For each flavor a sub-folder will be created (here ``2``).
-The new audio format is added to the header of the converted database:
+You can print the transitive dependencies as a nice dependency graph:
 
-.. code-block:: yaml
+.. literalinclude:: examples/print-deps.py
 
-    emodb:
-      ...
-      media:
-        microphone: {type: audio, format: wav, sampling_rate: 16000, channels: 1}
-        audb: {type: audio, format: flac, channels: 2, mix: stereo}
-      ...
+.. literalinclude:: examples/output/print-deps.txt
+
+Or you can get a list of all the artifacts included
+in the dependency tree:
+
+.. literalinclude:: examples/list-artifacts.py
+
+.. literalinclude:: examples/output/list-artifacts.txt
 
 
-Metadata only
--------------
-
-It is also possible to request only the metadata of a database.
-In that case audio files are not loaded:
-
-.. code-block:: python
-
-    >>> db = audb.load('emodb', only_metadata=True)
-
-
-Cache root
-----------
-
-``cache_root`` points to the local folder where the databases are stored.
-By default, is set to ``~/audb``.
-
-There are two ways to overwrite this location:
-
-1. Explicitly, by setting the argument ``cache_root``
-   during a call to :func:`audb.load`, e.g:
-
-.. code-block:: python
-
-  >>> db = audb.load('emodb', cache_root='/my/cache')
-
-2. Implicitly, through the system variables ``AUDB_CACHE_ROOT``, e.g.:
-
-.. code-block::
-
-    export AUDB_CACHE_ROOT=/my/audb
-
-Note that 1. overwrites 2.
+.. _transitive dependencies:
+    https://docs.gradle.org/current/userguide/dependency_management_terminology.html#sub:terminology_transitive_dependency
