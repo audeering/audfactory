@@ -333,6 +333,60 @@ def test_server_pom_url(group_id, name, version, expected_url):
 
 
 @pytest.mark.parametrize(
+    'versions,expeted_versions',
+    [
+        (
+            ['0.1.1', '2.23.3', '3.0'],
+            ['0.1.1', '2.23.3', '3.0'],
+        ),
+        (
+            ['1.0.0', '1.0.0-SNASPHOT'],
+            ['1.0.0-SNASPHOT', '1.0.0'],
+        ),
+        (
+            ['1.0.0', '1.0.0-SNAPSHOT', '2.0.0'],
+            ['1.0.0-SNAPSHOT', '1.0.0', '2.0.0'],
+        ),
+        (
+            [
+                '1.0.0-SNAPSHOT',
+                '4.0.0-20200206.095424-2',
+                '1.0.0',
+                '2.0.0-20200131.102442-1',
+                '3.0.0',
+                '3.1.0',
+                '4.0.0-20200206.095316-1',
+                '3.2.0',
+                '2.0.0-20200131.102728-2',
+                '3.3.0',
+                '3.4.0',
+                '4.0.0-20200206.095534-3',
+                '4.0.0',
+            ],
+            [
+                '1.0.0-SNAPSHOT',
+                '1.0.0',
+                '2.0.0-20200131.102442-1',
+                '2.0.0-20200131.102728-2',
+                '3.0.0',
+                '3.1.0',
+                '3.2.0',
+                '3.3.0',
+                '3.4.0',
+                '4.0.0-20200206.095316-1',
+                '4.0.0-20200206.095424-2',
+                '4.0.0-20200206.095534-3',
+                '4.0.0',
+            ],
+        ),
+    ],
+)
+def test_sort_versions(versions, expeted_versions):
+    versions = audfactory.sort_versions(versions)
+    assert versions == expeted_versions
+
+
+@pytest.mark.parametrize(
     'group_id,name,version,expected_url',
     [
         (

@@ -12,6 +12,7 @@ from audfactory.core.api import (
     rest_api_request,
     server_pom_url,
     server_url,
+    sort_versions,
     transitive_dependencies,
     transitive_dependencies_as_string,
     versions,

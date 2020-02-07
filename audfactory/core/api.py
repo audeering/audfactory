@@ -442,6 +442,59 @@ def server_pom_url(
     )
 
 
+def sort_versions(versions: List[str]) -> List:
+    """Sort version and snapshot versions.
+
+    As no Python package provides the desired results,
+    we implement the sorting ourselves.
+
+    Args:
+        versions: list with versions
+
+    Returns:
+        sorted list of version with highest as last entry
+
+    Example:
+        >>> vers = [
+        ...     '1.0.0',
+        ...     '2.0.0',
+        ...     '2.0.0-SNAPSHOT',
+        ... ]
+        >>> sort_versions(vers)
+        ['1.0.0', '2.0.0-SNAPSHOT', '2.0.0']
+
+    """
+    versions = sorted(versions)
+    # Now we have to move SNAPSHOT before the stable releases
+    sorted_versions = []
+    n = 0
+    while n < len(versions):
+        v = versions[n].split('-')
+        # Non snapshot version
+        if len(v) == 1:
+            # Make sure we include the last entry of the list
+            if n + 1 == len(versions):
+                sorted_versions.append('-'.join(v))
+            # Check if the following up entries are SNAPSHOTs
+            # that needs to be shifted to the front
+            while n + 1 < len(versions):
+                v_next = versions[n + 1].split('-')
+                if len(v_next) == 1 or v_next[0] != v[0]:
+                    sorted_versions.append('-'.join(v))
+                    break
+                else:
+                    sorted_versions.append('-'.join(v_next))
+                    n = n + 1
+                    # Again make sure we handle the end of the list
+                    if n + 1 == len(versions):
+                        sorted_versions.append('-'.join(v))
+        # Snapshot version
+        else:
+            sorted_versions.append(versions[n])
+        n = n + 1
+    return sorted_versions
+
+
 def transitive_dependencies(
         pom: Dict,
         *,
@@ -574,56 +627,6 @@ def versions(
         ['1.0.0', '1.0.1']
 
     """
-    def sort_versions(versions):
-        """Sort version and snapshot versions.
-
-        As no Python package provides the desired results,
-        we implement the sorting ourselves.
-
-        Desired order is::
-
-            [
-                '0.0.1',
-                '1.0.0-SNAPSHOT',
-                '1.0.0-20200131.093409-1',
-                '1.0.0',
-                '2.0.0-20200131.093409-1',
-                '2.0.0-20200131.102728-2',
-                '2.0.0',
-                '3.0.0',
-                '3.1.0',
-            ]
-
-        """
-        versions = sorted(versions)
-        # Now we have to move SNAPSHOT before the stable releases
-        sorted_versions = []
-        n = 0
-        while n < len(versions):
-            v = versions[n].split('-')
-            # Non snapshot version
-            if len(v) == 1:
-                # Make sure we include the last entry of the list
-                if n + 1 == len(versions):
-                    sorted_versions.append('-'.join(v))
-                # Check if the following up entries are SNAPSHOTs
-                # that needs to be shifted to the front
-                while n + 1 < len(versions):
-                    v_next = versions[n + 1].split('-')
-                    if len(v_next) == 1 or v_next[0] != v[0]:
-                        sorted_versions.append('-'.join(v))
-                        break
-                    else:
-                        sorted_versions.append('-'.join(v_next))
-                        n = n + 1
-                        # Again make sure we handle the end of the list
-                        if n + 1 == len(versions):
-                            sorted_versions.append('-'.join(v))
-            # Snapshot version
-            else:
-                sorted_versions.append(versions[n])
-            n = n + 1
-        return sorted_versions
 
     if pattern is None:
         pattern = '*'

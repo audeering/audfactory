@@ -64,6 +64,11 @@ server_pom_url
 
 .. autofunction:: server_pom_url
 
+sort_versions
+-------------
+
+.. autofunction:: sort_versions
+
 transitive_dependencies
 -----------------------
 
