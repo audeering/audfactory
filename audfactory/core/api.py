@@ -33,6 +33,18 @@ def artifactory_path(
     Returns:
         Artifactory path object similar to pathlib.Path
 
+    Example:
+        >>> path = artifactory_path(
+        ...     'https://artifactory.audeering.com/artifactory/maven/'
+        ...     'com/audeering/data/timit/'
+        ... )
+        >>> for p in path:
+        ...     print(os.path.basename(str(p)))
+        ...
+        timit-metadata
+        timit-data
+        timit
+
     """
     apikey = os.getenv('ARTIFACTORY_API_KEY', None)
     username = os.getenv('ARTIFACTORY_USERNAME', None)
@@ -55,6 +67,15 @@ def dependencies(
 
     Returns:
         sorted list of dependencies
+
+    Example:
+        >>> pom = download_pom(
+        ...     'https://artifactory.audeering.com/artifactory/maven/'
+        ...     'com/audeering/data/timit/timit/1.0.1/timit-1.0.1.pom'
+        ... )
+        >>> dependencies(pom)
+        ['com.audeering.data.timit:timit-data:1.0.1',
+         'com.audeering.data.timit:timit-metadata:1.0.1']
 
     """
     try:
@@ -102,6 +123,16 @@ def download_artifacts(
 
     Raises:
         RuntimeError: if the provided artifact URLs are not valid
+
+    Example:
+        >>> files = download_artifacts(
+        ...     [('https://artifactory.audeering.com/artifactory/maven/'
+        ...       'com/audeering/data/audbunittests/audbunittests-data/'
+        ...       '4.0.0/audbunittests-data-4.0.0.flac')],
+        ...     '.',
+        ... )
+        >>> os.path.basename(files[0])
+        'audbunittests-data-4.0.0.flac'
 
     """
     destination = audeer.safe_path(destination)
@@ -169,6 +200,14 @@ def download_pom(
 
     Returns:
         parsed POM
+
+    Example:
+        >>> pom = download_pom(
+        ...     'https://artifactory.audeering.com/artifactory/maven/'
+        ...     'edu/upenn/ldc/timit/1.0.1/timit-1.0.1.pom'
+        ... )
+        >>> pom['project']['url']
+        'https://catalog.ldc.upenn.edu/LDC93S1'
 
     """
     pom_path = artifactory_path(pom_url)
@@ -277,6 +316,12 @@ def list_artifacts(
 
     Returns:
         list of all included artifact URLs
+
+    Example:
+        >>> deps = {'a:a:1.0.0': {'b:b:1.0.0': 'zip', 'c:c:1.2.0': 'zip'}}
+        >>> artifacts = list_artifacts(deps)
+        >>> [os.path.basename(a) for a in artifacts]
+        ['b-1.0.0.zip', 'c-1.2.0.zip']
 
     """
     artifact_urls = []
