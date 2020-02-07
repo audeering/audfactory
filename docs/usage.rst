@@ -17,8 +17,8 @@ Alternatively, they can provide them as environment variables:
 
 .. code-block:: bash
 
-    export ARTIFACTORY_USERNAME="MY_USERNAME"
-    export ARTIFACTORY_API_KEY="MY_API_KEY"
+    $ export ARTIFACTORY_USERNAME="MY_USERNAME"
+    $ export ARTIFACTORY_API_KEY="MY_API_KEY"
 
 
 Artifactory
@@ -51,7 +51,7 @@ You can query the available versions of an artifact:
 
 .. literalinclude:: examples/output/versions.txt
 
-Can get a dictionary containing the `transitive dependencies`_
+You can get a dictionary containing the `transitive dependencies`_
 of an artifact:
 
 .. literalinclude:: examples/get-deps.py
