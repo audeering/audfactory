@@ -25,15 +25,16 @@ generate-token:
 .pytest:
   before_script:
     - apt-get update
-    - apt-get install -y sox
-    - apt-get install -y curl
-    - apt-get install -y jq
-    - apt-get install -y pandoc
-    - export ARTIFACTORY_API_KEY=$(cat token.json | jq -r '.access_token')
-    - export ARTIFACTORY_USERNAME=${GITLAB_USER_LOGIN}
+    - apt-get install -y sox curl jq pandoc
+    - username=${GITLAB_USER_LOGIN}
+    - api_key=$(cat token.json | jq -r '.access_token')
+    - export ARTIFACTORY_USERNAME=${username}
+    - export ARTIFACTORY_API_KEY=${api_key}
+    - export TWINE_USERNAME=${username}
+    - export TWINE_PASSWORD=${api_key}
     - python -V
-    - pip install -r requirements.txt
   script:
+    - pip install -r requirements.txt
     - pip install -r tests/requirements.txt
     - python -m pytest
   dependencies:
@@ -59,6 +60,7 @@ docs:
   stage: test
   image: docker.audeering.com/python:3.6
   script:
+    - pip install -r requirements.txt
     - pip install -r docs/requirements.txt
     - python -m sphinx -W docs/ build/html -b html
     - python -m sphinx -W docs/ build/linkcheck -b linkcheck
@@ -84,22 +86,15 @@ pages:
 
 
 pypi:
+  extends: .pytest
   stage: pypi
   image: docker.audeering.com/python:3.6
   variables:
     TWINE_REPOSITORY_URL: https://artifactory.audeering.com/artifactory/api/pypi/pypi
-  before_script:
-    - apt-get update
-    - apt-get install -y sox curl jq pandoc
-    - export TWINE_USERNAME=${GITLAB_USER_LOGIN}
-    - export TWINE_PASSWORD=$(cat token.json | jq -r '.access_token')
-    - python -V
   script:
     - pip install twine
     - python setup.py sdist bdist_wheel
     - python -m twine upload --repository local dist/*
-  dependencies:
-    - generate-token
   only:
     refs:
       - tags
