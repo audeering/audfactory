@@ -506,13 +506,6 @@ def transitive_dependencies_as_string(
 
     This function is designed to be recursively called.
 
-    Returns a string that produces output like this if printed::
-
-        +-com.audeering.data.emodb:emodb:0.2.2
-          +-com.audeering.data.emodb:emodb-data:0.2.2
-          | +-info.bilderbar.emodb:emodb:1.0.0 (zip)
-          +-com.audeering.data.emodb:emodb-metadata:0.2.2 (zip)
-
     Args:
         d: dependency tree
         prefix: string printed in front of ``+-``.
