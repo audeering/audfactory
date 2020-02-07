@@ -63,7 +63,7 @@ def dependencies(
     and each entry has the form: ``'{group_id}:{name}:{version}'``
 
     Args:
-        pom: POM of database the dependencies are extracted from
+        pom: POM of artifact the dependencies are extracted from
 
     Returns:
         sorted list of dependencies
@@ -456,7 +456,7 @@ def transitive_dependencies(
     is stored as the dictionary value.
 
     Args:
-        pom: POM of database
+        pom: POM of artifact
         verbose: show progress messages
 
     Returns:
@@ -644,8 +644,8 @@ def versions(
             '\n'
             'The reason could be that you '
             'don\'t have access rights for the specified '
-            'database, used the wrong group_id, '
-            'or misspelled the database.'
+            'artifact, used the wrong group_id, '
+            'or misspelled the artifact.'
             .format(group_id, name)
         )
     versions = [v['version'] for v in r.json()['results']]
