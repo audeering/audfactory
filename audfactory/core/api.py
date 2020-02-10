@@ -603,7 +603,7 @@ def versions(
         name: str,
         *,
         pattern: str = None
-) -> str:
+) -> List:
     r"""Versions of an artifact on Artifactory.
 
     It considers stable and snapshot releases.
