@@ -97,6 +97,7 @@ def download_artifacts(
         *,
         chunk: int = 4 * 1024,
         force_download: bool = False,
+        repository: str = 'maven',
         verbose: bool = True,
 ) -> List:
     r"""Download listed artifacts.
@@ -112,6 +113,7 @@ def download_artifacts(
         chunk: amount of data read at once during the download
         force_download: forces the artifact to be downloaded
             even if it exists locally already
+        repository: repository of artifact
         verbose: show information on the download process
 
     Returns:
@@ -150,7 +152,7 @@ def download_artifacts(
             pbar.set_description_str(desc)
             pbar.refresh()
 
-            repo_url = f'{config.ARTIFACTORY_ROOT}/{config.ARTIFACTORY_REPO}'
+            repo_url = f'{config.ARTIFACTORY_ROOT}/{repository}'
             if artifact_url.startswith(repo_url):
                 # Extract destination path from source URL
                 relative_url = artifact_url[len(repo_url):]
@@ -297,6 +299,8 @@ def include_dependencies(
 
 def list_artifacts(
         deps: Dict,
+        *,
+        repository: str = 'maven',
 ) -> List:
     r"""Extract all artifacts from a nested dependency tree.
 
@@ -305,6 +309,7 @@ def list_artifacts(
 
     Args:
         deps: dependency tree
+        repository: repository of dependencies
 
     Returns:
         list of all included artifact URLs
@@ -324,7 +329,12 @@ def list_artifacts(
                 artifact_urls += list_artifacts(value)
             else:
                 group_id, name, version = key.split(':')
-                pom_url = server_pom_url(group_id, name, version)
+                pom_url = server_pom_url(
+                    group_id,
+                    name,
+                    version,
+                    repository=repository,
+                )
                 artifact_urls += [pom_url.replace('.pom', '.' + value)]
     # Ensure unique entries as some packages might have duplicted ones
     return sorted(list(set(artifact_urls)))
@@ -332,6 +342,8 @@ def list_artifacts(
 
 def rest_api_request(
         pattern: str,
+        *,
+        repository: str = 'maven',
 ) -> requests.models.Response:
     """Execute a GET REST API query.
 
@@ -340,6 +352,7 @@ def rest_api_request(
 
     Args:
         pattern: search pattern
+        repository: repository to be used for the request
 
     Returns:
         server response
@@ -351,8 +364,7 @@ def rest_api_request(
 
     """
     search_url = (
-        f'{config.ARTIFACTORY_ROOT}/api/search/{pattern}'
-        f'&repos={config.ARTIFACTORY_REPO}'
+        f'{config.ARTIFACTORY_ROOT}/api/search/{pattern}&repos={repository}'
     )
     # Authentification
     apikey = os.getenv('ARTIFACTORY_API_KEY', None)
@@ -368,6 +380,7 @@ def server_url(
         group_id: str,
         *,
         name: str = None,
+        repository: str = 'maven',
         version: str = None,
 ) -> str:
     r"""Creates Artifactory URL from group_id, name, and version.
@@ -375,6 +388,7 @@ def server_url(
     Args:
         group_id: group ID of artifact
         name: name of artifact
+        repository: repository of artifact
         version: version of artifact
 
     Returns:
@@ -392,13 +406,15 @@ def server_url(
         url = f'{group_id}/{name}'
     else:
         url = group_id
-    return f'{config.ARTIFACTORY_ROOT}/{config.ARTIFACTORY_REPO}/{url}'
+    return f'{config.ARTIFACTORY_ROOT}/{repository}/{url}'
 
 
 def server_pom_url(
         group_id: str,
         name: str,
         version: str,
+        *,
+        repository: str = 'maven',
 ) -> str:
     r"""URL of POM generated from name, group_id, version.
 
@@ -409,6 +425,7 @@ def server_pom_url(
         group_id: group ID of artifact
         name: name of artifact
         version: version of artifact
+        repository: repository of artifact
 
     Returns:
         URL to POM
@@ -423,10 +440,13 @@ def server_pom_url(
         version_folder = version.split('-')[0] + '-SNAPSHOT'
     else:
         version_folder = version
-    return (
-        f'{server_url(group_id, name=name, version=version_folder)}/'
-        f'{name}-{version}.pom'
+    url = server_url(
+        group_id,
+        name=name,
+        repository=repository,
+        version=version_folder,
     )
+    return f'{url}/{name}-{version}.pom'
 
 
 def sort_versions(
@@ -487,6 +507,7 @@ def sort_versions(
 def transitive_dependencies(
         pom: Dict,
         *,
+        repository: str = 'maven',
         verbose: bool = False,
 ) -> Dict:
     r"""Extract all transitive dependencies of a POM.
@@ -499,6 +520,9 @@ def transitive_dependencies(
 
     Args:
         pom: POM of artifact
+        repository: repository of artifact.
+            If a dependency is not available in the specified repository,
+            :func:`transitive_dependencies` will fail
         verbose: show progress messages
 
     Returns:
@@ -518,7 +542,12 @@ def transitive_dependencies(
 
         for dep in deps:
             group_id, name, version = dep.split(':')
-            pom_url = server_pom_url(group_id, name, version)
+            pom_url = server_pom_url(
+                group_id,
+                name,
+                version,
+                repository=repository,
+            )
             if verbose:
                 desc = audeer.format_display_message(
                     f'Dependencies: {dep}',
@@ -528,6 +557,7 @@ def transitive_dependencies(
             pom = download_pom(pom_url)
             transitive_deps[dep] = transitive_dependencies(
                 pom,
+                repository=repository,
                 verbose=verbose,
             )
 
@@ -590,6 +620,7 @@ def versions(
         name: str,
         *,
         pattern: str = None,
+        repository: str = 'maven',
 ) -> List:
     r"""Versions of an artifact on Artifactory.
 
@@ -601,6 +632,7 @@ def versions(
         pattern: limit versions to specified pattern.
             Could be ``'1.*'``
             or a snapshot like ``'1.1.1-SNAPSHOT'``
+        repository: repository of artifact
 
     Returns:
         versions of artifact on Artifactory
@@ -623,7 +655,7 @@ def versions(
             f'It has to end with \'-SNAPSHOT\' or inlcude \'*\'.'
         )
     query_pattern = f'versions?g={group_id}&a={name}&v={pattern}'
-    r = rest_api_request(query_pattern)
+    r = rest_api_request(query_pattern, repository=repository)
     if r.status_code != 200:
         raise RuntimeError(
             f'Error trying to get versions for:\n'

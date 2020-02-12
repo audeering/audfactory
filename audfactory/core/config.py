@@ -5,7 +5,7 @@ class config:
     to public database releases::
 
         import audfactory
-        audfactory.config.ARTIFACTORY_REPO = 'data-public-release-local'
+        audfactory.config.ARTIFACTORY_URL = 'https://artf.audeering.com/artf'
 
     """
 
@@ -13,8 +13,3 @@ class config:
         'https://artifactory.audeering.com/artifactory'
     )
     """Artifactory URL"""
-
-    ARTIFACTORY_REPO = (
-        'maven'
-    )
-    """Artifactory repository"""

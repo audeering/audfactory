@@ -12,10 +12,9 @@ from example_poms import (
 )
 
 
-def artifactory(path):
-    """Add artifactory URL in front of path."""
-    url = 'https://artifactory.audeering.com/artifactory/maven/'
-    return url + path
+def artifactory(path, repo='maven'):
+    """Add artifactory URL in front of repo and path."""
+    return f'https://artifactory.audeering.com/artifactory/{repo}/{path}'
 
 
 @pytest.mark.parametrize(
@@ -303,18 +302,20 @@ def test_rest_api_request(pattern, expected_text):
 
 
 @pytest.mark.parametrize(
-    'group_id,name,version,expected_url',
+    'group_id,name,version,repository,expected_url',
     [
         (
             'org.data.d1',
             'd1',
             '0.1.0',
+            'maven',
             'org/data/d1/d1/0.1.0/d1-0.1.0.pom'
         ),
         (
             'de.dfki.mary',
             'dfkisemaine',
             '0.3.0-SNAPSHOT',
+            'data-public-snapshot-local',
             ('de/dfki/mary/dfkisemaine/0.3.0-SNAPSHOT/'
              'dfkisemaine-0.3.0-SNAPSHOT.pom'),
         ),
@@ -322,14 +323,20 @@ def test_rest_api_request(pattern, expected_text):
             'com.audeering.data.audbunittests',
             'audbunittests',
             '2.0.0-20200131.102728-2',
+            'maven',
             ('com/audeering/data/audbunittests/audbunittests/2.0.0-SNAPSHOT/'
              'audbunittests-2.0.0-20200131.102728-2.pom'),
         ),
     ],
 )
-def test_server_pom_url(group_id, name, version, expected_url):
-    expected_url = artifactory(expected_url)
-    url = audfactory.server_pom_url(group_id, name, version)
+def test_server_pom_url(group_id, name, version, repository, expected_url):
+    expected_url = artifactory(expected_url, repo=repository)
+    url = audfactory.server_pom_url(
+        group_id,
+        name,
+        version,
+        repository=repository,
+    )
     assert url == expected_url
 
 
@@ -388,41 +395,46 @@ def test_sort_versions(versions, expeted_versions):
 
 
 @pytest.mark.parametrize(
-    'group_id,name,version,expected_url',
+    'group_id,name,repository,version,expected_url',
     [
         (
             '',
             None,
+            'maven',
             None,
             '',
         ),
         (
             'com.audeering.data',
             None,
+            'maven',
             None,
             'com/audeering/data',
         ),
         (
             'com.audeering.data',
             'database',
+            'data-public-release-local',
             None,
             'com/audeering/data/database',
         ),
         (
             'com.audeering.data',
             'database',
+            'maven',
             '1.1.0',
             'com/audeering/data/database/1.1.0',
         ),
     ],
 )
-def test_server_url(group_id, name, version, expected_url):
+def test_server_url(group_id, name, version, repository, expected_url):
     url = audfactory.server_url(
         group_id,
         name=name,
+        repository=repository,
         version=version,
     )
-    expected_url = artifactory(expected_url)
+    expected_url = artifactory(expected_url, repo=repository)
     assert url == expected_url
 
 
