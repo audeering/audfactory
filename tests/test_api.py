@@ -1,4 +1,3 @@
-from collections import OrderedDict
 import copy
 import os
 import pytest
@@ -269,11 +268,13 @@ def test_include_dependencies(deps, pattern, expected_deps):
             [],
         ),
         (
-            OrderedDict([('com.audeering.data.emodb:emodb-data:0.2.2',
-                          OrderedDict([('info.bilderbar.emodb:emodb:1.0.0',
-                                        'zip')])),
-                         ('com.audeering.data.emodb:emodb-metadata:0.2.2',
-                          'zip')]),
+            {
+                'com.audeering.data.emodb:emodb-data:0.2.2':
+                    {
+                        'info.bilderbar.emodb:emodb:1.0.0': 'zip',
+                        'com.audeering.data.emodb:emodb-metadata:0.2.2': 'zip',
+                    },
+            },
             [('com/audeering/data/emodb/emodb-metadata/0.2.2/'
               'emodb-metadata-0.2.2.zip'),
              'info/bilderbar/emodb/emodb/1.0.0/emodb-1.0.0.zip']
@@ -438,11 +439,11 @@ def test_server_url(group_id, name, version, expected_url):
         ),
         (
             emodb_pom,
-            OrderedDict([('com.audeering.data.emodb:emodb-data:0.2.2',
-                          OrderedDict([('info.bilderbar.emodb:emodb:1.0.0',
-                                        'zip')])),
-                         ('com.audeering.data.emodb:emodb-metadata:0.2.2',
-                          'zip')]),
+            {
+                'com.audeering.data.emodb:emodb-data:0.2.2':
+                    {'info.bilderbar.emodb:emodb:1.0.0': 'zip'},
+                'com.audeering.data.emodb:emodb-metadata:0.2.2': 'zip',
+            }
         ),
     ],
 )
@@ -459,11 +460,11 @@ def test_transitive_dependencies(pom, expected_deps):
             '',
         ),
         (
-            OrderedDict([('com.audeering.data.emodb:emodb-data:0.2.2',
-                          OrderedDict([('info.bilderbar.emodb:emodb:1.0.0',
-                                        'zip')])),
-                         ('com.audeering.data.emodb:emodb-metadata:0.2.2',
-                          'zip')]),
+            {
+                'com.audeering.data.emodb:emodb-data:0.2.2':
+                    {'info.bilderbar.emodb:emodb:1.0.0': 'zip'},
+                'com.audeering.data.emodb:emodb-metadata:0.2.2': 'zip',
+            },
             ('+-com.audeering.data.emodb:emodb-data:0.2.2\n'
              '| +-info.bilderbar.emodb:emodb:1.0.0 (zip)\n'
              '+-com.audeering.data.emodb:emodb-metadata:0.2.2 (zip)\n'),

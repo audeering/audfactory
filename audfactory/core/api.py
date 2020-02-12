@@ -1,4 +1,3 @@
-from collections import OrderedDict
 import os
 import re
 from typing import Dict, List, Tuple
@@ -185,7 +184,7 @@ def download_artifacts(
 
 def download_pom(
         pom_url: str,
-) -> OrderedDict:
+) -> Dict:
     r"""Retrieves a POM from Artifactory.
 
     Args:
@@ -212,7 +211,7 @@ def download_pom(
 def exclude_dependencies(
         deps: Dict,
         pattern: str,
-) -> OrderedDict:
+) -> Dict:
     r"""Exclude nodes of a transitive dependency tree.
 
     Args:
@@ -225,10 +224,10 @@ def exclude_dependencies(
     Example:
         >>> deps = {'a': {'b': {'c': {'c1': [], 'c2': []}, 'd': []}}}
         >>> exclude_dependencies(deps, pattern='c')
-        OrderedDict([('a', OrderedDict([('b', OrderedDict([('d', [])]))]))])
+        {'a': {'b': {'d': []}}}
 
     """
-    filtered_deps = OrderedDict()
+    filtered_deps = {}
     for key, value in deps.items():
         if re.match(pattern, key):
             continue
@@ -265,7 +264,7 @@ def group_id_to_path(
 def include_dependencies(
         deps: Dict,
         pattern: str,
-) -> OrderedDict:
+) -> Dict:
     r"""Include nodes of a transitive dependency tree.
 
     Args:
@@ -278,10 +277,10 @@ def include_dependencies(
     Example:
         >>> deps = {'a': {'b': {'c': {'c1': [], 'c2': []}, 'd': []}}}
         >>> include_dependencies(deps, pattern='d')
-        OrderedDict([('a', OrderedDict([('b', OrderedDict([('d', [])]))]))])
+        {'a': {'b': {'d': []}}}
 
     """
-    filtered_deps = OrderedDict()
+    filtered_deps = {}
     for key, value in deps.items():
         if re.match(pattern, key):
             filtered_deps[key] = value
@@ -489,7 +488,7 @@ def transitive_dependencies(
         pom: Dict,
         *,
         verbose: bool = False,
-) -> OrderedDict:
+) -> Dict:
     r"""Extract all transitive dependencies of a POM.
 
     Each dependency is used as a key of the dictionary
@@ -509,14 +508,12 @@ def transitive_dependencies(
         >>> url = server_pom_url('com.audeering.data.timit', 'timit', '1.0.0')
         >>> pom = download_pom(url)
         >>> transitive_dependencies(pom)
-        OrderedDict([('com.audeering.data.timit:timit-data:1.0.0',
-                      OrderedDict([('edu.upenn.ldc:timit:1.0.0', 'zip')])),
-                     ('com.audeering.data.timit:timit-metadata:1.0.0', 'zip')])
+        {'com.audeering.data.timit:timit-data:1.0.0': {'edu.upenn.ldc:timit:1.0.0': 'zip'}, 'com.audeering.data.timit:timit-metadata:1.0.0': 'zip'}
 
-    """
+    """  # noqa: E501
     package_type = _pom.type(pom)
     if package_type == 'pom':
-        transitive_deps = OrderedDict()
+        transitive_deps = {}
         deps = dependencies(pom)
 
         for dep in deps:
