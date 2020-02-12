@@ -40,11 +40,6 @@ generate-token:
   dependencies:
     - generate-token
 
-python-3.5:
-  extends: .pytest
-  stage: test
-  image: docker.audeering.com/python:3.5
-
 python-3.6:
   extends: .pytest
   stage: test
