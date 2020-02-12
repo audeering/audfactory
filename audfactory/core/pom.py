@@ -102,7 +102,7 @@ def license(pom: Dict) -> str:
             license += licenses['license']['name']
         if 'url' in licenses['license']:
             if licenses['license']['url']:
-                license += ' <{}>'.format(licenses['license']['url'])
+                license += f" <{licenses['license']['url']}>"
     return license
 
 

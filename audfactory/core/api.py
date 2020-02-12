@@ -87,10 +87,7 @@ def dependencies(
 
     def dict_to_string(d: Dict) -> str:
         """Dependency as 'group_id:name:version'."""
-        return (
-            '{}:{}:{}'
-            .format(_pom.group_id(d), _pom.name(d), _pom.version(d))
-        )
+        return f'{_pom.group_id(d)}:{_pom.name(d)}:{_pom.version(d)}'
 
     return sorted([dict_to_string(d) for d in deps])
 
@@ -148,16 +145,13 @@ def download_artifacts(
         for artifact_url in artifact_urls:
 
             desc = audeer.format_display_message(
-                'Scan {}'.format(os.path.basename(artifact_url)),
+                f'Scan {os.path.basename(artifact_url)}',
                 pbar=True,
             )
             pbar.set_description_str(desc)
             pbar.refresh()
 
-            repo_url = '{}/{}'.format(
-                config.ARTIFACTORY_ROOT,
-                config.ARTIFACTORY_REPO,
-            )
+            repo_url = f'{config.ARTIFACTORY_ROOT}/{config.ARTIFACTORY_REPO}'
             if artifact_url.startswith(repo_url):
                 # Extract destination path from source URL
                 relative_url = artifact_url[len(repo_url):]
@@ -169,8 +163,7 @@ def download_artifacts(
                 )
             else:
                 raise RuntimeError(
-                    '{} has to start with {}'
-                    .format(artifact_url, repo_url)
+                    f'{artifact_url} has to start with {repo_url}'
                 )
 
             # Append all destination paths,
@@ -359,8 +352,8 @@ def rest_api_request(
 
     """
     search_url = (
-        '{}/api/search/{}&repos={}'
-        .format(config.ARTIFACTORY_ROOT, pattern, config.ARTIFACTORY_REPO)
+        f'{config.ARTIFACTORY_ROOT}/api/search/{pattern}'
+        f'&repos={config.ARTIFACTORY_REPO}'
     )
     # Authentification
     apikey = os.getenv('ARTIFACTORY_API_KEY', None)
@@ -395,16 +388,12 @@ def server_url(
     """
     group_id = group_id_to_path(group_id)
     if name is not None and version is not None:
-        url = '{}/{}/{}'.format(group_id, name, version)
+        url = f'{group_id}/{name}/{version}'
     elif name is not None:
-        url = '{}/{}'.format(group_id, name)
+        url = f'{group_id}/{name}'
     else:
         url = group_id
-    return '{}/{}/{}'.format(
-        config.ARTIFACTORY_ROOT,
-        config.ARTIFACTORY_REPO,
-        url,
-    )
+    return f'{config.ARTIFACTORY_ROOT}/{config.ARTIFACTORY_REPO}/{url}'
 
 
 def server_pom_url(
@@ -435,10 +424,9 @@ def server_pom_url(
         version_folder = version.split('-')[0] + '-SNAPSHOT'
     else:
         version_folder = version
-    return '{}/{}-{}.pom'.format(
-        server_url(group_id, name=name, version=version_folder),
-        name,
-        version,
+    return (
+        f'{server_url(group_id, name=name, version=version_folder)}/'
+        f'{name}-{version}.pom'
     )
 
 
@@ -536,7 +524,7 @@ def transitive_dependencies(
             pom_url = server_pom_url(group_id, name, version)
             if verbose:
                 desc = audeer.format_display_message(
-                    'Dependencies: {}'.format(dep),
+                    f'Dependencies: {dep}',
                     pbar=False,
                 )
                 print(desc, end='\r')
@@ -581,7 +569,7 @@ def transitive_dependencies_as_string(
     """
     output = ''
     for n, (key, value) in enumerate(d.items()):
-        output += '{}+-{}\n'.format(prefix, key)
+        output += f'{prefix}+-{key}\n'
         if n < len(d) - 1:
             # Add | connection line to next dep on same level
             new_prefix = prefix + '| '
@@ -596,7 +584,7 @@ def transitive_dependencies_as_string(
             )
         else:
             # Leaf entry adds "(value)" to same line as corresponding key
-            output = '{} ({})\n'.format(output.rstrip(), str(value))
+            output = f'{output.rstrip()} ({str(value)})\n'
     return output
 
 
@@ -634,34 +622,31 @@ def versions(
         pattern = '*'
     if not pattern.endswith('-SNAPSHOT') and '*' not in pattern:
         raise ValueError(
-            'version pattern {} not valid. '
-            'It has to end with \'-SNAPSHOT\' or inlcude \'*\'.'
-            .format(pattern)
+            f'version pattern {pattern} not valid. '
+            f'It has to end with \'-SNAPSHOT\' or inlcude \'*\'.'
         )
-    query_pattern = 'versions?g={}&a={}&v={}'.format(group_id, name, pattern)
+    query_pattern = f'versions?g={group_id}&a={name}&v={pattern}'
     r = rest_api_request(query_pattern)
     if r.status_code != 200:
         raise RuntimeError(
-            'Error trying to get versions for:\n'
-            '\n'
-            '  group_id: {}\n'
-            '      name: {}\n'
-            '\n'
-            'The reason could be that you '
-            'don\'t have access rights for the specified '
-            'artifact, used the wrong group_id, '
-            'or misspelled the artifact.'
-            .format(group_id, name)
+            f'Error trying to get versions for:\n'
+            f'\n'
+            f'  group_id: {group_id}\n'
+            f'      name: {name}\n'
+            f'\n'
+            f'The reason could be that you '
+            f'don\'t have access rights for the specified '
+            f'artifact, used the wrong group_id, '
+            f'or misspelled the artifact.'
         )
     versions = [v['version'] for v in r.json()['results']]
     if not versions:
         raise RuntimeError(
-            'No version found for:\n'
-            '\n'
-            '  group_id: {}\n'
-            '      name: {}\n'
-            '   pattern: {}\n'
-            .format(group_id, name, pattern)
+            f'No version found for:\n'
+            f'\n'
+            f'  group_id: {group_id}\n'
+            f'      name: {name}\n'
+            f'   pattern: {pattern}\n'
         )
     return sort_versions(versions)
 
@@ -686,7 +671,7 @@ def _download_artifacts(
             dst_size = 0
 
             desc = audeer.format_display_message(
-                'Download {}'.format(os.path.basename(str(src_path))),
+                f'Download {os.path.basename(str(src_path))}',
                 pbar=True,
             )
             pbar.set_description_str(desc)
