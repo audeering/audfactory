@@ -13,7 +13,7 @@ from audfactory.core.config import config
 
 
 def artifactory_path(
-        url: str
+        url: str,
 ) -> ArtifactoryPath:
     r"""Authenticate at Artifactory and get path object.
 
@@ -55,7 +55,7 @@ def artifactory_path(
 
 
 def dependencies(
-        pom: Dict
+        pom: Dict,
 ) -> List:
     r"""Extract all direct dependencies from a POM.
 
@@ -101,7 +101,7 @@ def download_artifacts(
         *,
         chunk: int = 4 * 1024,
         force_download: bool = False,
-        verbose: bool = True
+        verbose: bool = True,
 ) -> List:
     r"""Download listed artifacts.
 
@@ -191,7 +191,7 @@ def download_artifacts(
 
 
 def download_pom(
-        pom_url: str
+        pom_url: str,
 ) -> OrderedDict:
     r"""Retrieves a POM from Artifactory.
 
@@ -218,7 +218,7 @@ def download_pom(
 
 def exclude_dependencies(
         deps: Dict,
-        pattern: str
+        pattern: str,
 ) -> OrderedDict:
     r"""Exclude nodes of a transitive dependency tree.
 
@@ -251,7 +251,7 @@ def exclude_dependencies(
 
 
 def group_id_to_path(
-        group_id: str
+        group_id: str,
 ) -> str:
     r"""Replaces ``.`` by ``/`` in group ID.
 
@@ -271,7 +271,7 @@ def group_id_to_path(
 
 def include_dependencies(
         deps: Dict,
-        pattern: str
+        pattern: str,
 ) -> OrderedDict:
     r"""Include nodes of a transitive dependency tree.
 
@@ -304,7 +304,7 @@ def include_dependencies(
 
 
 def list_artifacts(
-        deps: Dict
+        deps: Dict,
 ) -> List:
     r"""Extract all artifacts from a nested dependency tree.
 
@@ -339,7 +339,7 @@ def list_artifacts(
 
 
 def rest_api_request(
-        pattern: str
+        pattern: str,
 ) -> requests.models.Response:
     """Execute a GET REST API query.
 
@@ -376,7 +376,7 @@ def server_url(
         group_id: str,
         *,
         name: str = None,
-        version: str = None
+        version: str = None,
 ) -> str:
     r"""Creates Artifactory URL from group_id, name, and version.
 
@@ -410,7 +410,7 @@ def server_url(
 def server_pom_url(
         group_id: str,
         name: str,
-        version: str
+        version: str,
 ) -> str:
     r"""URL of POM generated from name, group_id, version.
 
@@ -442,7 +442,9 @@ def server_pom_url(
     )
 
 
-def sort_versions(versions: List[str]) -> List:
+def sort_versions(
+        versions: List[str],
+) -> List:
     """Sort version and snapshot versions.
 
     As no Python package provides the desired results,
@@ -498,7 +500,7 @@ def sort_versions(versions: List[str]) -> List:
 def transitive_dependencies(
         pom: Dict,
         *,
-        verbose: bool = False
+        verbose: bool = False,
 ) -> OrderedDict:
     r"""Extract all transitive dependencies of a POM.
 
@@ -553,7 +555,7 @@ def transitive_dependencies(
 def transitive_dependencies_as_string(
         d: Dict,
         *,
-        prefix: str = ''
+        prefix: str = '',
 ) -> str:
     r"""Transitive dependency graph as string output.
 
@@ -602,7 +604,7 @@ def versions(
         group_id: str,
         name: str,
         *,
-        pattern: str = None
+        pattern: str = None,
 ) -> List:
     r"""Versions of an artifact on Artifactory.
 
@@ -667,7 +669,7 @@ def versions(
 def _download_artifacts(
         download_items: List,
         chunk: int,
-        verbose: bool
+        verbose: bool,
 ):
     r"""Helper function called by download_artifacts"""
 
