@@ -3,6 +3,7 @@ from audfactory.core.config import config
 from audfactory.core.api import (
     artifactory_path,
     dependencies,
+    download_artifact,
     download_artifacts,
     download_pom,
     exclude_dependencies,

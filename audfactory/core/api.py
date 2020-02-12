@@ -1,10 +1,11 @@
 import os
 import re
-from typing import Dict, List, Tuple
+from typing import Dict, List, Tuple, Union
 
 from artifactory import ArtifactoryPath, get_global_config_entry
 import audeer
 import requests
+import tqdm
 import xmltodict
 
 from audfactory.core import pom as _pom
@@ -91,6 +92,93 @@ def dependencies(
     return sorted([dict_to_string(d) for d in deps])
 
 
+def download_artifact(
+        url: str,
+        destination: str = '.',
+        *,
+        chunk: int = 4 * 1024,
+        force_download: bool = True,
+        progress_bar: Union[bool, tqdm.std.tqdm] = False,
+) -> str:
+    r"""Download an artifact.
+
+    Args:
+        url: artifact URL
+        destination: path to store the artifact,
+            can be a folder or a file name
+        chunk: amount of data read at once during the download
+        force_download: forces the artifact to be downloaded
+            even if it exists locally already
+        progress_bar: if ``True`` shows a progress bar,
+            or if a progress bar object is given,
+            it updates the given one.
+            If ``False`` no output is shown
+
+    Returns:
+        path to local artifact
+
+    Example:
+        >>> file = download_artifact(
+        ...     ('https://artifactory.audeering.com/artifactory/maven/'
+        ...      'com/audeering/data/audbunittests/audbunittests-data/'
+        ...      '4.0.0/audbunittests-data-4.0.0.flac'),
+        ...     '.',
+        ... )
+        >>> os.path.basename(file)
+        'audbunittests-data-4.0.0.flac'
+
+    """
+    destination = audeer.safe_path(destination)
+    if os.path.isdir(destination):
+        destination = os.path.join(destination, os.path.basename(url))
+    if os.path.exists(destination) and not force_download:
+        return destination
+
+    src_path = artifactory_path(url)
+    src_size = ArtifactoryPath.stat(src_path).size
+
+    def download(src_path, src_size, destination, pbar):
+        try:
+            dst_size = 0
+            with src_path.open() as src_fp:
+                with open(destination, 'wb') as dst_fp:
+                    while src_size > dst_size:
+                        data = src_fp.read(chunk)
+                        n_data = len(data)
+                        if n_data > 0:
+                            dst_fp.write(data)
+                            dst_size += n_data
+                            if pbar is not False:
+                                pbar.update(n_data)
+        except (KeyboardInterrupt, Exception):
+            # Clean up broken artifact files
+            if os.path.exists(destination):
+                os.remove(destination)
+            raise
+
+    if progress_bar is True:
+        close_pbar_at_end = True
+        progress_bar = audeer.progress_bar(total=src_size, disable=False)
+    else:
+        close_pbar_at_end = False
+
+    if progress_bar is not False:
+        desc = audeer.format_display_message(
+            'Download {}'.format(os.path.basename(str(src_path))),
+            pbar=True,
+        )
+        progress_bar.set_description_str(desc)
+        progress_bar.refresh()
+
+    download(src_path, src_size, destination, progress_bar)
+
+    if close_pbar_at_end is True:
+        progress_bar.close()
+
+    return destination
+
+
+@audeer.deprecated(removal_version='0.4.0', alternative='download_artifact')
 def download_artifacts(
         artifact_urls: List,
         destination: str,
@@ -174,12 +262,28 @@ def download_artifacts(
             if not os.path.exists(dst_path) or force_download:
                 src_path = artifactory_path(artifact_url)
                 src_size = ArtifactoryPath.stat(src_path).size
-                download_items.append((dst_path, src_path, src_size))
+                download_items.append((dst_path, artifact_url, src_size))
 
             pbar.update()
 
     # Download artifacts
-    _download_artifacts(download_items, chunk, verbose)
+    if not download_items:
+        return dst_paths
+
+    total_download_size = sum([src_size for _, _, src_size in download_items])
+    with audeer.progress_bar(
+            total=total_download_size,
+            disable=not verbose,
+    ) as pbar:
+        for dst_path, url, _ in download_items:
+            audeer.mkdir(os.path.dirname(dst_path))
+            download_artifact(
+                url,
+                dst_path,
+                chunk=chunk,
+                force_download=force_download,
+                progress_bar=pbar,
+            )
 
     return dst_paths
 
@@ -678,46 +782,3 @@ def versions(
             f'   pattern: {pattern}\n'
         )
     return sort_versions(versions)
-
-
-def _download_artifacts(
-        download_items: List,
-        chunk: int,
-        verbose: bool,
-):
-    r"""Helper function called by download_artifacts"""
-
-    if not download_items:
-        return
-
-    total_download_size = sum([src_size for _, _, src_size in download_items])
-    with audeer.progress_bar(
-            total=total_download_size,
-            disable=not verbose,
-    ) as pbar:
-        for dst_path, src_path, src_size in download_items:
-            audeer.mkdir(os.path.dirname(dst_path))
-            dst_size = 0
-
-            desc = audeer.format_display_message(
-                f'Download {os.path.basename(str(src_path))}',
-                pbar=True,
-            )
-            pbar.set_description_str(desc)
-            pbar.refresh()
-
-            try:
-                with src_path.open() as src_fp:
-                    with open(dst_path, 'wb') as dst_fp:
-                        while src_size > dst_size:
-                            data = src_fp.read(chunk)
-                            n_data = len(data)
-                            if n_data > 0:
-                                dst_fp.write(data)
-                                dst_size += n_data
-                                pbar.update(n_data)
-            except (KeyboardInterrupt, Exception):
-                # Clean up broken artifact files
-                if os.path.exists(dst_path):
-                    os.remove(dst_path)
-                raise

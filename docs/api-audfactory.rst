@@ -19,10 +19,10 @@ dependencies
 
 .. autofunction:: dependencies
 
-download_artifacts
-------------------
+download_artifact
+-----------------
 
-.. autofunction:: download_artifacts
+.. autofunction:: download_artifact
 
 download_pom
 ------------

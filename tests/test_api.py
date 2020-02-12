@@ -2,6 +2,7 @@ import copy
 import os
 import pytest
 
+import audeer
 import audfactory
 
 from example_poms import (
@@ -64,6 +65,66 @@ def test_dependencies(pom, expected_deps):
     deps = audfactory.dependencies(pom)
     assert len(deps) == len(expected_deps)
     assert deps == expected_deps
+
+
+@pytest.mark.parametrize(
+    'url,destination,force_download,expected_path',
+    [
+        (
+            '',
+            '.',
+            False,
+            '',
+        ),
+        (
+            ('com/audeering/data/emodb/emodb-metadata/0.2.2/'
+             'emodb-metadata-0.2.2.zip'),
+            '.',
+            False,
+            'emodb-metadata-0.2.2.zip',
+        ),
+        (
+            ('com/audeering/data/emodb/emodb-metadata/0.2.2/'
+             'emodb-metadata-0.2.2.zip'),
+            '.',
+            True,
+            'emodb-metadata-0.2.2.zip',
+        ),
+        (
+            ('com/audeering/data/emodb/emodb-metadata/0.2.2/'
+             'emodb-metadata-0.2.2.zip'),
+            'emodb.zip',
+            False,
+            'emodb.zip',
+        ),
+        pytest.param(
+            ('com/audeering/data/emodb/emodb-metadata/0.2.2/'
+             'emodb-metadata-0.2.2.zip'),
+            'emodb-folder/emodb.zip',
+            False,
+            'emodb.zip',
+            marks=pytest.mark.xfail(raises=FileNotFoundError),
+        ),
+    ],
+)
+def test_download_artifact(
+        tmpdir,
+        url,
+        destination,
+        force_download,
+        expected_path,
+):
+    url = artifactory(url)
+    cache = str(tmpdir.mkdir('audfactory'))
+    path = audfactory.download_artifact(
+        url,
+        os.path.join(cache, audeer.safe_path(destination)),
+        chunk=4 * 1024,
+        force_download=force_download,
+        progress_bar=False,
+    )
+    assert os.path.exists(path)
+    assert os.path.basename(path) == expected_path
 
 
 @pytest.mark.parametrize(
