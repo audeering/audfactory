@@ -7,6 +7,17 @@ The format is based on `Keep a Changelog`_,
 and this project adheres to `Semantic Versioning`_.
 
 
+Version 0.3.0 (2020-02-14)
+--------------------------
+
+* Added: Python 3.8 support
+* Added: :func:`audfactory.upload_artifact`
+* Added: :func:`audfactory.download_artifact`
+* Changed: add ``repository`` as optional argument instead config value
+* Deprecated: :func:`audfactory.download_artifacts`
+* Removed: Python 3.5 support
+
+
 Version 0.2.0 (2020-02-07)
 --------------------------
 
