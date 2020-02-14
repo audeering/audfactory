@@ -16,7 +16,7 @@ generate-token:
   script:
     - git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@${CI_SERVER_HOST}/${GITLAB_USER_LOGIN}/artifactory-tokenizer.git
     - cd artifactory-tokenizer
-    - bash get_token.sh > ../token.json
+    - bash get_token.sh "readers,deployers" > ../token.json
   artifacts:
     paths:
       - token.json
