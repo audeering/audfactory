@@ -1,6 +1,7 @@
 import os
 import re
-from typing import Dict, List, Tuple, Union
+import errno
+from typing import Dict, List, Union
 
 from artifactory import ArtifactoryPath, get_global_config_entry
 import audeer
@@ -717,6 +718,68 @@ def transitive_dependencies_as_string(
             # Leaf entry adds "(value)" to same line as corresponding key
             output = f'{output.rstrip()} ({str(value)})\n'
     return output
+
+
+def upload_artifact(
+        path: str,
+        repository: str,
+        group_id: str,
+        name: str,
+        version: str,
+        *,
+        verbose: bool = False,
+) -> str:
+    r"""Upload local file as an artifact.
+
+    .. warning:: Will raise an error if filename does not match
+        {name}-{version}.{extension}
+
+    The url will be composed as follows:
+
+        {repository}/{group_id}/{name}/{version}/{name}-{version}.{extension}
+
+    Args:
+        path: local file path (must exist)
+        repository: name of the repository
+        group_id: group ID of the artifact
+        name: name of the artifact
+        version: version string
+        verbose: show information on the upload process
+
+    Returns:
+        url of the artifact
+
+    Raises:
+        FileNotFoundError: if local file does not exist
+        ValueError: if filename does not match {name}-{version}.{extension}
+
+    """
+    src_path = audeer.safe_path(path)
+    if not os.path.exists(src_path):
+        raise FileNotFoundError(errno.ENOENT, os.strerror(errno.ENOENT),
+                                src_path)
+
+    src_filename = os.path.basename(src_path)
+    if not src_filename.startswith(f'{name}-{version}.'):
+        raise ValueError(f"Invalid filename '{src_filename}', expected "
+                         f"'{name}-{version}.<extension>'")
+
+    url = server_url(group_id, repository=repository,
+                     name=name, version=version)
+    dst_path = artifactory_path(url)
+    if not dst_path.exists():
+        dst_path.mkdir()
+
+    if verbose:
+        desc = audeer.format_display_message(
+            f'Upload {src_path}',
+            pbar=False,
+        )
+        print(desc, end='\r')
+
+    dst_path.deploy_file(path)
+
+    return os.path.join(url, src_filename)
 
 
 def versions(

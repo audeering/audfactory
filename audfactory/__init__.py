@@ -16,6 +16,7 @@ from audfactory.core.api import (
     sort_versions,
     transitive_dependencies,
     transitive_dependencies_as_string,
+    upload_artifact,
     versions,
 )
 

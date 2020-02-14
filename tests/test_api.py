@@ -550,6 +550,57 @@ def test_transitive_dependencies_as_string(deps, expected_deps_string):
 
 
 @pytest.mark.parametrize(
+    'filename,content,repository,group_id,name,version',
+    [
+        (
+            'audfactory-1.0.0.txt',
+            'hello\nartifact',
+            'models-public-local',
+            'com.audeering.models',
+            'audfactory',
+            '1.0.0',
+        ),
+        pytest.param(
+            'foo-1.0.0.txt',
+            'hello\nartifact',
+            'models-public-local',
+            'com.audeering.models',
+            'audfactory',
+            '1.0.0',
+            marks=pytest.mark.xfail(raises=ValueError)
+        )
+    ]
+)
+def test_upload_artifact(filename, content, repository, group_id, name,
+                         version):
+    # create local file
+    with open(filename, 'w') as fp:
+        fp.write(content)
+    # upload artifact
+    url = audfactory.upload_artifact(filename, repository, group_id, name,
+                                     version)
+    # clean up
+    os.remove(filename)
+    # check url
+    assert url == os.path.join(audfactory.server_url(group_id,
+                                                     name=name,
+                                                     repository=repository,
+                                                     version=version),
+                               os.path.basename(filename))
+    # download artifact
+    path = audfactory.download_artifact(url, filename)
+    # check content
+    with open(path, 'r') as fp:
+        lines = [line.strip() for line in fp.readlines()]
+        assert content == '\n'.join(lines)
+    # clean up
+    os.remove(path)
+    # check version
+    versions = audfactory.versions(group_id, name, repository=repository)
+    assert version in versions
+
+
+@pytest.mark.parametrize(
     'group_id,name,pattern,expected_versions',
     [
         (

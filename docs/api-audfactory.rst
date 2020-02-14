@@ -79,6 +79,11 @@ transitive_dependencies_as_string
 
 .. autofunction:: transitive_dependencies_as_string
 
+upload_artifact
+---------------
+
+.. autofunction:: upload_artifact
+
 versions
 --------
 
