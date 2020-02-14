@@ -99,7 +99,7 @@ def download_artifact(
         *,
         chunk: int = 4 * 1024,
         force_download: bool = True,
-        progress_bar: Union[bool, tqdm.std.tqdm] = False,
+        verbose=False,
 ) -> str:
     r"""Download an artifact.
 
@@ -110,10 +110,7 @@ def download_artifact(
         chunk: amount of data read at once during the download
         force_download: forces the artifact to be downloaded
             even if it exists locally already
-        progress_bar: if ``True`` shows a progress bar,
-            or if a progress bar object is given,
-            it updates the given one.
-            If ``False`` no output is shown
+        verbose: show information on the download process
 
     Returns:
         path to local artifact
@@ -138,7 +135,14 @@ def download_artifact(
     src_path = artifactory_path(url)
     src_size = ArtifactoryPath.stat(src_path).size
 
-    def download(src_path, src_size, destination, pbar):
+    with audeer.progress_bar(total=src_size, disable=not verbose) as pbar:
+        desc = audeer.format_display_message(
+            'Download {}'.format(os.path.basename(str(src_path))),
+            pbar=True,
+        )
+        pbar.set_description_str(desc)
+        pbar.refresh()
+
         try:
             dst_size = 0
             with src_path.open() as src_fp:
@@ -149,32 +153,12 @@ def download_artifact(
                         if n_data > 0:
                             dst_fp.write(data)
                             dst_size += n_data
-                            if pbar is not False:
-                                pbar.update(n_data)
+                            pbar.update(n_data)
         except (KeyboardInterrupt, Exception):
             # Clean up broken artifact files
             if os.path.exists(destination):
                 os.remove(destination)
             raise
-
-    if progress_bar is True:
-        close_pbar_at_end = True
-        progress_bar = audeer.progress_bar(total=src_size, disable=False)
-    else:
-        close_pbar_at_end = False
-
-    if progress_bar is not False:
-        desc = audeer.format_display_message(
-            'Download {}'.format(os.path.basename(str(src_path))),
-            pbar=True,
-        )
-        progress_bar.set_description_str(desc)
-        progress_bar.refresh()
-
-    download(src_path, src_size, destination, progress_bar)
-
-    if close_pbar_at_end is True:
-        progress_bar.close()
 
     return destination
 
@@ -227,64 +211,54 @@ def download_artifacts(
     dst_paths = []
     download_items = []
 
-    # Get artifact paths, sizes, and destination paths
-    with audeer.progress_bar(
-            total=len(artifact_urls),
-            disable=not verbose,
-    ) as pbar:
-        for artifact_url in artifact_urls:
-
-            desc = audeer.format_display_message(
-                f'Scan {os.path.basename(artifact_url)}',
-                pbar=True,
+    # Get artifact paths, and destination paths
+    for artifact_url in artifact_urls:
+        repo_url = f'{config.ARTIFACTORY_ROOT}/{repository}'
+        if artifact_url.startswith(repo_url):
+            # Extract destination path from source URL
+            relative_url = artifact_url[len(repo_url):]
+            if relative_url.startswith('/'):
+                relative_url = relative_url[1:]
+            dst_path = os.path.join(
+                destination,
+                relative_url,
             )
-            pbar.set_description_str(desc)
-            pbar.refresh()
+        else:
+            raise RuntimeError(
+                f'{artifact_url} has to start with {repo_url}'
+            )
 
-            repo_url = f'{config.ARTIFACTORY_ROOT}/{repository}'
-            if artifact_url.startswith(repo_url):
-                # Extract destination path from source URL
-                relative_url = artifact_url[len(repo_url):]
-                if relative_url.startswith('/'):
-                    relative_url = relative_url[1:]
-                dst_path = os.path.join(
-                    destination,
-                    relative_url,
-                )
-            else:
-                raise RuntimeError(
-                    f'{artifact_url} has to start with {repo_url}'
-                )
+        # Append all destination paths,
+        # including the ones data is already downloaded
+        dst_paths.append(dst_path)
 
-            # Append all destination paths,
-            # including the ones data is already downloaded
-            dst_paths.append(dst_path)
-
-            if not os.path.exists(dst_path) or force_download:
-                src_path = artifactory_path(artifact_url)
-                src_size = ArtifactoryPath.stat(src_path).size
-                download_items.append((dst_path, artifact_url, src_size))
-
-            pbar.update()
+        if not os.path.exists(dst_path) or force_download:
+            download_items.append((dst_path, artifact_url))
 
     # Download artifacts
     if not download_items:
         return dst_paths
 
-    total_download_size = sum([src_size for _, _, src_size in download_items])
     with audeer.progress_bar(
-            total=total_download_size,
+            total=len(download_items),
             disable=not verbose,
     ) as pbar:
-        for dst_path, url, _ in download_items:
+        for dst_path, url in download_items:
+            desc = audeer.format_display_message(
+                f'Download {os.path.basename(url)}',
+                pbar=True,
+            )
+            pbar.set_description_str(desc)
+            pbar.refresh()
             audeer.mkdir(os.path.dirname(dst_path))
             download_artifact(
                 url,
                 dst_path,
                 chunk=chunk,
                 force_download=force_download,
-                progress_bar=pbar,
+                verbose=False,
             )
+            pbar.update()
 
     return dst_paths
 

@@ -121,7 +121,7 @@ def test_download_artifact(
         os.path.join(cache, audeer.safe_path(destination)),
         chunk=4 * 1024,
         force_download=force_download,
-        progress_bar=False,
+        verbose=False,
     )
     assert os.path.exists(path)
     assert os.path.basename(path) == expected_path
