@@ -1,4 +1,4 @@
-.. audb documentation master file
+.. audfactory documentation master file
 
 .. include:: ../README.rst
     :end-line: 12

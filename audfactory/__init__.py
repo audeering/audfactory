@@ -20,7 +20,7 @@ from audfactory.core.api import (
 )
 
 
-# Disencourage from audb import *
+# Disencourage from audfactory import *
 __all__ = []
 
 
