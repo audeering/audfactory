@@ -801,6 +801,7 @@ def versions(
         raise RuntimeError(
             f'Error trying to get versions for:\n'
             f'\n'
+            f'repository: {repository}\n'
             f'  group_id: {group_id}\n'
             f'      name: {name}\n'
             f'\n'
@@ -814,6 +815,7 @@ def versions(
         raise RuntimeError(
             f'No version found for:\n'
             f'\n'
+            f'repository: {repository}\n'
             f'  group_id: {group_id}\n'
             f'      name: {name}\n'
             f'   pattern: {pattern}\n'
