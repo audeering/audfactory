@@ -7,6 +7,13 @@ The format is based on `Keep a Changelog`_,
 and this project adheres to `Semantic Versioning`_.
 
 
+Version 0.3.2 (2020-03-06)
+--------------------------
+
+* Fixed: :func:`audfactory.pom.license` now doesn't fail for empty license
+  entries
+
+
 Version 0.3.1 (2020-02-14)
 --------------------------
 
