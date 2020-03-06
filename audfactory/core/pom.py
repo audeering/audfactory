@@ -97,12 +97,14 @@ def license(pom: Dict) -> str:
     """
     license = ''
     licenses = get_attr(pom, 'licenses')
-    if licenses:
-        if 'name' in licenses['license']:
-            license += licenses['license']['name']
-        if 'url' in licenses['license']:
-            if licenses['license']['url']:
-                license += f" <{licenses['license']['url']}>"
+    try:
+        license += licenses['license']['name']
+    except (KeyError, TypeError):
+        pass
+    try:
+        license += f" <{licenses['license']['url']}>"
+    except (KeyError, TypeError):
+        pass
     return license
 
 
