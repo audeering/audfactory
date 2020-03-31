@@ -128,54 +128,6 @@ def test_download_artifact(
 
 
 @pytest.mark.parametrize(
-    'urls,force_download',
-    [
-        (
-            [],
-            False,
-        ),
-        (
-            [('com/audeering/data/emodb/emodb-metadata/0.2.2/'
-              'emodb-metadata-0.2.2.zip')],
-            False,
-        ),
-        (
-            [('com/audeering/data/emodb/emodb-metadata/0.2.2/'
-              'emodb-metadata-0.2.2.zip')],
-            False,
-        ),
-        (
-            [('com/audeering/data/emodb/emodb-metadata/0.2.2/'
-              'emodb-metadata-0.2.2.zip')],
-            True,
-        ),
-        (
-            [('com/audeering/data/emodb/emodb-metadata/0.2.2/'
-              'emodb-metadata-0.2.2.zip'),
-             ('com/audeering/data/testdata/testdata-metadata/1.2.1/'
-              'testdata-metadata-1.2.1.zip')],
-            False,
-        ),
-    ],
-)
-def test_download_artifacts(tmpdir, urls, force_download):
-    artifact_urls = [artifactory(u) for u in urls]
-    cache = str(tmpdir.mkdir('audfactory'))
-    paths = audfactory.download_artifacts(
-        artifact_urls,
-        cache,
-        chunk=4 * 1024,
-        force_download=force_download,
-        verbose=False,
-    )
-    for p in paths:
-        assert os.path.exists(p)
-    # Remove cache + / from returned paths
-    paths = [p[len(cache) + 1:] for p in paths]
-    assert paths == urls
-
-
-@pytest.mark.parametrize(
     'pom_url,expected_description,expected_license,expected_packaging',
     [
         (

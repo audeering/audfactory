@@ -5,7 +5,6 @@ from audfactory.core.api import (
     authentification,
     dependencies,
     download_artifact,
-    download_artifacts,
     download_pom,
     exclude_dependencies,
     group_id_to_path,
