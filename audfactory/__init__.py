@@ -2,6 +2,7 @@ from audfactory import pom
 from audfactory.core.config import config
 from audfactory.core.api import (
     artifactory_path,
+    authentification,
     dependencies,
     download_artifact,
     download_artifacts,

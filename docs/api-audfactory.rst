@@ -8,6 +8,11 @@ artifactory_path
 
 .. autofunction:: artifactory_path
 
+authentification
+----------------
+
+.. autofunction:: authentification
+
 config
 ------
 

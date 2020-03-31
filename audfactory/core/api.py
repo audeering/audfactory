@@ -1,7 +1,7 @@
 import os
 import re
 import errno
-from typing import Dict, List, Union
+from typing import Dict, List, Union, Tuple
 
 from artifactory import ArtifactoryPath, get_global_config_entry
 import audeer
@@ -47,12 +47,31 @@ def artifactory_path(
         timit
 
     """
-    apikey = os.getenv('ARTIFACTORY_API_KEY', None)
+    username, apikey = authentification()
+    return ArtifactoryPath(url, auth=(username, apikey))
+
+
+def authentification() -> Tuple[str, str]:
+    """Look for username and API key.
+
+    It first looks for the two environment variables
+    ``ARTIFACTORY_USERNAME`` and
+    ``ARTIFACTORY_API_KEY``.
+    If some of them or both are missing,
+    it tries to extract them from the
+    :file:`~/.artifactory_python.cfg` config file.
+
+    Returns:
+        username and API key
+
+    """
     username = os.getenv('ARTIFACTORY_USERNAME', None)
+    apikey = os.getenv('ARTIFACTORY_API_KEY', None)
     if apikey is None or username is None:
-        return ArtifactoryPath(url)
-    else:
-        return ArtifactoryPath(url, auth=(username, apikey))
+        config_entry = get_global_config_entry(config.ARTIFACTORY_ROOT)
+        username = config_entry['username']
+        apikey = config_entry['password']
+    return username, apikey
 
 
 def dependencies(
@@ -445,13 +464,7 @@ def rest_api_request(
     search_url = (
         f'{config.ARTIFACTORY_ROOT}/api/search/{pattern}&repos={repository}'
     )
-    # Authentification
-    apikey = os.getenv('ARTIFACTORY_API_KEY', None)
-    username = os.getenv('ARTIFACTORY_USERNAME', None)
-    if apikey is None or username is None:
-        config_entry = get_global_config_entry(config.ARTIFACTORY_ROOT)
-        username = config_entry['username']
-        apikey = config_entry['password']
+    username, apikey = authentification()
     return requests.get(search_url, auth=(username, apikey))
 
 
