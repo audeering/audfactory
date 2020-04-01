@@ -338,6 +338,7 @@ def list_artifacts(
     return sorted(list(set(artifact_urls)))
 
 
+@audeer.deprecated(removal_version='0.5.0', alternative='rest_api_search')
 def rest_api_request(
         pattern: str,
         *,

@@ -59,11 +59,6 @@ rest_api_get
 
 .. autofunction:: rest_api_request
 
-rest_api_request
-----------------
-
-.. autofunction:: rest_api_request
-
 rest_api_search
 ---------------
 
