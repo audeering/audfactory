@@ -67,7 +67,7 @@ def authentification() -> Tuple[str, str]:
     """
     username = os.getenv('ARTIFACTORY_USERNAME', None)
     apikey = os.getenv('ARTIFACTORY_API_KEY', None)
-    if apikey is None or username is None:
+    if apikey is None or username is None:  # pragma: no cover
         config_entry = get_global_config_entry(config.ARTIFACTORY_ROOT)
         username = config_entry['username']
         apikey = config_entry['password']
@@ -176,7 +176,7 @@ def download_artifact(
         except (KeyboardInterrupt, Exception):
             # Clean up broken artifact files
             if os.path.exists(destination):
-                os.remove(destination)
+                os.remove(destination)  # pragma: no cover
             raise
 
     return destination
@@ -291,7 +291,7 @@ def include_dependencies(
             if sub_tree:
                 filtered_deps[key] = sub_tree
         else:
-            continue
+            continue  # pragma: no cover
     return filtered_deps
 
 
@@ -596,7 +596,7 @@ def transitive_dependencies(
                 version,
                 repository=repository,
             )
-            if verbose:
+            if verbose:  # pragma: no cover
                 desc = audeer.format_display_message(
                     f'Dependencies: {dep}',
                     pbar=False,
@@ -713,7 +713,7 @@ def upload_artifact(
     if not dst_path.exists():
         dst_path.mkdir()
 
-    if verbose:
+    if verbose:  # pragma: no cover
         desc = audeer.format_display_message(
             f'Upload {src_path}',
             pbar=False,
@@ -780,7 +780,7 @@ def versions(
             f'or misspelled the artifact.'
         )
     versions = [v['version'] for v in r.json()['results']]
-    if not versions:
+    if not versions:  # pragma: no cover
         raise RuntimeError(
             f'No version found for:\n'
             f'\n'

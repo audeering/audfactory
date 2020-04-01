@@ -560,15 +560,35 @@ def test_transitive_dependencies_as_string(deps, expected_deps_string):
             'com.audeering.models',
             'audfactory',
             '1.0.0',
-            marks=pytest.mark.xfail(raises=ValueError)
-        )
+            marks=pytest.mark.xfail(raises=ValueError),
+        ),
+        pytest.param(
+            'file-not-found.txt',
+            'hello\nartifact',
+            'models-public-local',
+            'com.audeering.models',
+            'audfactory',
+            '1.0.0',
+            marks=pytest.mark.xfail(raises=FileNotFoundError),
+        ),
     ]
 )
 def test_upload_artifact(filename, content, repository, group_id, name,
                          version):
+    # Remove existing path to trigger new creation
+    url = audfactory.server_url(
+        group_id,
+        repository=repository,
+        name=name,
+        version=version,
+    )
+    path = audfactory.artifactory_path(url)
+    if path.exists():
+        path.unlink()
     # create local file
-    with open(filename, 'w') as fp:
-        fp.write(content)
+    if filename != 'file-not-found.txt':
+        with open(filename, 'w') as fp:
+            fp.write(content)
     # upload artifact
     url = audfactory.upload_artifact(filename, repository, group_id, name,
                                      version)
@@ -672,6 +692,13 @@ def test_upload_artifact(filename, content, repository, group_id, name,
             'audbunittests',
             '2.*',
             ['2.0.0-20200131.102442-1', '2.0.0-20200131.102728-2'],
+        ),
+        pytest.param(
+            'com.audeering.data.non-existent',
+            'non-existent',
+            '1.*',
+            None,
+            marks=pytest.mark.xfail(raises=RuntimeError),
         ),
     ]
 )
