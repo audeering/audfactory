@@ -368,6 +368,61 @@ def rest_api_request(
     return requests.get(search_url, auth=(username, apikey))
 
 
+def rest_api_get(
+        url: str,
+) -> requests.models.Response:
+    """Execute a GET REST API request.
+
+    For details on the REST API, see
+    https://www.jfrog.com/confluence/display/JFROG/Artifactory+REST+API
+
+    Args:
+        url: URl to send the request without Artifactory base URL
+            as specified in ``config.ARTIFACTORY_ROOT``
+
+    Returns:
+        server response
+
+    Example:
+        >>> r = rest_api_get('maven/com/audeering/data/emodb/emodb-metadata/'
+        ...                  '0.2.2/emodb-metadata-0.2.2.zip!/db.yaml')
+        >>> print(r.text[:60])
+        name: emodb
+        description: Berlin Database of Emotional Speech
+
+    """
+    url = f'{config.ARTIFACTORY_ROOT}/{url}'
+    username, apikey = authentification()
+    return requests.get(url, auth=(username, apikey))
+
+
+def rest_api_search(
+        pattern: str,
+        *,
+        repository: str = 'maven',
+) -> requests.models.Response:
+    """Execute a GET REST API query.
+
+    For details on the REST API, see
+    https://www.jfrog.com/confluence/display/JFROG/Artifactory+REST+API
+
+    Args:
+        pattern: search pattern
+        repository: repository to be used for the request
+
+    Returns:
+        server response
+
+    Example:
+        >>> r = rest_api_search('latestVersion?g=edu.upenn.ldc&a=timit')
+        >>> r.text
+        '1.0.1'
+
+    """
+    url = f'api/search/{pattern}&repos={repository}'
+    return rest_api_get(url)
+
+
 def server_url(
         group_id: str,
         *,

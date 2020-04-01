@@ -300,6 +300,32 @@ def test_list_artifacts(deps, expected_dep_list):
 
 
 @pytest.mark.parametrize(
+    'url,expected_text',
+    [
+        (
+            (
+                'maven/info/bilderbar/emodb/emodb/1.0.0/'
+                'emodb-1.0.0.zip!/erklaerung.txt'
+            ),
+            (
+                'In der Datei info.txt und info.xls sind jeweils die '
+                'Dateinamen sowie die Erkennungsrate in Prozent und die '
+                'Beurteilung der Natuerlichkeit in Prozent angegeben. '
+                'Am Perzeptionstest haben 20 Versuchspersonen teilgenommen. '
+                '\r\nDie Auswahl der Saetze erfolgt bei mind. 80% richtig '
+                'erkannter Emotion (>=16 von 20 Hörern) und mind. 60% der '
+                'Beurteilungen als natuerlich (>=12 von 20).'
+            ),
+        ),
+    ],
+)
+def test_rest_api_get(url, expected_text):
+    r = audfactory.rest_api_get(url)
+    assert r.status_code == 200
+    assert r.text == expected_text
+
+
+@pytest.mark.parametrize(
     'pattern,expected_text',
     [
         (
@@ -310,6 +336,21 @@ def test_list_artifacts(deps, expected_dep_list):
 )
 def test_rest_api_request(pattern, expected_text):
     r = audfactory.rest_api_request(pattern)
+    assert r.status_code == 200
+    assert r.text == expected_text
+
+
+@pytest.mark.parametrize(
+    'pattern,expected_text',
+    [
+        (
+            'latestVersion?g=edu.upenn.ldc&a=timit',
+            '1.0.1',
+        ),
+    ],
+)
+def test_rest_api_search(pattern, expected_text):
+    r = audfactory.rest_api_search(pattern)
     assert r.status_code == 200
     assert r.text == expected_text
 

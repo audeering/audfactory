@@ -54,10 +54,20 @@ list_artifacts
 
 .. autofunction:: list_artifacts
 
+rest_api_get
+------------
+
+.. autofunction:: rest_api_request
+
 rest_api_request
 ----------------
 
 .. autofunction:: rest_api_request
+
+rest_api_search
+---------------
+
+.. autofunction:: rest_api_search
 
 server_url
 ----------
