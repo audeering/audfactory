@@ -10,12 +10,12 @@ and this project adheres to `Semantic Versioning`_.
 Version 0.4.0 (2020-04-01)
 --------------------------
 
-Added: test coverage
-Added: :func:`audfactory.rest_api_get`
-Added: :func:`rest_api_search`
-Added: :func:`audfactory.authentification`
-Deprecated: :func:`rest_api_request`
-Removed: :func:`audfactory.download_artifacts`
+* Added: test coverage
+* Added: :func:`audfactory.rest_api_get`
+* Added: :func:`rest_api_search`
+* Added: :func:`audfactory.authentification`
+* Deprecated: :func:`rest_api_request`
+* Removed: :func:`audfactory.download_artifacts`
 
 
 Version 0.3.2 (2020-03-06)
