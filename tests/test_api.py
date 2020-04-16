@@ -22,15 +22,6 @@ def artifactory(path, repo='maven'):
     'url,expected_urls',
     [
         (
-            'info/bilderbar/emodb/emodb/',
-            [
-                'info/bilderbar/emodb/emodb/maven-metadata.xml',
-                'info/bilderbar/emodb/emodb/1.0.0',
-                'info/bilderbar/emodb/emodb/1.1.0-SNAPSHOT',
-                'info/bilderbar/emodb/emodb/1.2.0',
-            ],
-        ),
-        (
             'com/audeering/data/emodb/emodb-data/0.2.2/',
             [('com/audeering/data/emodb/emodb-data/0.2.2/'
               'emodb-data-0.2.2.pom')],
