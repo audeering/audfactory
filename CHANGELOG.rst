@@ -7,6 +7,12 @@ The format is based on `Keep a Changelog`_,
 and this project adheres to `Semantic Versioning`_.
 
 
+Version 0.4.1 (2020-04-22)
+--------------------------
+
+* Added: :func:`audfactory.path_to_group_id`
+
+
 Version 0.4.0 (2020-04-01)
 --------------------------
 
