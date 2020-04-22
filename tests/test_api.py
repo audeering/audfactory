@@ -294,6 +294,24 @@ def test_list_artifacts(deps, expected_dep_list):
 
 
 @pytest.mark.parametrize(
+    'path,expected_group_id',
+    [
+        (
+            'com/audeering/data/raw',
+            'com.audeering.data.raw',
+        ),
+        (
+            'de/bilderbar/emodb',
+            'de.bilderbar.emodb',
+        ),
+    ],
+)
+def test_path_to_group_id(path, expected_group_id):
+    group_id = audfactory.path_to_group_id(path)
+    assert group_id == expected_group_id
+
+
+@pytest.mark.parametrize(
     'url,expected_text',
     [
         (

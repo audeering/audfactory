@@ -54,6 +54,11 @@ list_artifacts
 
 .. autofunction:: list_artifacts
 
+path_to_group_id
+----------------
+
+.. autofunction:: path_to_group_id
+
 rest_api_get
 ------------
 

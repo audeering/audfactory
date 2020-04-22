@@ -10,6 +10,7 @@ from audfactory.core.api import (
     group_id_to_path,
     include_dependencies,
     list_artifacts,
+    path_to_group_id,
     rest_api_get,
     rest_api_request,
     rest_api_search,

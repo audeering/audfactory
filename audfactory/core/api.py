@@ -338,6 +338,25 @@ def list_artifacts(
     return sorted(list(set(artifact_urls)))
 
 
+def path_to_group_id(
+        path: str,
+) -> str:
+    r"""Replaces ``/`` by ``.`` in group ID.
+
+    Args:
+        path: group ID path
+
+    Returns:
+        group ID
+
+    Example:
+        >>> path_to_group_id('com/audeering/data/emodb')
+        'com.audeering.data.emodb'
+
+    """
+    return '.'.join(path.split('/'))
+
+
 @audeer.deprecated(removal_version='0.5.0', alternative='rest_api_search')
 def rest_api_request(
         pattern: str,
