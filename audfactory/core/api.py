@@ -64,11 +64,23 @@ def authentification() -> Tuple[str, str]:
     Returns:
         username and API key
 
+    Raises:
+        RuntimeError: if no authentification credentials can be find
+
     """
     username = os.getenv('ARTIFACTORY_USERNAME', None)
     apikey = os.getenv('ARTIFACTORY_API_KEY', None)
     if apikey is None or username is None:  # pragma: no cover
         config_entry = get_global_config_entry(config.ARTIFACTORY_ROOT)
+        if config_entry is None:
+            raise RuntimeError(
+                'No Artifactory credentials found.\n'
+                'Please check you have a ~/.artifactory_python.cfg '
+                'file containing:\n'
+                '[artifactory.audeering.com/artifactory]\n'
+                'username = MY_USERNAME\n'
+                'password = MY_API_KEY'
+            )
         username = config_entry['username']
         apikey = config_entry['password']
     return username, apikey
