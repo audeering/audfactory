@@ -2,6 +2,7 @@ import os
 import re
 import errno
 from typing import Dict, List, Union, Tuple
+import xml
 
 from artifactory import ArtifactoryPath, get_global_config_entry
 import audeer
@@ -205,6 +206,11 @@ def download_pom(
     Returns:
         parsed POM
 
+    Raises:
+        RuntimeError: if POM is not valid,
+            URL is not available,
+            or user has no access rights
+
     Example:
         >>> pom = download_pom(
         ...     'https://artifactory.audeering.com/artifactory/maven/'
@@ -215,8 +221,23 @@ def download_pom(
 
     """
     pom_path = artifactory_path(pom_url)
-    with pom_path.open() as fp:
-        pom = xmltodict.parse(fp.read())
+    try:
+        with pom_path.open() as fp:
+            pom = xmltodict.parse(fp.read())
+    except xml.parsers.expat.ExpatError:
+        raise RuntimeError(
+            f'No valid POM. '
+            f"Maybe '{pom_url}' is not a POM?"
+        )
+    except RuntimeError as e:
+        code = str(e)
+        if code == '404':  # pragma: no cover as only admins see this
+            raise RuntimeError(f'404, cannot find {pom_url}')
+        if code == '403':
+            raise RuntimeError(
+                f"403, you don't have access rights for {pom_url}"
+            )
+        raise RuntimeError(code)  # pragma: no cover
     return pom
 
 

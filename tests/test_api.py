@@ -130,6 +130,30 @@ def test_download_artifact(
             'CC0 1.0',
             'pom',
         ),
+        # 404 error, path not found
+        pytest.param(
+            'edu/upenn/ldc/timit/0.0.3/timit-0.0.3.pom',
+            '',
+            '',
+            '',
+            marks=pytest.mark.xfail(raises=RuntimeError),
+        ),
+        # 403 error, no access rights
+        pytest.param(
+            'com/audeering/data/hipercom/hipercom/2.0.1/hipercom-2.0.1.pom',
+            'Call center conversations in Swiss German',
+            'Proprietary',
+            'pom',
+            marks=pytest.mark.xfail(raises=RuntimeError),
+        ),
+        # No valid POM
+        pytest.param(
+            'edu/upenn/ldc/timit/1.0.1/',
+            '',
+            '',
+            '',
+            marks=pytest.mark.xfail(raises=RuntimeError),
+        ),
     ],
 )
 def test_download_pom(
