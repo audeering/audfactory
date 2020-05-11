@@ -91,6 +91,7 @@ def test_dependencies(pom, expected_deps):
             False,
             'emodb.zip',
         ),
+        # Access non-existng local folder
         pytest.param(
             ('com/audeering/data/emodb/emodb-metadata/0.2.2/'
              'emodb-metadata-0.2.2.zip'),
@@ -99,6 +100,25 @@ def test_dependencies(pom, expected_deps):
             'emodb.zip',
             marks=pytest.mark.xfail(raises=FileNotFoundError),
         ),
+        # 404, access non-existing URL
+        pytest.param(
+            ('com/audeering/data/emodb/emodb-metadata/0.0.2/'
+             'emodb-metadata-0.0.2.zip'),
+            'emodb-metadata-0.0.2.zip',
+            False,
+            'emodb-metadata-0.0.2.zip',
+            marks=pytest.mark.xfail(raises=RuntimeError),
+        ),
+        # 403, no access rights for URL
+        pytest.param(
+            ('com/audeering/data/hipercom/hipercom-metadata/2.0.1/'
+             'hipercom-metadata-2.0.1.zip'),
+            'hipercom.zip',
+            False,
+            'hipercom.zip',
+            marks=pytest.mark.xfail(raises=RuntimeError),
+        ),
+
     ],
 )
 def test_download_artifact(
