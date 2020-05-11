@@ -796,7 +796,7 @@ def versions(
             f'It has to end with \'-SNAPSHOT\' or inlcude \'*\'.'
         )
     query_pattern = f'versions?g={group_id}&a={name}&v={pattern}'
-    r = rest_api_request(query_pattern, repository=repository)
+    r = rest_api_search(query_pattern, repository=repository)
     if r.status_code != 200:
         raise RuntimeError(
             f'Error trying to get versions for:\n'
