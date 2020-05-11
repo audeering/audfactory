@@ -250,19 +250,17 @@ def download_pom(
         with pom_path.open() as fp:
             pom = xmltodict.parse(fp.read())
     except xml.parsers.expat.ExpatError:
-        raise RuntimeError(
-            f'No valid POM. '
-            f"Maybe '{pom_url}' is not a POM?"
-        )
+        raise RuntimeError(f"No valid POM. Maybe '{pom_url}' is not a POM?")
     except RuntimeError as e:
         code = str(e)
         if code == '404':  # pragma: no cover as only admins see this
-            raise RuntimeError(f'404, cannot find {pom_url}')
-        if code == '403':
+            raise RuntimeError(f"{code}, cannot find '{pom_url}'")
+        elif code == '403':
+            raise RuntimeError(f"{code}, no access rights for '{pom_url}'")
+        else:
             raise RuntimeError(
-                f"403, you don't have access rights for {pom_url}"
-            )
-        raise RuntimeError(code)  # pragma: no cover
+                f"{code}, problem downloading '{pom_url}'.\n{REPORT_ISSUE}"
+            )  # pragma: no cover
     return pom
 
 
