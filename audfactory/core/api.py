@@ -855,13 +855,4 @@ def versions(
             f'or misspelled the artifact.'
         )
     versions = [v['version'] for v in r.json()['results']]
-    if not versions:  # pragma: no cover
-        raise RuntimeError(
-            f'No version found for:\n'
-            f'\n'
-            f'repository: {repository}\n'
-            f'  group_id: {group_id}\n'
-            f'      name: {name}\n'
-            f'   pattern: {pattern}\n'
-        )
     return sort_versions(versions)
