@@ -843,7 +843,7 @@ def versions(
     r = rest_api_search(query_pattern, repository=repository)
     if r.status_code == 404:
         return []
-    elif r.status_code != 200:
+    elif r.status_code != 200:  # pragma: no cover (should never happen)
         raise RuntimeError(
             f'Error trying to get versions for:\n'
             f'\n'
@@ -851,9 +851,7 @@ def versions(
             f'  group_id: {group_id}\n'
             f'      name: {name}\n'
             f'\n'
-            f'The reason could be '
-            f'that you don\'t have access rights '
-            f'for the specified artifact.'
+            f'{REPORT_ISSUE}'
         )
     versions = [v['version'] for v in r.json()['results']]
     return sort_versions(versions)

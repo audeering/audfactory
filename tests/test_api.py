@@ -761,13 +761,6 @@ def test_upload_artifact(filename, content, repository, group_id, name,
             '1.*',
             [],
         ),
-        pytest.param(
-            'com.audeering.data.hipercom',
-            'hipercom',
-            None,
-            [],
-            marks=pytest.mark.xfail(raises=RuntimeError),
-        ),
     ]
 )
 def test_versions(group_id, name, pattern, expected_versions):
