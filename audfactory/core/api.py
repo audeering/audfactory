@@ -841,7 +841,9 @@ def versions(
         )
     query_pattern = f'versions?g={group_id}&a={name}&v={pattern}'
     r = rest_api_search(query_pattern, repository=repository)
-    if r.status_code != 200:
+    if r.status_code == 404:
+        return []
+    elif r.status_code != 200:
         raise RuntimeError(
             f'Error trying to get versions for:\n'
             f'\n'
@@ -849,10 +851,9 @@ def versions(
             f'  group_id: {group_id}\n'
             f'      name: {name}\n'
             f'\n'
-            f'The reason could be that you '
-            f'don\'t have access rights for the specified '
-            f'artifact, used the wrong group_id, '
-            f'or misspelled the artifact.'
+            f'The reason could be '
+            f'that you don\'t have access rights '
+            f'for the specified artifact.'
         )
     versions = [v['version'] for v in r.json()['results']]
     return sort_versions(versions)

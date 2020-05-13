@@ -755,12 +755,11 @@ def test_upload_artifact(filename, content, repository, group_id, name,
             '2.*',
             ['2.0.0-20200131.102442-1', '2.0.0-20200131.102728-2'],
         ),
-        pytest.param(
+        (
             'com.audeering.data.non-existent',
             'non-existent',
             '1.*',
             [],
-            marks=pytest.mark.xfail(raises=RuntimeError),
         ),
     ]
 )
