@@ -390,21 +390,6 @@ def test_rest_api_get(url, expected_text):
         ),
     ],
 )
-def test_rest_api_request(pattern, expected_text):
-    r = audfactory.rest_api_request(pattern)
-    assert r.status_code == 200
-    assert r.text == expected_text
-
-
-@pytest.mark.parametrize(
-    'pattern,expected_text',
-    [
-        (
-            'latestVersion?g=edu.upenn.ldc&a=timit',
-            '1.0.1',
-        ),
-    ],
-)
 def test_rest_api_search(pattern, expected_text):
     r = audfactory.rest_api_search(pattern)
     assert r.status_code == 200

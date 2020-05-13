@@ -413,37 +413,6 @@ def path_to_group_id(
     return '.'.join(path.split('/'))
 
 
-@audeer.deprecated(removal_version='0.5.0', alternative='rest_api_search')
-def rest_api_request(
-        pattern: str,
-        *,
-        repository: str = 'maven',
-) -> requests.models.Response:
-    """Execute a GET REST API query.
-
-    For details on the REST API, see
-    https://www.jfrog.com/confluence/display/JFROG/Artifactory+REST+API
-
-    Args:
-        pattern: search pattern
-        repository: repository to be used for the request
-
-    Returns:
-        server response
-
-    Example:
-        >>> r = rest_api_request('latestVersion?g=edu.upenn.ldc&a=timit')
-        >>> r.text
-        '1.0.1'
-
-    """
-    search_url = (
-        f'{config.ARTIFACTORY_ROOT}/api/search/{pattern}&repos={repository}'
-    )
-    username, apikey = authentification()
-    return requests.get(search_url, auth=(username, apikey))
-
-
 def rest_api_get(
         url: str,
 ) -> requests.models.Response:

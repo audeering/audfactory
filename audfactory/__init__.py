@@ -12,7 +12,6 @@ from audfactory.core.api import (
     list_artifacts,
     path_to_group_id,
     rest_api_get,
-    rest_api_request,
     rest_api_search,
     server_pom_url,
     server_url,
