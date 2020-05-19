@@ -7,6 +7,20 @@ The format is based on `Keep a Changelog`_,
 and this project adheres to `Semantic Versioning`_.
 
 
+Version 0.5.0 (2020-05-19)
+--------------------------
+
+* Added: error messages to :func:`audb.download_artifact`
+* Added: error handling to :func:`audfactory.download_pom`
+* Changed: replace :func:`re.match` by :func:`re.search` inside
+  :func:`audfactory.exclude_dependencies`
+  and :func:`audfactory.include_dependencies`
+* Changed: :func:`audfactory.versions` now returns empty list if no versions
+  are found
+* Fixed: parallel execution of tests
+* Removed: deprecated :func:`audfactory.rest_api_request`
+
+
 Version 0.4.2 (2020-05-11)
 --------------------------
 
