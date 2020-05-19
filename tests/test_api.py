@@ -1,5 +1,7 @@
 import copy
 import os
+import uuid
+
 import pytest
 
 import audeer
@@ -616,6 +618,9 @@ def test_transitive_dependencies_as_string(deps, expected_deps_string):
 )
 def test_upload_artifact(filename, content, repository, group_id, name,
                          version):
+    # Use random name to ensure parallel running
+    random_string = uuid.uuid1()
+    name = f'{name}-{random_string}'
     # Remove existing path to trigger new creation
     url = audfactory.server_url(
         group_id,
@@ -628,6 +633,8 @@ def test_upload_artifact(filename, content, repository, group_id, name,
         path.unlink()
     # create local file
     if filename != 'file-not-found.txt':
+        filename_parts = filename.split('-')
+        filename = f'{filename_parts[0]}-{random_string}-{filename_parts[1]}'
         with open(filename, 'w') as fp:
             fp.write(content)
     # upload artifact
