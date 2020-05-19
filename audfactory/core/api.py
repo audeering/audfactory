@@ -285,7 +285,7 @@ def exclude_dependencies(
     """
     filtered_deps = {}
     for key, value in deps.items():
-        if re.match(pattern, key):
+        if re.search(pattern, key):
             continue
         elif isinstance(value, dict):
             # Recursively traverse the sub-tree
@@ -338,7 +338,7 @@ def include_dependencies(
     """
     filtered_deps = {}
     for key, value in deps.items():
-        if re.match(pattern, key):
+        if re.search(pattern, key):
             filtered_deps[key] = value
         elif isinstance(value, dict):
             # Recursively traverse the sub-tree
