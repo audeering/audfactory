@@ -54,6 +54,12 @@ list_artifacts
 
 .. autofunction:: list_artifacts
 
+Lookup
+------
+
+.. autoclass:: Lookup
+    :members:
+
 path_to_group_id
 ----------------
 

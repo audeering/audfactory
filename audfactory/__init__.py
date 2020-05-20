@@ -1,5 +1,4 @@
 from audfactory import pom
-from audfactory.core.config import config
 from audfactory.core.api import (
     artifactory_path,
     authentification,
@@ -21,6 +20,8 @@ from audfactory.core.api import (
     upload_artifact,
     versions,
 )
+from audfactory.core.config import config
+from audfactory.core.lookup import Lookup
 
 
 # Disencourage from audfactory import *
