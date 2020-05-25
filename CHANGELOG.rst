@@ -7,6 +7,13 @@ The format is based on `Keep a Changelog`_,
 and this project adheres to `Semantic Versioning`_.
 
 
+Version 0.5.2 (2020-05-25)
+--------------------------
+
+* Fixed: description of ``params`` argument of :meth:`audfactory.Lookup.create`
+  in the documentation
+
+
 Version 0.5.1 (2020-05-20)
 --------------------------
 
