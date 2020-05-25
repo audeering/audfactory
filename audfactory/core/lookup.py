@@ -279,7 +279,7 @@ class Lookup:
         Args:
             group_id: group ID of lookup table
             version: version of lookup table
-            params: lookup table entry in the form of ``{column: parameter}``
+            params: lookup table column names
             name: name of lookup table
             repository: repository of lookup table
             force: if ``True`` an existing lookup table is overwritten
