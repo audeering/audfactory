@@ -7,6 +7,14 @@ The format is based on `Keep a Changelog`_,
 and this project adheres to `Semantic Versioning`_.
 
 
+Version 0.5.3 (2020-06-02)
+--------------------------
+
+* Changed: error message handling in :func:`audb.download_artifact`
+  is now handled inside ``dohq-artifactory``
+* Fixed: broken ``jwt`` dependency due to bug in ``dohq-artifactory``
+
+
 Version 0.5.2 (2020-05-25)
 --------------------------
 
