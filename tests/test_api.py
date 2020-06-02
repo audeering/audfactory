@@ -109,7 +109,7 @@ def test_dependencies(pom, expected_deps):
             'emodb-metadata-0.0.2.zip',
             False,
             'emodb-metadata-0.0.2.zip',
-            marks=pytest.mark.xfail(raises=RuntimeError),
+            marks=pytest.mark.xfail(raises=FileNotFoundError),
         ),
         # 403, no access rights for URL
         pytest.param(
@@ -118,7 +118,7 @@ def test_dependencies(pom, expected_deps):
             'hipercom.zip',
             False,
             'hipercom.zip',
-            marks=pytest.mark.xfail(raises=RuntimeError),
+            marks=pytest.mark.xfail(raises=FileNotFoundError),
         ),
 
     ],

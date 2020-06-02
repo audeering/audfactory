@@ -177,20 +177,7 @@ def download_artifact(
         return destination
 
     src_path = artifactory_path(url)
-    try:
-        src_size = ArtifactoryPath.stat(src_path).size
-    except RuntimeError as e:
-        # Convert error to dictionary
-        e = json.loads(str(e))
-        code = str(e['errors'][0]['status'])
-        if code in ['404', '403']:  # it seems never to raise 403
-            raise RuntimeError(
-                f"{code}, artifact not found or no access rights: '{url}'"
-            )
-        else:
-            raise RuntimeError(
-                f"{code}, problem downloading '{url}'.\n{REPORT_ISSUE}"
-            )  # pragma: no cover
+    src_size = ArtifactoryPath.stat(src_path).size
 
     with audeer.progress_bar(total=src_size, disable=not verbose) as pbar:
         desc = audeer.format_display_message(
