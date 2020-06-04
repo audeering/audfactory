@@ -616,68 +616,61 @@ def test_transitive_dependencies_as_string(deps, expected_deps_string):
 
 
 @pytest.mark.parametrize(
-    'filename,content,repository,group_id,name,version',
+    'filename,content',
     [
         (
             'audfactory-1.0.0.txt',
             'hello\nartifact',
-            'models-public-local',
-            'com.audeering.models',
-            'audfactory',
-            '1.0.0',
         ),
         pytest.param(
             'foo-1.0.0.txt',
             'hello\nartifact',
-            'models-public-local',
-            'com.audeering.models',
-            'audfactory',
-            '1.0.0',
             marks=pytest.mark.xfail(raises=ValueError),
         ),
         pytest.param(
             'file-not-found.txt',
             'hello\nartifact',
-            'models-public-local',
-            'com.audeering.models',
-            'audfactory',
-            '1.0.0',
             marks=pytest.mark.xfail(raises=FileNotFoundError),
         ),
     ]
 )
-def test_upload_artifact(filename, content, repository, group_id, name,
-                         version):
+def test_upload_artifact(filename, content):
     # Use random name to ensure parallel running
-    random_string = uuid.uuid1()
-    name = f'{name}-{random_string}'
     # Remove existing path to trigger new creation
     url = audfactory.server_url(
-        group_id,
-        repository=repository,
-        name=name,
-        version=version,
+        pytest.GROUP_ID,
+        repository=pytest.REPOSITORY,
+        name=pytest.NAME,
+        version=pytest.VERSION,
     )
     path = audfactory.artifactory_path(url)
     if path.exists():
         path.unlink()
     # create local file
     if filename != 'file-not-found.txt':
-        filename_parts = filename.split('-')
-        filename = f'{filename_parts[0]}-{random_string}-{filename_parts[1]}'
         with open(filename, 'w') as fp:
             fp.write(content)
     # upload artifact
-    url = audfactory.upload_artifact(filename, repository, group_id, name,
-                                     version)
+    url = audfactory.upload_artifact(
+        filename,
+        pytest.REPOSITORY,
+        pytest.GROUP_ID,
+        pytest.NAME,
+        pytest.VERSION,
+    )
     # clean up
     os.remove(filename)
     # check url
-    assert url == os.path.join(audfactory.server_url(group_id,
-                                                     name=name,
-                                                     repository=repository,
-                                                     version=version),
-                               os.path.basename(filename))
+    expected_url = os.path.join(
+        audfactory.server_url(
+            pytest.GROUP_ID,
+            name=pytest.NAME,
+            repository=pytest.REPOSITORY,
+            version=pytest.VERSION,
+        ),
+        os.path.basename(filename),
+    )
+    assert url == expected_url
     # download artifact
     path = audfactory.download_artifact(url, filename)
     # check content
@@ -687,8 +680,12 @@ def test_upload_artifact(filename, content, repository, group_id, name,
     # clean up
     os.remove(path)
     # check version
-    versions = audfactory.versions(group_id, name, repository=repository)
-    assert version in versions
+    versions = audfactory.versions(
+        pytest.GROUP_ID,
+        pytest.NAME,
+        repository=pytest.REPOSITORY,
+    )
+    assert pytest.VERSION in versions
 
 
 @pytest.mark.parametrize(
