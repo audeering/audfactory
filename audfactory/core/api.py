@@ -643,6 +643,9 @@ def transitive_dependencies(
     else:
         transitive_deps = package_type
 
+    if verbose:  # pragma: no cover
+        print()
+
     return transitive_deps
 
 
@@ -752,6 +755,9 @@ def upload_artifact(
         print(desc, end='\r')
 
     dst_path.deploy_file(path)
+
+    if verbose:  # pragma: no cover
+        print()
 
     return os.path.join(url, src_filename)
 
