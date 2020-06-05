@@ -7,6 +7,14 @@ The format is based on `Keep a Changelog`_,
 and this project adheres to `Semantic Versioning`_.
 
 
+Version 0.5.4 (2020-06-05)
+--------------------------
+
+* Fixed: print line was not cleared at the end of
+  :func:`audfactory.upload_artifact`
+  and :func:`audfactory.transitive_dependencies`
+
+
 Version 0.5.3 (2020-06-02)
 --------------------------
 
