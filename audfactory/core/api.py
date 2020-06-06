@@ -644,7 +644,8 @@ def transitive_dependencies(
         transitive_deps = package_type
 
     if verbose:  # pragma: no cover
-        print()
+        # Final clearing of progress line
+        print(audeer.format_display_message(' ', pbar=False), end='\r')
 
     return transitive_deps
 
@@ -757,7 +758,8 @@ def upload_artifact(
     dst_path.deploy_file(path)
 
     if verbose:  # pragma: no cover
-        print()
+        # Final clearing of progress line
+        print(audeer.format_display_message(' ', pbar=False), end='\r')
 
     return os.path.join(url, src_filename)
 
