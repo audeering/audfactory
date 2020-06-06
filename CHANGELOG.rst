@@ -7,6 +7,12 @@ The format is based on `Keep a Changelog`_,
 and this project adheres to `Semantic Versioning`_.
 
 
+Version 0.5.5 (2020-06-06)
+--------------------------
+
+* Fixed: clear print line without new line
+
+
 Version 0.5.4 (2020-06-05)
 --------------------------
 
