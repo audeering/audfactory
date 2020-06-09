@@ -433,6 +433,32 @@ def _check_params_type(params):
                 "bool, float, int, NoneType, str. "
                 f"Yours includes {type(value)}"
             )
+        if isinstance(value, str):
+            # Forbid strings that are converted to other types
+            try:
+                int(value)
+            except ValueError:
+                pass
+            else:
+                raise ValueError(
+                    f"'{value}' is forbidden, use the int {value} instead"
+                )
+            try:
+                float(value)
+            except ValueError:
+                pass
+            else:
+                raise ValueError(
+                    f"'{value}' is forbidden, use the float {value} instead"
+                )
+            if value in ['True', 'False']:
+                raise ValueError(
+                    f"'{value}' is forbidden, use the bool {value} instead"
+                )
+            if value == 'None':
+                raise ValueError(
+                    f"'{value}' is forbidden, use the NoneType {value} instead"
+                )
 
 
 def _import_csv(s):

@@ -55,7 +55,7 @@ def test_getitem(lookup_table):
 
 
 def test_table(lookup_table):
-    params = {'a': 1, 'b': 2.0, 'c': '3.0.0', 'd': True, 'e': '4.0', 'f': None}
+    params = {'a': 1, 'b': 2.0, 'c': '3.0.0', 'd': True, 'e': 4.0, 'f': None}
     lookup_table.extend(list(params.keys()))
     lookup_table.append(params)
     csvfile = audfactory.download_artifact(lookup_table.url)
@@ -261,3 +261,28 @@ def test_versions(lookup_table):
 def test_sort(table, expected_table):
     sorted_table = audfactory.core.lookup._sort(table)
     assert sorted_table == expected_table
+
+
+def test__check_params_type():
+    with pytest.raises(ValueError):
+        audfactory.core.lookup._check_params_type({'a': {'b': 1}})
+    with pytest.raises(ValueError) as error:
+        audfactory.core.lookup._check_params_type({'a': '1'})
+    error = str(error.value)
+    assert error == "'1' is forbidden, use the int 1 instead"
+    with pytest.raises(ValueError) as error:
+        audfactory.core.lookup._check_params_type({'a': '1.0'})
+    error = str(error.value)
+    assert error == "'1.0' is forbidden, use the float 1.0 instead"
+    with pytest.raises(ValueError) as error:
+        audfactory.core.lookup._check_params_type({'a': 'True'})
+    error = str(error.value)
+    assert error == "'True' is forbidden, use the bool True instead"
+    with pytest.raises(ValueError) as error:
+        audfactory.core.lookup._check_params_type({'a': 'False'})
+    error = str(error.value)
+    assert error == "'False' is forbidden, use the bool False instead"
+    with pytest.raises(ValueError) as error:
+        audfactory.core.lookup._check_params_type({'a': 'None'})
+    error = str(error.value)
+    assert error == "'None' is forbidden, use the NoneType None instead"
