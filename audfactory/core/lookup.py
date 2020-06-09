@@ -85,13 +85,25 @@ class Lookup:
 
         """
         table = self.table
-        columns = table[0][1:]
+        columns = _columns(table)
         item = {}
         for row in table[1:]:
             if row[0] == uid:
                 item = {c: p for c, p in zip(columns, row[1:])}
                 break
         return item
+
+    @property
+    def columns(self) -> typing.List:
+        r"""Lookup table column names."""
+        table = _download(self.url)
+        return _columns(table)
+
+    @property
+    def ids(self) -> typing.List:
+        r"""Lookup table ids."""
+        table = _download(self.url)
+        return _ids(table)
 
     @property
     def table(self) -> typing.List[typing.List]:
@@ -115,7 +127,7 @@ class Lookup:
 
         """
         table = self.table
-        columns = _header(table)[1:]  # header without uid
+        columns = _columns(table)
         _check_params_type(params)
         params = dict(sorted(params.items()))
 
@@ -138,7 +150,7 @@ class Lookup:
         r"""Clear lookup table."""
         table = self.table
 
-        table = [_header(table)]
+        table = [table[0]]  # empty table with header
         _upload(table, self.group_id, self.name, self.version, self.repository)
 
     def contains(self, params: typing.Dict[str, typing.Any]) -> bool:
@@ -188,15 +200,15 @@ class Lookup:
         _check_params_type(params)
 
         table = self.table
-        header = _header(table)
+        columns = _columns(table)
 
         for param, value in params.items():
-            if param not in header:
-                # Append param key to header
+            if param not in columns:
+                # Append param key to columns
                 table[0] += [param]
                 # FIXME: the following code seems ugly to me
                 if len(table) == 1 and value is not None:
-                    # Start from empty table, by first updating the header
+                    # Start from empty table, by first updating the columns
                     _upload(
                         table,
                         self.group_id,
@@ -204,7 +216,7 @@ class Lookup:
                         self.version,
                         self.repository,
                     )
-                    original_params = {p: None for p in header if p != 'id'}
+                    original_params = {p: None for p in columns}
                     self.append({**original_params, **{param: value}})
                     table = self.table
                 else:
@@ -461,6 +473,14 @@ def _check_params_type(params):
                 )
 
 
+def _columns(table: typing.List[typing.List]) -> typing.List:
+    return table[0][1:]
+
+
+def _ids(table: typing.List[typing.List]) -> typing.List:
+    return [row[0] for row in table[1:]]
+
+
 def _import_csv(s):
     r"""Convert strings to int, float, and None.
 
@@ -503,10 +523,6 @@ def _download(url: str) -> typing.List[typing.List]:
         row = [_import_csv(r) for r in row]
         table.append(row)
     return table
-
-
-def _header(table: typing.List[typing.List]) -> typing.List:
-    return table[0]
 
 
 def _sort(table: typing.List[typing.List]) -> typing.List[typing.List]:

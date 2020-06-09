@@ -54,7 +54,10 @@ def test_getitem(lookup_table):
     assert params == lookup_table[uid]
 
 
-def test_table(lookup_table):
+def test_columns_ids_table(lookup_table):
+    assert lookup_table.table == [['id']]
+    assert lookup_table.columns == []
+    assert lookup_table.ids == []
     params = {'a': 1, 'b': 2.0, 'c': '3.0.0', 'd': True, 'e': 4.0, 'f': None}
     lookup_table.extend(list(params.keys()))
     lookup_table.append(params)
@@ -66,6 +69,8 @@ def test_table(lookup_table):
     table = lookup_table.table
     assert list(df.columns.values) == table[0]
     assert list(df.iloc[0, :].values) == table[1]
+    assert lookup_table.columns == table[0][1:]
+    assert lookup_table.ids == [table[1][0]]
     with pytest.raises(AttributeError):
         lookup_table.table = []
 
