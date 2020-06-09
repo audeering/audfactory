@@ -7,6 +7,16 @@ The format is based on `Keep a Changelog`_,
 and this project adheres to `Semantic Versioning`_.
 
 
+Version 0.5.6 (2020-06-10)
+--------------------------
+
+* Added: :attr:`audfactory.Lookup.columns`
+* Added: :attr:`audfactory.Lookup.ids`
+* Added: nice ``repr`` and ``str`` output for :class:`audfactory.Lookup`
+* Fixed: check for correct type of lookup parameters
+  to avoid storing the same parameter twice in a lookup table
+
+
 Version 0.5.5 (2020-06-06)
 --------------------------
 
