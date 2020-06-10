@@ -54,6 +54,21 @@ def test_getitem(lookup_table):
     assert params == lookup_table[uid]
 
 
+def test_str(lookup_table):
+    assert str(lookup_table) == 'id'
+    assert repr(lookup_table) == 'id'
+    params = {'a': 1, 'b': 2.0, 'c': '3.0.0', 'd': True, 'e': 4.0, 'f': None}
+    lookup_table.extend(list(params.keys()))
+    lookup_table.append(params)
+    expected_message = (
+        f'id                                    '
+        f'a  b    c      d     e    f   \n'
+        f'{lookup_table.ids[0]}  1  2.0  3.0.0  True  4.0  None'
+    )
+    assert str(lookup_table) == expected_message
+    assert repr(lookup_table) == expected_message
+
+
 def test_columns_ids_table(lookup_table):
     assert lookup_table.table == [['id']]
     assert lookup_table.columns == []

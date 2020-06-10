@@ -93,6 +93,26 @@ class Lookup:
                 break
         return item
 
+    def __repr__(self):
+        r"""String representation of lokkup table."""
+        table = self.table
+        padding = 2
+        # Longest string in each column
+        transposed_table = [list(x) for x in zip(*table)]
+        col_width = [
+            len(max([str(word) for word in row], key=len)) + padding
+            for row in transposed_table
+        ]
+        # Don't pad the last column
+        col_width[-1] -= padding
+        row = [
+            ''.join(
+                str(word).ljust(width) for word, width in zip(row, col_width)
+            )
+            for row in table
+        ]
+        return '\n'.join(row)
+
     @property
     def columns(self) -> typing.List:
         r"""Lookup table column names."""
