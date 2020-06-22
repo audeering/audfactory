@@ -25,12 +25,14 @@ class Lookup:
     :class:`float`,
     :class:`int`,
     :class:`NoneType`,
-    :class:`str`,
-    where ``''`` will be automatically converted to ``None``,
-    ``'True'`` to ``True``,
-    ``'False'`` to ``False``,
-    ``'4.0'`` to ``4.0``,
-    and ``'4'`` to ``4``.
+    :class:`str`.
+    You cannot use strings
+    that would be converted to any of the other types like
+    ``'None'``,
+    ``'True'``,
+    ``'False'``,
+    ``'4.0'``,
+    and ``'4'``.
 
     The following code converts an :class:`audfactory.Lookup` object
     into a :class:`pandas.DataFrame`:
