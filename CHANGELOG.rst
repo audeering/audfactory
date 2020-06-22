@@ -7,6 +7,13 @@ The format is based on `Keep a Changelog`_,
 and this project adheres to `Semantic Versioning`_.
 
 
+Version 0.5.8 (2020-06-22)
+--------------------------
+
+* Fixed: repository argument of :func:`audfactory.list_artifacts`
+  was ignored before
+
+
 Version 0.5.7 (2020-06-22)
 --------------------------
 
