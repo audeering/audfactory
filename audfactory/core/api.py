@@ -367,7 +367,7 @@ def list_artifacts(
     if isinstance(deps, dict):
         for key, value in deps.items():
             if isinstance(value, dict):
-                artifact_urls += list_artifacts(value)
+                artifact_urls += list_artifacts(value, repository=repository)
             else:
                 group_id, name, version = key.split(':')
                 pom_url = server_pom_url(

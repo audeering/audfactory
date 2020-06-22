@@ -343,10 +343,11 @@ def test_include_dependencies(deps, pattern, expected_deps):
 
 
 @pytest.mark.parametrize(
-    'deps,expected_dep_list',
+    'deps,repo,expected_dep_list',
     [
         (
             {},
+            'maven',
             [],
         ),
         (
@@ -357,15 +358,16 @@ def test_include_dependencies(deps, pattern, expected_deps):
                         'com.audeering.data.emodb:emodb-metadata:0.2.2': 'zip',
                     },
             },
+            'data-local',
             [('com/audeering/data/emodb/emodb-metadata/0.2.2/'
               'emodb-metadata-0.2.2.zip'),
              'info/bilderbar/emodb/emodb/1.0.0/emodb-1.0.0.zip']
         ),
     ],
 )
-def test_list_artifacts(deps, expected_dep_list):
-    dep_list = audfactory.list_artifacts(deps)
-    expected_dep_list = [artifactory(d) for d in expected_dep_list]
+def test_list_artifacts(deps, repo, expected_dep_list):
+    dep_list = audfactory.list_artifacts(deps, repository=repo)
+    expected_dep_list = [artifactory(d, repo=repo) for d in expected_dep_list]
     assert dep_list == expected_dep_list
 
 
