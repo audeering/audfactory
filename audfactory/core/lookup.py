@@ -32,6 +32,17 @@ class Lookup:
     ``'4.0'`` to ``4.0``,
     and ``'4'`` to ``4``.
 
+    The following code converts an :class:`audfactory.Lookup` object
+    into a :class:`pandas.DataFrame`:
+
+    .. code-block:: python
+
+        index, data = [], []
+        if len(lookup.table) > 1:
+            index = [entry[0] for entry in lookup.table[1:]]
+            data = [entry[1:] for entry in lookup.table[1:]]
+        df = pd.DataFrame(data=data, index=index, columns=lookup.columns)
+
     Args:
         group_id: group ID of lookup table
         name: name of lookup table
