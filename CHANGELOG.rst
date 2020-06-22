@@ -7,6 +7,15 @@ The format is based on `Keep a Changelog`_,
 and this project adheres to `Semantic Versioning`_.
 
 
+Version 0.5.7 (2020-06-22)
+--------------------------
+
+* Added: documentation on how to convert :class:`audfactory.Lookup`
+  to a :class:`pandas.Dataframe`
+* Fixed: list string parameters that are not allowed to use as params
+  in :class:`audfactory.Lookup`
+
+
 Version 0.5.6 (2020-06-10)
 --------------------------
 
