@@ -11,17 +11,22 @@ import audfactory
 RANDOM_NAME = uuid.uuid1()
 GROUP_ID = f'com.audeering.audfactory.unittest.{RANDOM_NAME}'
 VERSION = '1.0.0'
+REPOSITORY = 'unittests-public-local'
 
 
 @pytest.fixture()
 def lookup_table():
-    audfactory.Lookup.create(GROUP_ID, VERSION)
-    lookup_table = audfactory.Lookup(GROUP_ID, version=VERSION)
+    audfactory.Lookup.create(GROUP_ID, VERSION, repository=REPOSITORY)
+    lookup_table = audfactory.Lookup(
+        GROUP_ID,
+        version=VERSION,
+        repository=REPOSITORY,
+    )
     yield lookup_table
     # Clean up
-    if audfactory.Lookup.exists(GROUP_ID, VERSION):
+    if audfactory.Lookup.exists(GROUP_ID, VERSION, repository=REPOSITORY):
         lookup_table.clear()
-        audfactory.Lookup.delete(GROUP_ID, VERSION)
+        audfactory.Lookup.delete(GROUP_ID, VERSION, repository=REPOSITORY)
 
 
 @pytest.mark.parametrize(
@@ -42,7 +47,7 @@ def lookup_table():
     ],
 )
 def test_init(group_id, version):
-    audfactory.Lookup(group_id, version=version)
+    audfactory.Lookup(group_id, version=version, repository=REPOSITORY)
 
 
 def test_getitem(lookup_table):
@@ -186,10 +191,20 @@ def test_remove(lookup_table):
 )
 def test_create(params, expected_columns):
     # Create a new lookup table
-    url = audfactory.Lookup.create(GROUP_ID, VERSION, params)
+    url = audfactory.Lookup.create(
+        GROUP_ID,
+        VERSION,
+        params,
+        repository=REPOSITORY,
+    )
     # Raise error if lookup table exists already
     with pytest.raises(RuntimeError):
-        audfactory.Lookup.create(GROUP_ID, VERSION, params)
+        audfactory.Lookup.create(
+            GROUP_ID,
+            VERSION,
+            params,
+            repository=REPOSITORY,
+        )
     # Check content of CSV file
     lookup_file = audfactory.download_artifact(url)
     with open(lookup_file, newline='') as csvfile:
@@ -197,7 +212,7 @@ def test_create(params, expected_columns):
         assert next(reader) == expected_columns
     # Clean up
     os.remove(lookup_file)
-    audfactory.Lookup.delete(GROUP_ID, VERSION)
+    audfactory.Lookup.delete(GROUP_ID, VERSION, repository=REPOSITORY)
 
 
 @pytest.mark.parametrize(
@@ -222,35 +237,91 @@ def test_create(params, expected_columns):
 def test_delete(lookup_table, empty, force):
     if not empty:
         lookup_table.extend({'a': 1})
-    audfactory.Lookup.delete(GROUP_ID, VERSION, force=force)
+    audfactory.Lookup.delete(
+        GROUP_ID,
+        VERSION,
+        repository=REPOSITORY,
+        force=force,
+    )
 
 
 def test_exists(lookup_table):
-    assert audfactory.Lookup.exists(GROUP_ID, VERSION)
-    assert not audfactory.Lookup.exists(GROUP_ID, '0.0.0')
+    assert audfactory.Lookup.exists(GROUP_ID, VERSION, repository=REPOSITORY)
+    assert not audfactory.Lookup.exists(
+        GROUP_ID,
+        '0.0.0',
+        repository=REPOSITORY,
+    )
 
 
 def test_latest_version(lookup_table):
     p = {'a': 1}
-    assert audfactory.Lookup.latest_version(GROUP_ID) == VERSION
-    assert audfactory.Lookup.latest_version(GROUP_ID, params=p) is None
+    version = audfactory.Lookup.latest_version(
+        GROUP_ID,
+        repository=REPOSITORY,
+    )
+    assert version == VERSION
+    version = audfactory.Lookup.latest_version(
+        GROUP_ID,
+        params=p,
+        repository=REPOSITORY,
+    )
+    assert version is None
     lookup_table.extend(p)
-    assert audfactory.Lookup.latest_version(GROUP_ID, params=p) == VERSION
-    assert audfactory.Lookup.latest_version(GROUP_ID, params={'a': 0}) is None
+    version = audfactory.Lookup.latest_version(
+        GROUP_ID,
+        params=p,
+        repository=REPOSITORY,
+    )
+    assert version == VERSION
+    version = audfactory.Lookup.latest_version(
+        GROUP_ID,
+        params={'a': 0},
+        repository=REPOSITORY,
+    )
+    assert version is None
 
 
 def test_versions(lookup_table):
     p = {'a': 1}
-    assert audfactory.Lookup.versions(GROUP_ID) == [VERSION]
-    assert audfactory.Lookup.versions(GROUP_ID, params=p) == []
+    versions = audfactory.Lookup.versions(
+        GROUP_ID,
+        repository=REPOSITORY,
+    )
+    assert versions == [VERSION]
+    versions = audfactory.Lookup.versions(
+        GROUP_ID,
+        params=p,
+        repository=REPOSITORY,
+    )
+    assert versions == []
     lookup_table.extend(p)
-    assert audfactory.Lookup.versions(GROUP_ID, params=p) == [VERSION]
-    assert audfactory.Lookup.versions(GROUP_ID, params={'a': 0}) == []
+    versions = audfactory.Lookup.versions(
+        GROUP_ID,
+        params=p,
+        repository=REPOSITORY,
+    )
+    assert versions == [VERSION]
+    versions = audfactory.Lookup.versions(
+        GROUP_ID,
+        params={'a': 0},
+        repository=REPOSITORY,
+    )
+    assert versions == []
     # Add another version
-    audfactory.Lookup.create(GROUP_ID, '2.0.0')
-    assert audfactory.Lookup.versions(GROUP_ID) == [VERSION, '2.0.0']
-    assert audfactory.Lookup.versions(GROUP_ID, params=p) == [VERSION]
-    audfactory.Lookup.delete(GROUP_ID, '2.0.0')
+    audfactory.Lookup.create(GROUP_ID, '2.0.0', repository=REPOSITORY)
+    versions = audfactory.Lookup.versions(
+        GROUP_ID,
+        repository=REPOSITORY,
+    )
+    assert versions == [VERSION, '2.0.0']
+    versions = audfactory.Lookup.versions(
+        GROUP_ID,
+        params=p,
+        repository=REPOSITORY,
+    )
+    assert versions == [VERSION]
+    audfactory.Lookup.delete(GROUP_ID, '2.0.0', repository=REPOSITORY)
 
 
 @pytest.mark.parametrize(
