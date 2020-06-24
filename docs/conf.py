@@ -36,7 +36,10 @@ intersphinx_mapping = {
     'pandas': ('https://pandas-docs.github.io/pandas-docs-travis/', None),
 }
 # Disable Gitlab as we need to sign in
-linkcheck_ignore = ['https://gitlab.audeering.com']
+linkcheck_ignore = [
+    'https://gitlab.audeering.com',
+    'http://sphinx-doc.org/',
+]
 
 
 # HTML --------------------------------------------------------------------
