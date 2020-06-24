@@ -8,10 +8,9 @@ import pytest
 import audfactory
 
 
-RANDOM_NAME = uuid.uuid1()
-GROUP_ID = f'com.audeering.audfactory.unittest.{RANDOM_NAME}'
-VERSION = '1.0.0'
-REPOSITORY = 'unittests-public-local'
+GROUP_ID = pytest.GROUP_ID
+VERSION = pytest.VERSION
+REPOSITORY = pytest.REPOSITORY
 
 
 @pytest.fixture()
