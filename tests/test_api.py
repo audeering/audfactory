@@ -711,6 +711,8 @@ def test_upload_artifact(filename, content):
                 '4.0.0-20200206.095424-2',
                 '4.0.0-20200206.095534-3',
                 '4.0.0',
+                '5.0.0',
+                '5.1.0',
             ],
         ),
         (
@@ -731,6 +733,8 @@ def test_upload_artifact(filename, content):
                 '4.0.0-20200206.095424-2',
                 '4.0.0-20200206.095534-3',
                 '4.0.0',
+                '5.0.0',
+                '5.1.0',
             ],
         ),
         (
@@ -760,7 +764,7 @@ def test_upload_artifact(filename, content):
         (
             'com.audeering.data.audbunittests',
             'audbunittests',
-            '5.*',
+            '6.*',
             [],
         ),
         pytest.param(
