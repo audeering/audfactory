@@ -7,6 +7,13 @@ The format is based on `Keep a Changelog`_,
 and this project adheres to `Semantic Versioning`_.
 
 
+Version 0.5.9 (2020-09-08)
+--------------------------
+
+* Added: link to HTML documentation to :file:`setup.cfg`
+* Added: cleanup after tests on Artifactory
+
+
 Version 0.5.8 (2020-06-22)
 --------------------------
 
