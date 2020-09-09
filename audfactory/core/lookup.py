@@ -2,7 +2,6 @@ import csv
 import io
 import os
 import typing
-import uuid
 
 import audeer
 
@@ -146,6 +145,13 @@ class Lookup:
     def append(self, params: typing.Dict[str, typing.Any]) -> str:
         r"""Append entry to lookup table.
 
+        The lookup table entry gets a unique ID
+        from ``params``,
+        :attr:`self.name`,
+        :attr:`self.group_id`,
+        :attr:`self.version`,
+        and :attr:`self.repository`.
+
         Args:
             params: lookup table entry in the form of ``{column: parameter}``
 
@@ -172,7 +178,13 @@ class Lookup:
             )
 
         # Add an UID to the new row and append it to the table
-        uid = str(uuid.uuid1())
+        uid = self.generate_uid(
+            params=str(params),
+            group_id=self.group_id,
+            name=self.name,
+            version=self.version,
+            repository=self.repository,
+        )
         new_row = [uid] + list(params.values())
         table.append(new_row)
         _upload(table, self.group_id, self.name, self.version, self.repository)
@@ -432,6 +444,53 @@ class Lookup:
             return v[-1]
         else:
             return None
+
+    @staticmethod
+    def generate_uid(
+            *,
+            params: typing.Dict[str, typing.Any],
+            name: str,
+            group_id: str,
+            version: str,
+            repository: str,
+    ) -> str:
+        r"""Generate unique ID.
+
+        It converts ``params`` to a string,
+        and concatenates it with ``name``, ``group_id``, ``version``,
+        and ``repository``.
+        From that concatenated string a unique ID is derived.
+
+        Args:
+            params: params in the form of ``{column: parameter}``
+            group_id: group ID of lookup table
+            name: name of lookup table
+            version: version of lookup table
+            repository: repository of lookup table
+
+        Returns:
+            unique identifier of length 36
+
+        Example:
+            >>> Lookup.generate_uid(
+            ...     params={0: None},
+            ...     name='name',
+            ...     group_id='group.id',
+            ...     version='1.0.0',
+            ...     repository='https://url.to/your/repo',
+            ... )
+            '426a1979-83ae-023f-c54c-f476672b495a'
+
+        """
+        unique_string = (
+            str(params)
+            + group_id
+            + name
+            + version
+            + repository
+        )
+        uid = audeer.uid(from_string=unique_string)
+        return uid
 
     @staticmethod
     def versions(

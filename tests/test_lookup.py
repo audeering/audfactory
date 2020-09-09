@@ -5,6 +5,7 @@ import uuid
 import pandas as pd
 import pytest
 
+import audeer
 import audfactory
 
 
@@ -99,8 +100,18 @@ def test_append(lookup_table):
         lookup_table.append({'a': 1})
     # Extend lookup to 3 columns and add two new rows
     lookup_table.extend(('a', 'b', 'c'))
-    lookup_table.append({'a': 1, 'b': 2, 'c': 3})
-    lookup_table.append({'a': 4, 'b': 5, 'c': 6})
+    uid1 = lookup_table.append({'a': 1, 'b': 2, 'c': 3})
+    uid2 = lookup_table.append({'a': 4, 'b': 5, 'c': 6})
+    assert uid1 != uid2
+    assert len(uid1) == len(uid2)
+    unique_string = (
+        str({'a': 4, 'b': 5, 'c': 6})
+        + lookup_table.group_id
+        + lookup_table.name
+        + lookup_table.version
+        + lookup_table.repository
+    )
+    assert uid2 == audeer.uid(from_string=unique_string)
     table = lookup_table.table
     assert table[0] == ['id', 'a', 'b', 'c']
     assert table[1][1:] == [1, 2, 3]
