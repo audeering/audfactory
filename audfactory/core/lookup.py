@@ -65,8 +65,11 @@ class Lookup:
             repository: str = 'models-public-local',
     ):
         self.group_id = group_id
+        """group ID of lookup table"""
         self.name = name
+        """name of lookup table"""
         self.repository = repository
+        """repository of lookup table"""
 
         if version is None:
             version = Lookup.latest_version(
@@ -87,7 +90,9 @@ class Lookup:
             )
 
         self.version = version
+        """version of lookup table"""
         self.url = _url_table(group_id, name, version, repository)
+        """Artifactory URL of lookup table"""
 
     def __getitem__(self, uid: str):
         r"""Get lookup table entry by ID.
