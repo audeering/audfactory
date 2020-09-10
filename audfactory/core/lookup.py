@@ -94,11 +94,14 @@ class Lookup:
         self.url = _url_table(group_id, name, version, repository)
         """Artifactory URL of lookup table"""
 
-    def __getitem__(self, uid: str):
+    def __getitem__(self, uid: str) -> typing.Dict:
         r"""Get lookup table entry by ID.
 
         Args:
             uid: ID of lookup table entry
+
+        Returns:
+            lookup table entry
 
         """
         table = self.table

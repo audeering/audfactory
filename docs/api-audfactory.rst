@@ -59,6 +59,7 @@ Lookup
 
 .. autoclass:: Lookup
     :members:
+    :special-members: __getitem__
 
 path_to_group_id
 ----------------
