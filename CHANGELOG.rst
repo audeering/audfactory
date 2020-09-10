@@ -7,7 +7,14 @@ The format is based on `Keep a Changelog`_,
 and this project adheres to `Semantic Versioning`_.
 
 
+Version 0.6.1 (2020-09-10)
+--------------------------
+
+* Fixed: added documentation for :meth:`audfactory.Lookup.__getitem__`
+
+
 Version 0.6.0 (2020-09-09)
+--------------------------
 
 * Added: static method :meth:`audfactory.Lookup.generate_uid`
   to generate UID by hashing a string
