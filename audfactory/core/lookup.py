@@ -485,9 +485,9 @@ class Lookup:
             ...     name='name',
             ...     group_id='group.id',
             ...     version='1.0.0',
-            ...     repository='https://url.to/your/repo',
+            ...     repository='models-public-local',
             ... )
-            '426a1979-83ae-023f-c54c-f476672b495a'
+            'afe694a5-8bad-4dbc-73ba-636f18340615'
 
         """
         unique_string = (
