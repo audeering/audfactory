@@ -55,14 +55,17 @@ class Lookup:
             table with the specified version can be found
 
     Example:
-        >>> l = Lookup('com.audeering.models.gender.voxcnn', version='0.2.0')
-        >>> l
+        >>> lookup = Lookup('com.audeering.models.gender.voxcnn', version='0.2.0')
+        >>> lookup
         id                                    purpose  sampling_rate  train-db
         3bb24968-759a-11ea-ab25-309c2364e602  prod     16000          voxceleb1
-        >>> l['3bb24968-759a-11ea-ab25-309c2364e602']
+        >>> lookup.table
+        [['id', 'purpose', 'sampling_rate', 'train-db'],
+         ['3bb24968-759a-11ea-ab25-309c2364e602', 'prod', 16000, 'voxceleb1']]
+        >>> lookup['3bb24968-759a-11ea-ab25-309c2364e602']
         {'purpose': 'prod', 'sampling_rate': 16000, 'train-db': 'voxceleb1'}
 
-    """
+    """  # noqa: E501
 
     def __init__(
             self,
