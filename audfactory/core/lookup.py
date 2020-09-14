@@ -54,6 +54,14 @@ class Lookup:
         RuntimeError: if no lookup tables or no lookup
             table with the specified version can be found
 
+    Example:
+        >>> l = Lookup('com.audeering.models.gender.voxcnn', version='0.2.0')
+        >>> l
+        id                                    purpose  sampling_rate  train-db
+        3bb24968-759a-11ea-ab25-309c2364e602  prod     16000          voxceleb1
+        >>> l['3bb24968-759a-11ea-ab25-309c2364e602']
+        {'purpose': 'prod', 'sampling_rate': 16000, 'train-db': 'voxceleb1'}
+
     """
 
     def __init__(
@@ -423,6 +431,10 @@ class Lookup:
         Returns:
             ``True`` if lookup table exists
 
+        Example:
+            >>> Lookup.exists('com.audeering.models.gender.voxcnn', '0.1.0')
+            True
+
         """
         versions = audfactory.versions(group_id, name, repository=repository)
         return version in versions
@@ -445,6 +457,10 @@ class Lookup:
 
         Returns:
             latest version of lookup table
+
+        Example:
+            >>> Lookup.latest_version('com.audeering.models.gender.voxcnn')
+            '0.2.0'
 
         """
         v = Lookup.versions(group_id, params, name=name, repository=repository)
@@ -518,6 +534,10 @@ class Lookup:
 
         Returns:
             available versions of lookup table
+
+        Example:
+            >>> Lookup.versions('com.audeering.models.gender.voxcnn')
+            ['0.1.0', '0.2.0']
 
         """
         versions = audfactory.versions(group_id, name, repository=repository)
