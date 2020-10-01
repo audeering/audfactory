@@ -55,6 +55,19 @@ python-3.8:
   stage: test
   image: docker.audeering.com/python:3.8
 
+windows:
+  # Based on Python 3.8 by default
+  extends: .pytest
+  stage: test
+  tags:
+    - windows
+  before_script:
+    - $username = $Env:GITLAB_USER_LOGIN
+    - $api_key = (Get-Content token.json | ConvertFrom-Json).access_token
+    - $Env:ARTIFACTORY_USERNAME = $username
+    - $Env:ARTIFACTORY_API_KEY = $api_key
+    - python -V
+
 docs:
   extends: .pytest
   stage: test
