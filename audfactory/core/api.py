@@ -761,7 +761,7 @@ def upload_artifact(
         # Final clearing of progress line
         print(audeer.format_display_message(' ', pbar=False), end='\r')
 
-    return os.path.join(url, src_filename)
+    return f'{url}/{src_filename}'
 
 
 def versions(

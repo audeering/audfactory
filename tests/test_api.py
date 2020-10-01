@@ -663,14 +663,15 @@ def test_upload_artifact(filename, content):
     # clean up
     os.remove(filename)
     # check url
-    expected_url = os.path.join(
+    expected_url = (
         audfactory.server_url(
             pytest.GROUP_ID,
             name=pytest.NAME,
             repository=pytest.REPOSITORY,
             version=pytest.VERSION,
-        ),
-        os.path.basename(filename),
+        )
+        + '/'
+        + os.path.basename(filename)
     )
     assert url == expected_url
     # download artifact
