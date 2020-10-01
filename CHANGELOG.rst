@@ -7,6 +7,12 @@ The format is based on `Keep a Changelog`_,
 and this project adheres to `Semantic Versioning`_.
 
 
+Version 0.6.3 (2020-10-01)
+--------------------------
+
+* Added: official support for Windows
+
+
 Version 0.6.2 (2020-09-14)
 --------------------------
 
