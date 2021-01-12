@@ -95,6 +95,73 @@ def test_dependencies(pom, expected_deps):
 
 
 @pytest.mark.parametrize(
+    'filename,content,expected_versions',
+    [
+        (
+            'audfactory.txt',
+            'hello\nartifact',
+            ['1.0.0'],
+        ),
+        # name different from pytest.NAME
+        (
+            'foo.txt',
+            'hello\nartifact',
+            [],
+        ),
+        # 'file-not-found.txt' will not create a local file
+        pytest.param(
+            'file-not-found.txt',
+            'hello\nartifact',
+            [],
+            marks=pytest.mark.xfail(raises=FileNotFoundError),
+        ),
+    ]
+)
+def test_deploy_artifact(filename, content, expected_versions):
+    # Use random name to ensure parallel running
+    # Remove existing path to trigger new creation
+    url = audfactory.server_url(
+        pytest.GROUP_ID,
+        repository=pytest.REPOSITORY,
+        name=pytest.NAME,
+        version=pytest.VERSION,
+    )
+    path = audfactory.artifactory_path(url)
+    if path.exists():
+        path.unlink()
+    # Add version to filename
+    name, ext = os.path.splitext(os.path.basename(filename))
+    url = f'{url}/{name}-{pytest.VERSION}{ext}'
+    # create local file
+    if filename != 'file-not-found.txt':
+        with open(filename, 'w') as fp:
+            fp.write(content)
+    # upload artifact
+    returned_url = audfactory.deploy_artifact(filename, url)
+    # clean up
+    os.remove(filename)
+    # check url
+    assert url == returned_url
+    assert audfactory.artifactory_path(url).exists()
+
+    # download artifact
+    path = audfactory.download_artifact(url, filename)
+    # check content
+    with open(path, 'r') as fp:
+        lines = [line.strip() for line in fp.readlines()]
+        assert content == '\n'.join(lines)
+    # clean up
+    os.remove(path)
+    # check version
+    versions = audfactory.versions(
+        pytest.GROUP_ID,
+        pytest.NAME,
+        repository=pytest.REPOSITORY,
+    )
+    assert expected_versions == versions
+
+
+@pytest.mark.parametrize(
     'url,destination,force_download,expected_path',
     [
         (
@@ -683,6 +750,9 @@ def test_upload_artifact(filename, content):
     if filename != 'file-not-found.txt':
         with open(filename, 'w') as fp:
             fp.write(content)
+    else:
+        # Ensure we have valid filename for missing file
+        filename = 'audfactory-1.0.0.txt'
     # upload artifact
     url = audfactory.upload_artifact(
         filename,

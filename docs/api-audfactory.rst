@@ -29,6 +29,11 @@ dependencies
 
 .. autofunction:: dependencies
 
+deploy_artifact
+---------------
+
+.. autofunction:: deploy_artifact
+
 download_artifact
 -----------------
 

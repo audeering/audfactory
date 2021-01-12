@@ -181,6 +181,84 @@ def dependencies(
     return sorted([dict_to_string(d) for d in deps])
 
 
+def deploy_artifact(
+        path: str,
+        url: str,
+        *,
+        md5: str = None,
+        sha1: str = None,
+        sha256: str = None,
+        parameters: Dict = {},
+        verbose: bool = False,
+) -> str:
+    r"""Deploy local file as an artifact.
+
+    This works similar to :func:`audfactory.upload_artifact`,
+    but allows for providing an URL
+    and using a filename that differs from
+    {name}-{version}.{extension}.
+
+    If your URL ends different from {name}-{version}.{extension},
+    :func:`audfactory.versions` will not list the file
+    as it does not follow the Maven repository conventions.
+
+    Args:
+        path: local file path (must exist)
+        url: path on Artifactory
+        md5: MD5 sum, will be calculated if not provided
+        sha1: SHA1 hash, will be calculated if not provided
+        sha256: SHA256 hash, will be calculated if not provided
+        parameters: attach any additional metadata
+        verbose: show information on the upload process
+
+    Returns:
+        URL of the artifact
+
+    Raises:
+        FileNotFoundError: if local file does not exist
+
+    """
+    src_path = audeer.safe_path(path)
+    if not os.path.exists(src_path):
+        raise FileNotFoundError(
+            errno.ENOENT,
+            os.strerror(errno.ENOENT),
+            src_path,
+        )
+
+    if verbose:  # pragma: no cover
+        desc = audeer.format_display_message(
+            f'Deploy {src_path}',
+            pbar=False,
+        )
+        print(desc, end='\r')
+
+    if md5 is None:
+        md5 = md5sum(src_path)
+    if sha1 is None:
+        sha1 = sha1sum(src_path)
+    if sha256 is None:
+        sha256 = sha256sum(src_path)
+
+    dst_path = artifactory_path(url)
+    if not dst_path.parent.exists():
+        dst_path.parent.mkdir()
+    with open(src_path, "rb") as fobj:
+        dst_path.deploy(
+            fobj,
+            md5=md5,
+            sha1=sha1,
+            sha256=sha256,
+            parameters=parameters,
+        )
+
+    if verbose:  # pragma: no cover
+        # Final clearing of progress line
+        print(audeer.format_display_message(' ', pbar=False), end='\r')
+
+    return url
+
+
 def download_artifact(
         url: str,
         destination: str = '.',
@@ -753,16 +831,22 @@ def upload_artifact(
         name: str,
         version: str,
         *,
+        md5: str = None,
+        sha1: str = None,
+        sha256: str = None,
+        parameters: Dict = {},
         verbose: bool = False,
 ) -> str:
     r"""Upload local file as an artifact.
 
-    .. warning:: Will raise an error if filename does not match
-        {name}-{version}.{extension}
-
-    The url will be composed as follows:
+    The URL will be composed as follows:
 
         {repository}/{group_id}/{name}/{version}/{name}-{version}.{extension}
+
+    It will raise an error if filename does not match
+    {name}-{version}.{extension}.
+    If you need to publish files with a different name,
+    use :func:`deploy_artifact` instead.
 
     Args:
         path: local file path (must exist)
@@ -770,46 +854,42 @@ def upload_artifact(
         group_id: group ID of the artifact
         name: name of the artifact
         version: version string
+        md5: MD5 sum, will be calculated if not provided
+        sha1: SHA1 hash, will be calculated if not provided
+        sha256: SHA256 hash, will be calculated if not provided
+        parameters: attach any additional metadata
         verbose: show information on the upload process
 
     Returns:
-        url of the artifact
+        URL of the artifact
 
     Raises:
         FileNotFoundError: if local file does not exist
         ValueError: if filename does not match {name}-{version}.{extension}
 
     """
-    src_path = audeer.safe_path(path)
-    if not os.path.exists(src_path):
-        raise FileNotFoundError(errno.ENOENT, os.strerror(errno.ENOENT),
-                                src_path)
-
-    src_filename = os.path.basename(src_path)
+    src_filename = os.path.basename(path)
     if not src_filename.startswith(f'{name}-{version}.'):
-        raise ValueError(f"Invalid filename '{src_filename}', expected "
-                         f"'{name}-{version}.<extension>'")
-
-    url = server_url(group_id, repository=repository,
-                     name=name, version=version)
-    dst_path = artifactory_path(url)
-    if not dst_path.exists():
-        dst_path.mkdir()
-
-    if verbose:  # pragma: no cover
-        desc = audeer.format_display_message(
-            f'Upload {src_path}',
-            pbar=False,
+        raise ValueError(
+            f"Invalid filename '{src_filename}', expected "
+            f"'{name}-{version}.<extension>'"
         )
-        print(desc, end='\r')
-
-    dst_path.deploy_file(path)
-
-    if verbose:  # pragma: no cover
-        # Final clearing of progress line
-        print(audeer.format_display_message(' ', pbar=False), end='\r')
-
-    return f'{url}/{src_filename}'
+    url = server_url(
+        group_id,
+        repository=repository,
+        name=name,
+        version=version,
+    )
+    url = f'{url}/{src_filename}'
+    return deploy_artifact(
+        path,
+        url,
+        md5=md5,
+        sha1=sha1,
+        sha256=sha256,
+        parameters=parameters,
+        verbose=verbose,
+    )
 
 
 def versions(

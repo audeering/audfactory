@@ -4,6 +4,7 @@ from audfactory.core.api import (
     authentification,
     checksum,
     dependencies,
+    deploy_artifact,
     download_artifact,
     download_pom,
     exclude_dependencies,
