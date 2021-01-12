@@ -2,6 +2,7 @@ from audfactory import pom
 from audfactory.core.api import (
     artifactory_path,
     authentification,
+    checksum,
     dependencies,
     download_artifact,
     download_pom,

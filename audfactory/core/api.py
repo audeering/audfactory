@@ -5,7 +5,13 @@ import errno
 from typing import Dict, List, Union, Tuple
 import xml
 
-from artifactory import ArtifactoryPath, get_global_config_entry
+from artifactory import (
+    ArtifactoryPath,
+    get_global_config_entry,
+    md5sum,
+    sha1sum,
+    sha256sum,
+)
 import audeer
 import requests
 import tqdm
@@ -93,6 +99,48 @@ def authentification() -> Tuple[str, str]:
         username = config_entry['username']
         apikey = config_entry['password']
     return username, apikey
+
+
+def checksum(path, type='md5') -> str:
+    r"""Calculate checksum for local or remote file.
+
+    Args:
+        path: local file path,
+            or URL to file path on Artifactory
+        type: checksum type to calculate,
+            one of ``'md5'``, ``'sha1'``, ``'sha256'``
+
+    Returns:
+        checksum
+
+    Example:
+        >>> checksum(
+        ...     'https://artifactory.audeering.com/artifactory/maven/'
+        ...     'edu/upenn/ldc/timit/1.0.1/timit-1.0.1.pom'
+        ... )
+        '9f0c246e1b3ab736c28bbe0f00caf277'
+
+    """
+    if path.startswith('http'):
+        path = artifactory_path(path)
+        if not path.exists():
+            raise RuntimeError(f'File not found: {path}')
+        if type == 'md5':
+            return ArtifactoryPath.stat(path).md5
+        elif type == 'sha1':
+            return ArtifactoryPath.stat(path).sha1
+        elif type == 'sha256':
+            return ArtifactoryPath.stat(path).sha256
+    else:
+        path = audeer.safe_path(path)
+        if not os.path.exists(path):
+            raise RuntimeError(f'File not found: {path}')
+        if type == 'md5':
+            return md5sum(path)
+        elif type == 'sha1':
+            return sha1sum(path)
+        elif type == 'sha256':
+            return sha256sum(path)
 
 
 def dependencies(

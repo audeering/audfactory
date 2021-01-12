@@ -13,6 +13,11 @@ authentification
 
 .. autofunction:: authentification
 
+checksum
+--------
+
+.. autofunction:: checksum
+
 config
 ------
 

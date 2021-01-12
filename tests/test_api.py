@@ -39,6 +39,37 @@ def test_artifactory_path(url, expected_urls):
     assert expected_urls == urls
 
 
+def test_checksum():
+
+    with pytest.raises(RuntimeError, match=r'File not found:'):
+        audfactory.checksum('file-not-found.txt')
+    with pytest.raises(RuntimeError, match=r'File not found:'):
+        url = (
+            'https://artifactory.audeering.com/artifactory/maven/'
+            'file-not-found.txt'
+        )
+        audfactory.checksum(url)
+
+    url = (
+        'https://artifactory.audeering.com/artifactory/maven/'
+        'edu/upenn/ldc/timit/1.0.1/timit-1.0.1.pom'
+    )
+    md5 = '9f0c246e1b3ab736c28bbe0f00caf277'
+    sha1 = '077963a1085ff6fef6666c635d3cc8000ab4cec5'
+    sha256 = 'fe5e3a0514f9503281b5f5160c0b0ecc6695ff90265955ac550df4d9d58a60e2'
+
+    assert audfactory.checksum(url, type='md5') == md5
+    assert audfactory.checksum(url, type='sha1') == sha1
+    assert audfactory.checksum(url, type='sha256') == sha256
+
+    path = audfactory.download_artifact(url)
+    assert audfactory.checksum(path, type='md5') == md5
+    assert audfactory.checksum(path, type='sha1') == sha1
+    assert audfactory.checksum(path, type='sha256') == sha256
+
+    os.remove(path)
+
+
 @pytest.mark.parametrize(
     'pom,expected_deps',
     [
