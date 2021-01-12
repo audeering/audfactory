@@ -7,6 +7,15 @@ The format is based on `Keep a Changelog`_,
 and this project adheres to `Semantic Versioning`_.
 
 
+Version 0.7.0 (2021-01-12)
+--------------------------
+
+* Added: :func:`audfactory.checksum`
+* Added: :func:`audfactory.deploy_artifact`
+* Added: ``md5``, ``sha1``, ``sha256``, ``parameters`` arguments
+  to :func:`audfactory.upload_artifact`
+
+
 Version 0.6.3 (2020-10-01)
 --------------------------
 
