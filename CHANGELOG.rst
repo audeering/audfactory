@@ -7,6 +7,12 @@ The format is based on `Keep a Changelog`_,
 and this project adheres to `Semantic Versioning`_.
 
 
+Version 0.7.1 (2021-01-27)
+--------------------------
+
+* Fixed: sorting of versions for, e.g. ``'10.0.0'`` > ``'9.0.0'``
+
+
 Version 0.7.0 (2021-01-12)
 --------------------------
 
