@@ -614,6 +614,18 @@ def test_server_pom_url(group_id, name, version, repository, expected_url):
                 '4.0.0',
             ],
         ),
+        (
+            [
+                '1.0.0',
+                '10.0.0',
+                '9.0.0',
+            ],
+            [
+                '1.0.0',
+                '9.0.0',
+                '10.0.0',
+            ],
+        ),
     ],
 )
 def test_sort_versions(versions, expeted_versions):

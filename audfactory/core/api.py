@@ -1,3 +1,4 @@
+from distutils.version import LooseVersion
 import json
 import os
 import re
@@ -678,7 +679,7 @@ def sort_versions(
         ['1.0.0', '2.0.0-SNAPSHOT', '2.0.0']
 
     """
-    versions = sorted(versions)
+    versions = sorted(versions, key=LooseVersion)
     # Now we have to move SNAPSHOT before the stable releases
     sorted_versions = []
     n = 0
