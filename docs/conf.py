@@ -1,3 +1,4 @@
+from datetime import date
 import os
 from subprocess import check_output
 import sys
@@ -7,7 +8,7 @@ import audeer
 
 # Project -----------------------------------------------------------------
 project = 'audfactory'
-copyright = '2019-2020 audEERING GmbH'
+copyright = f'2019-{date.today().year} audEERING GmbH'
 author = 'Hagen Wierstorf'
 # The x.y.z version read from tags
 try:
