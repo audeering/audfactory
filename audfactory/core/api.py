@@ -785,6 +785,7 @@ def transitive_dependencies(
     return transitive_deps
 
 
+@audeer.deprecated(removal_version='1.0.0')
 def transitive_dependencies_as_string(
         d: Dict,
         *,

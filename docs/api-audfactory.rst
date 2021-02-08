@@ -66,11 +66,6 @@ server_url
 
 .. autofunction:: server_url
 
-transitive_dependencies_as_string
----------------------------------
-
-.. autofunction:: transitive_dependencies_as_string
-
 upload_artifact
 ---------------
 
