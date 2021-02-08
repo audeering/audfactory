@@ -655,6 +655,7 @@ def server_pom_url(
     return f'{url}/{name}-{version}.pom'
 
 
+@audeer.deprecated(removal_version='1.0.0', alternative='audeer.sort_versions')
 def sort_versions(
         versions: List[str],
 ) -> List:
