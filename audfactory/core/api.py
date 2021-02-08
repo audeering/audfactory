@@ -144,6 +144,7 @@ def checksum(path, type='md5') -> str:
             return sha256sum(path)
 
 
+@audeer.deprecated(removal_version='1.0.0')
 def dependencies(
         pom: Dict,
 ) -> List:

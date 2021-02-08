@@ -24,11 +24,6 @@ config
 .. autoclass:: config
     :members:
 
-dependencies
-------------
-
-.. autofunction:: dependencies
-
 deploy_artifact
 ---------------
 
