@@ -1,8 +1,11 @@
 from typing import Dict
 
+import audeer
+
 from audfactory.core.api import download_pom
 
 
+@audeer.deprecated(removal_version='1.0.0')
 def description(pom: Dict) -> str:
     """Description of artifact.
 
@@ -24,6 +27,7 @@ def description(pom: Dict) -> str:
     return get_attr(pom, 'description')
 
 
+@audeer.deprecated(removal_version='1.0.0')
 def get_attr(pom: Dict, attribute: str) -> str:
     """Return POM attribute or empty string.
 
@@ -53,6 +57,7 @@ def get_attr(pom: Dict, attribute: str) -> str:
     return attr
 
 
+@audeer.deprecated(removal_version='1.0.0')
 def group_id(pom: Dict) -> str:
     """Group ID of artifact.
 
@@ -74,6 +79,7 @@ def group_id(pom: Dict) -> str:
     return get_attr(pom, 'groupId')
 
 
+@audeer.deprecated(removal_version='1.0.0')
 def license(pom: Dict) -> str:
     """License name and if given license URL of artifact.
 
@@ -108,6 +114,7 @@ def license(pom: Dict) -> str:
     return license
 
 
+@audeer.deprecated(removal_version='1.0.0')
 def maintainer(pom: Dict) -> str:
     """Maintainer of artifact.
 
@@ -129,6 +136,7 @@ def maintainer(pom: Dict) -> str:
     return get_attr(pom, 'maintainer')
 
 
+@audeer.deprecated(removal_version='1.0.0')
 def name(pom: Dict) -> str:
     """Name of artifact.
 
@@ -150,6 +158,7 @@ def name(pom: Dict) -> str:
     return get_attr(pom, 'artifactId')
 
 
+@audeer.deprecated(removal_version='1.0.0')
 def type(pom: Dict) -> str:
     """File type of artifact.
 
@@ -171,6 +180,7 @@ def type(pom: Dict) -> str:
     return get_attr(pom, 'packaging')
 
 
+@audeer.deprecated(removal_version='1.0.0')
 def url(pom: Dict) -> str:
     """URL of artifact.
 
@@ -192,6 +202,7 @@ def url(pom: Dict) -> str:
     return get_attr(pom, 'url')
 
 
+@audeer.deprecated(removal_version='1.0.0')
 def version(pom: Dict) -> str:
     """Version of artifact.
 

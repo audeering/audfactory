@@ -19,7 +19,6 @@
     :hidden:
 
     api-audfactory
-    api-audfactory-pom
     genindex
 
 .. toctree::
