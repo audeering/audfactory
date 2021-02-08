@@ -380,6 +380,7 @@ def download_pom(
     return pom
 
 
+@audeer.deprecated(removal_version='1.0.0')
 def exclude_dependencies(
         deps: Dict,
         pattern: str,

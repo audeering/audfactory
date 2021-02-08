@@ -34,11 +34,6 @@ download_artifact
 
 .. autofunction:: download_artifact
 
-exclude_dependencies
---------------------
-
-.. autofunction:: exclude_dependencies
-
 group_id_to_path
 ----------------
 
