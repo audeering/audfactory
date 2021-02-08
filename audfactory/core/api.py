@@ -620,6 +620,7 @@ def server_url(
     return f'{config.ARTIFACTORY_ROOT}/{repository}/{url}'
 
 
+@audeer.deprecated(removal_version='1.0.0')
 def server_pom_url(
         group_id: str,
         name: str,
