@@ -469,6 +469,7 @@ def include_dependencies(
     return filtered_deps
 
 
+@audeer.deprecated(removal_version='1.0.0')
 def list_artifacts(
         deps: Dict,
         *,

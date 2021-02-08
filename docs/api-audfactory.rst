@@ -39,11 +39,6 @@ group_id_to_path
 
 .. autofunction:: group_id_to_path
 
-list_artifacts
---------------
-
-.. autofunction:: list_artifacts
-
 Lookup
 ------
 
