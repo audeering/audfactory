@@ -39,11 +39,6 @@ group_id_to_path
 
 .. autofunction:: group_id_to_path
 
-include_dependencies
---------------------
-
-.. autofunction:: include_dependencies
-
 list_artifacts
 --------------
 

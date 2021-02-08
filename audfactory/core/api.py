@@ -434,6 +434,7 @@ def group_id_to_path(
     return '/'.join(group_id.split('.'))
 
 
+@audeer.deprecated(removal_version='1.0.0')
 def include_dependencies(
         deps: Dict,
         pattern: str,
