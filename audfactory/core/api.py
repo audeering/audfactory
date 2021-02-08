@@ -335,6 +335,7 @@ def download_artifact(
     return destination
 
 
+@audeer.deprecated(removal_version='1.0.0')
 def download_pom(
         pom_url: str,
 ) -> Dict:

@@ -34,11 +34,6 @@ download_artifact
 
 .. autofunction:: download_artifact
 
-download_pom
-------------
-
-.. autofunction:: download_pom
-
 exclude_dependencies
 --------------------
 
