@@ -66,11 +66,6 @@ server_url
 
 .. autofunction:: server_url
 
-transitive_dependencies
------------------------
-
-.. autofunction:: transitive_dependencies
-
 transitive_dependencies_as_string
 ---------------------------------
 

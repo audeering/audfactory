@@ -717,6 +717,7 @@ def sort_versions(
     return sorted_versions
 
 
+@audeer.deprecated(removal_version='1.0.0')
 def transitive_dependencies(
         pom: Dict,
         *,
