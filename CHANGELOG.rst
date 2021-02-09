@@ -7,6 +7,21 @@ The format is based on `Keep a Changelog`_,
 and this project adheres to `Semantic Versioning`_.
 
 
+Version 0.8.0 (2021-02-09)
+--------------------------
+
+* Deprecated: ``audfactory.sort_versions()``
+* Deprecated: ``audfactory.dependencies()``
+* Deprecated: ``audfactory.download_pom()``
+* Deprecated: ``audfactory.exclude_dependencies()``
+* Deprecated: ``audfactory.include_dependencies()``
+* Deprecated: ``audfactory.list_artifacts()``
+* Deprecated: ``audfactory.server_pom_url()``
+* Deprecated: ``audfactory.transitive_dependencies()``
+* Deprecated: ``audfactory.transitive_dependencies_as_string()``
+* Deprecated: ``audfactory.pom`` module
+
+
 Version 0.7.2 (2021-01-27)
 --------------------------
 
