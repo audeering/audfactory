@@ -956,4 +956,4 @@ def versions(
             f'{REPORT_ISSUE}'
         )
     versions = [v['version'] for v in r.json()['results']]
-    return sort_versions(versions)
+    return audeer.sort_versions(versions)
