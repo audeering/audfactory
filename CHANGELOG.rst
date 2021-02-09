@@ -7,6 +7,12 @@ The format is based on `Keep a Changelog`_,
 and this project adheres to `Semantic Versioning`_.
 
 
+Version 0.8.1 (2021-02-09)
+--------------------------
+
+* Fixed: use ``audeer.sort_versions()`` in ``audfactory.versions()``
+
+
 Version 0.8.0 (2021-02-09)
 --------------------------
 
