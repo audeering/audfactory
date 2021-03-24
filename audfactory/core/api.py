@@ -60,6 +60,7 @@ def authentification(url) -> typing.Tuple[str, str]:
     It first looks for the two environment variables
     ``ARTIFACTORY_USERNAME`` and
     ``ARTIFACTORY_API_KEY``.
+
     If some of them or both are missing,
     it tries to extract them from the
     :file:`~/.artifactory_python.cfg` config file.
@@ -70,15 +71,20 @@ def authentification(url) -> typing.Tuple[str, str]:
     it will look for an entry in the config file under
     ``[audeering.jfrog.io/artifactory]``.
 
+    If it cannot find the config file
+    or a macthcing entry in the config file
+    it will set the username to ``anonymous``
+    and the API key to an empty string.
+    If your Artifactory server is configured
+    to allow anonymous users
+    you will be able to access the server this way.
+
     Args:
         url: URL of Artifactory server,
             e.g. https://audeering.jfrog.io/artifactory
 
     Returns:
         username and API key
-
-    Raises:
-        RuntimeError: if no authentification credentials can be find
 
     """
     username = os.getenv('ARTIFACTORY_USERNAME', None)
@@ -87,16 +93,11 @@ def authentification(url) -> typing.Tuple[str, str]:
         url = _strip_url(url)
         config_entry = get_global_config_entry(url)
         if config_entry is None:
-            raise RuntimeError(
-                'No Artifactory credentials found.\n'
-                'Please check you have a ~/.artifactory_python.cfg '
-                'file containing:\n'
-                f'[{url}]\n'
-                'username = MY_USERNAME\n'
-                'password = MY_API_KEY'
-            )
-        username = config_entry['username']
-        apikey = config_entry['password']
+            username = 'anonymous'
+            apikey = ''
+        else:
+            username = config_entry['username']
+            apikey = config_entry['password']
     return username, apikey
 
 
