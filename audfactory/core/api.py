@@ -365,7 +365,7 @@ def server_url(
 
     Args:
         server: URL of Artifactory server,
-            e.g. https://artifactory.audeering.com
+            e.g. https://audeering.jfrog.io
         repository: repository
         group_id: group ID
         name: name of artifact
