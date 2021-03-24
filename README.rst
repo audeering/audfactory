@@ -10,8 +10,7 @@ and allows you to deploy and download artifacts
 or collect metadata information
 from repositories.
 
-Have a look at the installation_ and usage_ instructions
-and the `format specifications`_ as a starting point.
+Have a look at the installation_ and usage_ instructions.
 
 .. _Artifactory: https://jfrog.com/artifactory/
 .. _dohq-artifactory: https://github.com/devopshq/artifactory
