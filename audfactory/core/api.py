@@ -72,7 +72,7 @@ def authentification(url) -> typing.Tuple[str, str]:
     ``[audeering.jfrog.io/artifactory]``.
 
     If it cannot find the config file
-    or a macthcing entry in the config file
+    or a matching entry in the config file
     it will set the username to ``anonymous``
     and the API key to an empty string.
     If your Artifactory server is configured
