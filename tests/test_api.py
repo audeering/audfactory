@@ -15,7 +15,7 @@ GROUP_ID_URL = audfactory.group_id_to_path(GROUP_ID)
 NAME = pytest.NAME
 VERSION = pytest.VERSION
 FILENAME = f'{NAME}-{VERSION}'
-CONTENT = 'hello\nartifact'
+CONTENT = 'hello-artifact'
 
 
 @pytest.fixture(
