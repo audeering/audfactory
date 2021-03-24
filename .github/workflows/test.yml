@@ -37,6 +37,9 @@ jobs:
         pip install -r tests/requirements.txt
 
     - name: Test with pytest
+      env:
+        ARTIFACTORY_USERNAME: ${{ secrets.ARTIFACTORY_USERNAME }}
+        ARTIFACTORY_API_KEY: ${{ secrets.ARTIFACTORY_API_KEY }}
       run: |
         python -m pytest
 
@@ -48,7 +51,10 @@ jobs:
       if: matrix.os == 'ubuntu-18.04'
 
     - name: Test building documentation
+      env:
+        ARTIFACTORY_USERNAME: ${{ secrets.ARTIFACTORY_USERNAME }}
+        ARTIFACTORY_API_KEY: ${{ secrets.ARTIFACTORY_API_KEY }}
       run: |
         python -m sphinx docs/ docs/_build/ -b html -W
-        python -m sphinx docs/ build/sphinx/html -b linkcheck
+        # python -m sphinx docs/ build/sphinx/html -b linkcheck
       if: matrix.os == 'ubuntu-18.04'

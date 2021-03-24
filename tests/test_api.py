@@ -15,7 +15,7 @@ GROUP_ID_URL = audfactory.group_id_to_path(GROUP_ID)
 NAME = pytest.NAME
 VERSION = pytest.VERSION
 FILENAME = f'{NAME}-{VERSION}'
-CONTENT = 'hello\nartifact'
+CONTENT = 'hello-artifact'
 
 
 @pytest.fixture(
@@ -76,10 +76,7 @@ def test_checksum(tmpdir):
     with pytest.raises(RuntimeError, match=r'File not found:'):
         audfactory.checksum('file-not-found.txt')
     with pytest.raises(RuntimeError, match=r'File not found:'):
-        url = (
-            'https://artifactory.audeering.com/artifactory/maven/'
-            'file-not-found.txt'
-        )
+        url = f'{SERVER}/{REPOSITORY}/file-not-found.txt'
         audfactory.checksum(url)
 
     url = (
