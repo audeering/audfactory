@@ -1,5 +1,6 @@
 import csv
-import io
+import os
+import tempfile
 import typing
 
 import audeer
@@ -678,23 +679,17 @@ def _import_csv(s):
 
 
 def _download(url: str) -> typing.List[typing.List]:
-    r = audfactory.rest_api_get(url)
-    code = r.status_code
-    if code in [403, 404]:  # pragma: no cover
-        raise RuntimeError(
-            f"{code}, URL not found or no access rights: '{url}'"
-        )
-    elif code != 200:  # pragma: no cover
-        raise RuntimeError(
-            f"{code}, problem downloading '{url}'.\n{audfactory.REPORT_ISSUE}"
-        )
-    r.encoding = 'utf-8'
-    table = []
-    csvreader = csv.reader(r.text.splitlines(), delimiter=',')
-    for row in csvreader:
-        # Convert '' to None
-        row = [_import_csv(r) for r in row]
-        table.append(row)
+    with tempfile.TemporaryDirectory(prefix='audfactory') as tmpdir:
+        path = os.path.join(tmpdir, 'lookup.csv')
+        audfactory.download(url, path)
+
+        with open(path, 'r') as fp:
+            csvreader = csv.reader(fp, delimiter=',')
+            table = []
+            for row in csvreader:
+                # Convert '' to None
+                row = [_import_csv(r) for r in row]
+                table.append(row)
     return table
 
 
@@ -712,15 +707,15 @@ def _upload(
         url: str,
 ) -> None:
     r"""Upload table to a CSV file on Artifactory without using a tmp file."""
-    fobj = io.StringIO()
-    writer = csv.writer(fobj, delimiter=',')
-    writer.writerows(table)
-    # Seek to beginning of file, otherwise an empty CSV file wil be written
-    fobj.seek(0)
-    artifactory_path = audfactory.path(url)
-    if not artifactory_path.parent.exists():
-        artifactory_path.parent.mkdir()
-    artifactory_path.deploy(fobj)
+    with tempfile.TemporaryDirectory(prefix='audfactory') as tmpdir:
+        path = os.path.join(tmpdir, 'lookup.csv')
+        with open(path, 'w') as fp:
+            writer = csv.writer(fp, delimiter=',')
+            writer.writerows(table)
+        artifactory_path = audfactory.path(url)
+        if not artifactory_path.parent.exists():
+            artifactory_path.parent.mkdir()
+        audfactory.deploy_artifact(path, url)
 
     return url
 
