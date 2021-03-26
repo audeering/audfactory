@@ -1,0 +1,691 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>audfactory.core.api &mdash; audfactory Documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../../_static/favicon.png"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/audeering.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/jupyter-sphinx.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/thebelab.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    
+  
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          <a href="../../../index.html">
+          
+            <img src="../../../_static/images/audeering.svg" class="logo" alt="audEERING"/>
+          
+          
+            <span> audfactory</span>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v1.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../usage.html">Usage</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../api-audfactory.html">audfactory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../genindex.html">Index</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Changelog</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">audfactory</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>audfactory.core.api</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for audfactory.core.api</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">errno</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">typing</span>
+
+<span class="kn">from</span> <span class="nn">artifactory</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">ArtifactoryPath</span><span class="p">,</span>
+    <span class="n">get_global_config_entry</span><span class="p">,</span>
+    <span class="n">md5sum</span><span class="p">,</span>
+    <span class="n">sha1sum</span><span class="p">,</span>
+    <span class="n">sha256sum</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="kn">import</span> <span class="nn">audeer</span>
+
+
+<div class="viewcode-block" id="authentification"><a class="viewcode-back" href="../../../api-audfactory.html#audfactory.authentification">[docs]</a><span class="k">def</span> <span class="nf">authentification</span><span class="p">(</span><span class="n">url</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Look for username and API key.</span>
+
+<span class="sd">    It first looks for the two environment variables</span>
+<span class="sd">    ``ARTIFACTORY_USERNAME`` and</span>
+<span class="sd">    ``ARTIFACTORY_API_KEY``.</span>
+
+<span class="sd">    If some of them or both are missing,</span>
+<span class="sd">    it tries to extract them from the</span>
+<span class="sd">    :file:`~/.artifactory_python.cfg` config file.</span>
+<span class="sd">    For that it removes ``http://`` or ``https://``</span>
+<span class="sd">    from the beginning of ``url``</span>
+<span class="sd">    and everything that comes after ``/artifactory``.</span>
+<span class="sd">    E.g. for ``https://audeering.jfrog.io/artifactory/data-public/emodb``</span>
+<span class="sd">    it will look for an entry in the config file under</span>
+<span class="sd">    ``[audeering.jfrog.io/artifactory]``.</span>
+
+<span class="sd">    If it cannot find the config file</span>
+<span class="sd">    or a matching entry in the config file</span>
+<span class="sd">    it will set the username to ``anonymous``</span>
+<span class="sd">    and the API key to an empty string.</span>
+<span class="sd">    If your Artifactory server is configured</span>
+<span class="sd">    to allow anonymous users</span>
+<span class="sd">    you will be able to access the server this way.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        url: URL of Artifactory server,</span>
+<span class="sd">            e.g. https://audeering.jfrog.io/artifactory</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        username and API key</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">username</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;ARTIFACTORY_USERNAME&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">apikey</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;ARTIFACTORY_API_KEY&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">apikey</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">username</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">_strip_url</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="n">config_entry</span> <span class="o">=</span> <span class="n">get_global_config_entry</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">config_entry</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">username</span> <span class="o">=</span> <span class="s1">&#39;anonymous&#39;</span>
+            <span class="n">apikey</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">username</span> <span class="o">=</span> <span class="n">config_entry</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]</span>
+            <span class="n">apikey</span> <span class="o">=</span> <span class="n">config_entry</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">username</span><span class="p">,</span> <span class="n">apikey</span></div>
+
+
+<div class="viewcode-block" id="checksum"><a class="viewcode-back" href="../../../api-audfactory.html#audfactory.checksum">[docs]</a><span class="k">def</span> <span class="nf">checksum</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;md5&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Calculate checksum for local or remote file.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        path: local file path,</span>
+<span class="sd">            or URL to file path on Artifactory</span>
+<span class="sd">        type: checksum type to calculate,</span>
+<span class="sd">            one of ``&#39;md5&#39;``, ``&#39;sha1&#39;``, ``&#39;sha256&#39;``</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        checksum</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; checksum(</span>
+<span class="sd">        ...     &#39;https://audeering.jfrog.io/artifactory/&#39;</span>
+<span class="sd">        ...     &#39;data-public/emodb/db/1.1.0/db-1.1.0.zip&#39;</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &#39;f4cfdbc821a070e1163d225b72b241a7&#39;</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;http&#39;</span><span class="p">):</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">_path</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;File not found: </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">type</span> <span class="o">==</span> <span class="s1">&#39;md5&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">ArtifactoryPath</span><span class="o">.</span><span class="n">stat</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="o">.</span><span class="n">md5</span>
+        <span class="k">elif</span> <span class="nb">type</span> <span class="o">==</span> <span class="s1">&#39;sha1&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">ArtifactoryPath</span><span class="o">.</span><span class="n">stat</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="o">.</span><span class="n">sha1</span>
+        <span class="k">elif</span> <span class="nb">type</span> <span class="o">==</span> <span class="s1">&#39;sha256&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">ArtifactoryPath</span><span class="o">.</span><span class="n">stat</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="o">.</span><span class="n">sha256</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">audeer</span><span class="o">.</span><span class="n">safe_path</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;File not found: </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">type</span> <span class="o">==</span> <span class="s1">&#39;md5&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">md5sum</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">type</span> <span class="o">==</span> <span class="s1">&#39;sha1&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">sha1sum</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">type</span> <span class="o">==</span> <span class="s1">&#39;sha256&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">sha256sum</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="deploy"><a class="viewcode-back" href="../../../api-audfactory.html#audfactory.deploy">[docs]</a><span class="k">def</span> <span class="nf">deploy</span><span class="p">(</span>
+        <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">md5</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">sha1</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">sha256</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">parameters</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Dict</span> <span class="o">=</span> <span class="p">{},</span>
+        <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Deploy local file as an artifact.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        path: local file path</span>
+<span class="sd">        url: path on Artifactory</span>
+<span class="sd">        md5: MD5 sum, will be calculated if not provided</span>
+<span class="sd">        sha1: SHA1 hash, will be calculated if not provided</span>
+<span class="sd">        sha256: SHA256 hash, will be calculated if not provided</span>
+<span class="sd">        parameters: attach any additional metadata</span>
+<span class="sd">        verbose: show information on the upload process</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        URL of the artifact</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        FileNotFoundError: if local file does not exist</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">src_path</span> <span class="o">=</span> <span class="n">audeer</span><span class="o">.</span><span class="n">safe_path</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">src_path</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span>
+            <span class="n">errno</span><span class="o">.</span><span class="n">ENOENT</span><span class="p">,</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">strerror</span><span class="p">(</span><span class="n">errno</span><span class="o">.</span><span class="n">ENOENT</span><span class="p">),</span>
+            <span class="n">src_path</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
+        <span class="n">desc</span> <span class="o">=</span> <span class="n">audeer</span><span class="o">.</span><span class="n">format_display_message</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s1">&#39;Deploy </span><span class="si">{</span><span class="n">src_path</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="n">pbar</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">desc</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\r</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">md5</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">md5</span> <span class="o">=</span> <span class="n">md5sum</span><span class="p">(</span><span class="n">src_path</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">sha1</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">sha1</span> <span class="o">=</span> <span class="n">sha1sum</span><span class="p">(</span><span class="n">src_path</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">sha256</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">sha256</span> <span class="o">=</span> <span class="n">sha256sum</span><span class="p">(</span><span class="n">src_path</span><span class="p">)</span>
+
+    <span class="n">dst_path</span> <span class="o">=</span> <span class="n">_path</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">dst_path</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+        <span class="n">dst_path</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">mkdir</span><span class="p">()</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">src_path</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fobj</span><span class="p">:</span>
+        <span class="n">dst_path</span><span class="o">.</span><span class="n">deploy</span><span class="p">(</span>
+            <span class="n">fobj</span><span class="p">,</span>
+            <span class="n">md5</span><span class="o">=</span><span class="n">md5</span><span class="p">,</span>
+            <span class="n">sha1</span><span class="o">=</span><span class="n">sha1</span><span class="p">,</span>
+            <span class="n">sha256</span><span class="o">=</span><span class="n">sha256</span><span class="p">,</span>
+            <span class="n">parameters</span><span class="o">=</span><span class="n">parameters</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
+        <span class="c1"># Final clearing of progress line</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">audeer</span><span class="o">.</span><span class="n">format_display_message</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">pbar</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\r</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">url</span></div>
+
+
+<div class="viewcode-block" id="download"><a class="viewcode-back" href="../../../api-audfactory.html#audfactory.download">[docs]</a><span class="k">def</span> <span class="nf">download</span><span class="p">(</span>
+        <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">destination</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;.&#39;</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">chunk</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">,</span>
+        <span class="n">force_download</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Download an artifact.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        url: artifact URL</span>
+<span class="sd">        destination: path to store the artifact,</span>
+<span class="sd">            can be a folder or a file name</span>
+<span class="sd">        chunk: amount of data read at once during the download</span>
+<span class="sd">        force_download: forces the artifact to be downloaded</span>
+<span class="sd">            even if it exists locally already</span>
+<span class="sd">        verbose: show information on the download process</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        path to local artifact</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        RuntimeError: if artifact cannot be found,</span>
+<span class="sd">            or you don&#39;t have access rights to the artifact</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; file = download(</span>
+<span class="sd">        ...     (</span>
+<span class="sd">        ...         &#39;https://audeering.jfrog.io/artifactory/&#39;</span>
+<span class="sd">        ...         &#39;data-public/emodb/db/1.1.0/db-1.1.0.yaml&#39;</span>
+<span class="sd">        ...     ),</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; os.path.basename(file)</span>
+<span class="sd">        &#39;db-1.1.0.yaml&#39;</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">destination</span> <span class="o">=</span> <span class="n">audeer</span><span class="o">.</span><span class="n">safe_path</span><span class="p">(</span><span class="n">destination</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">destination</span><span class="p">):</span>
+        <span class="n">destination</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">destination</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">url</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">destination</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">force_download</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">destination</span>
+
+    <span class="n">src_path</span> <span class="o">=</span> <span class="n">_path</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">src_path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Source &#39;</span><span class="si">{</span><span class="n">url</span><span class="si">}</span><span class="s2">&#39; does not exists.&quot;</span><span class="p">)</span>
+    <span class="n">src_size</span> <span class="o">=</span> <span class="n">ArtifactoryPath</span><span class="o">.</span><span class="n">stat</span><span class="p">(</span><span class="n">src_path</span><span class="p">)</span><span class="o">.</span><span class="n">size</span>
+
+    <span class="k">with</span> <span class="n">audeer</span><span class="o">.</span><span class="n">progress_bar</span><span class="p">(</span><span class="n">total</span><span class="o">=</span><span class="n">src_size</span><span class="p">,</span> <span class="n">disable</span><span class="o">=</span><span class="ow">not</span> <span class="n">verbose</span><span class="p">)</span> <span class="k">as</span> <span class="n">pbar</span><span class="p">:</span>
+        <span class="n">desc</span> <span class="o">=</span> <span class="n">audeer</span><span class="o">.</span><span class="n">format_display_message</span><span class="p">(</span>
+            <span class="s1">&#39;Download </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">src_path</span><span class="p">))),</span>
+            <span class="n">pbar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">pbar</span><span class="o">.</span><span class="n">set_description_str</span><span class="p">(</span><span class="n">desc</span><span class="p">)</span>
+        <span class="n">pbar</span><span class="o">.</span><span class="n">refresh</span><span class="p">()</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">dst_size</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">with</span> <span class="n">src_path</span><span class="o">.</span><span class="n">open</span><span class="p">()</span> <span class="k">as</span> <span class="n">src_fp</span><span class="p">:</span>
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">destination</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">dst_fp</span><span class="p">:</span>
+                    <span class="k">while</span> <span class="n">src_size</span> <span class="o">&gt;</span> <span class="n">dst_size</span><span class="p">:</span>
+                        <span class="n">data</span> <span class="o">=</span> <span class="n">src_fp</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
+                        <span class="n">n_data</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="n">n_data</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                            <span class="n">dst_fp</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+                            <span class="n">dst_size</span> <span class="o">+=</span> <span class="n">n_data</span>
+                            <span class="n">pbar</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">n_data</span><span class="p">)</span>
+        <span class="k">except</span> <span class="p">(</span><span class="ne">KeyboardInterrupt</span><span class="p">,</span> <span class="ne">Exception</span><span class="p">):</span>
+            <span class="c1"># Clean up broken artifact files</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">destination</span><span class="p">):</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">destination</span><span class="p">)</span>  <span class="c1"># pragma: no cover</span>
+            <span class="k">raise</span>
+
+    <span class="k">return</span> <span class="n">destination</span></div>
+
+
+<div class="viewcode-block" id="group_id_to_path"><a class="viewcode-back" href="../../../api-audfactory.html#audfactory.group_id_to_path">[docs]</a><span class="k">def</span> <span class="nf">group_id_to_path</span><span class="p">(</span>
+        <span class="n">group_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Replaces ``.`` by ``/`` in group ID.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        group_id: group ID</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        group ID path</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; group_id_to_path(&#39;com.audeering.data.emodb&#39;)</span>
+<span class="sd">        &#39;com/audeering/data/emodb&#39;</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="s1">&#39;/&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">group_id</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="path"><a class="viewcode-back" href="../../../api-audfactory.html#audfactory.path">[docs]</a><span class="k">def</span> <span class="nf">path</span><span class="p">(</span>
+        <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ArtifactoryPath</span><span class="p">:</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Authenticate at Artifactory and get path object.</span>
+
+<span class="sd">    You can set your username and API key in the console:</span>
+
+<span class="sd">    .. code-block:: bash</span>
+
+<span class="sd">        $ export ARTIFACTORY_USERNAME=...</span>
+<span class="sd">        $ export ARTIFACTORY_API_KEY=...</span>
+
+<span class="sd">    If they are not specified,</span>
+<span class="sd">    they are read from :file:`~/.artifactory_python.cfg`</span>
+<span class="sd">    by matching ``url`` against the available entries</span>
+<span class="sd">    to pick the matching Artifactory server.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        url: URL to path on Artifactory</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Artifactory path object similar to pathlib.Path</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; artifactory_path = path(</span>
+<span class="sd">        ...     &#39;https://audeering.jfrog.io/artifactory/data-public/emodb/&#39;</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; for content in artifactory_path:</span>
+<span class="sd">        ...     print(os.path.basename(str(content)))</span>
+<span class="sd">        ...</span>
+<span class="sd">        db</span>
+<span class="sd">        media</span>
+<span class="sd">        meta</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">username</span><span class="p">,</span> <span class="n">apikey</span> <span class="o">=</span> <span class="n">authentification</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ArtifactoryPath</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">apikey</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="path_to_group_id"><a class="viewcode-back" href="../../../api-audfactory.html#audfactory.path_to_group_id">[docs]</a><span class="k">def</span> <span class="nf">path_to_group_id</span><span class="p">(</span>
+        <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Replaces ``/`` by ``.`` in group ID.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        path: group ID path</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        group ID</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; path_to_group_id(&#39;com/audeering/data/emodb&#39;)</span>
+<span class="sd">        &#39;com.audeering.data.emodb&#39;</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="s1">&#39;.&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="rest_api_get"><a class="viewcode-back" href="../../../api-audfactory.html#audfactory.rest_api_get">[docs]</a><span class="k">def</span> <span class="nf">rest_api_get</span><span class="p">(</span>
+        <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">requests</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">Response</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Execute a GET REST API request.</span>
+
+<span class="sd">    For details on the REST API, see</span>
+<span class="sd">    https://www.jfrog.com/confluence/display/JFROG/Artifactory+REST+API</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        url: REST API request URl</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        server response</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; r = rest_api_get(</span>
+<span class="sd">        ...     &#39;https://audeering.jfrog.io/artifactory/&#39;</span>
+<span class="sd">        ...     &#39;data-public/emodb/meta/files/1.1.0/&#39;</span>
+<span class="sd">        ...     &#39;files-1.1.0.zip!/db.files.csv&#39;</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; print(r.text[:35])</span>
+<span class="sd">        file,duration,speaker,transcription</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">username</span><span class="p">,</span> <span class="n">apikey</span> <span class="o">=</span> <span class="n">authentification</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">apikey</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="url"><a class="viewcode-back" href="../../../api-audfactory.html#audfactory.url">[docs]</a><span class="k">def</span> <span class="nf">url</span><span class="p">(</span>
+        <span class="n">server</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">repository</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">group_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Creates Artifactory URL from group_id, name, and version.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        server: URL of Artifactory server,</span>
+<span class="sd">            e.g. https://audeering.jfrog.io</span>
+<span class="sd">        repository: repository</span>
+<span class="sd">        group_id: group ID</span>
+<span class="sd">        name: name of artifact</span>
+<span class="sd">        version: version of artifact</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        URL to location on server</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; url(</span>
+<span class="sd">        ...     &#39;https://audeering.jfrog.io/artifactory&#39;,</span>
+<span class="sd">        ...     repository=&#39;data-public&#39;,</span>
+<span class="sd">        ...     name=&#39;emodb&#39;,</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &#39;https://audeering.jfrog.io/artifactory/data-public/emodb&#39;</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="n">server</span>
+    <span class="k">if</span> <span class="n">repository</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">url</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">url</span> <span class="o">+=</span> <span class="sa">f</span><span class="s1">&#39;/</span><span class="si">{</span><span class="n">repository</span><span class="si">}</span><span class="s1">&#39;</span>
+    <span class="k">if</span> <span class="n">group_id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">group_id</span> <span class="o">=</span> <span class="n">group_id_to_path</span><span class="p">(</span><span class="n">group_id</span><span class="p">)</span>
+        <span class="n">url</span> <span class="o">+=</span> <span class="sa">f</span><span class="s1">&#39;/</span><span class="si">{</span><span class="n">group_id</span><span class="si">}</span><span class="s1">&#39;</span>
+    <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">url</span> <span class="o">+=</span> <span class="sa">f</span><span class="s1">&#39;/</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">&#39;</span>
+    <span class="k">if</span> <span class="n">version</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">url</span> <span class="o">+=</span> <span class="sa">f</span><span class="s1">&#39;/</span><span class="si">{</span><span class="n">version</span><span class="si">}</span><span class="s1">&#39;</span>
+    <span class="k">return</span> <span class="n">url</span></div>
+
+
+<div class="viewcode-block" id="versions"><a class="viewcode-back" href="../../../api-audfactory.html#audfactory.versions">[docs]</a><span class="k">def</span> <span class="nf">versions</span><span class="p">(</span>
+        <span class="n">server</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">repository</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">group_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">List</span><span class="p">:</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Versions of an artifact on Artifactory.</span>
+
+<span class="sd">    It lists all folders under the given path</span>
+<span class="sd">    and considers all as versions that are conform with</span>
+<span class="sd">    :func:`audeer.is_semantic_version`.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        server: URL of Artifactory server,</span>
+<span class="sd">            e.g. ``&#39;https://audeering.jfrog.io/artifactory&#39;``</span>
+<span class="sd">        repository: repository of artifact</span>
+<span class="sd">        group_id: group ID of artifact</span>
+<span class="sd">        name: name of artifact</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        versions of artifact on Artifactory</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">artifact_url</span> <span class="o">=</span> <span class="n">url</span><span class="p">(</span>
+        <span class="n">server</span><span class="p">,</span>
+        <span class="n">repository</span><span class="o">=</span><span class="n">repository</span><span class="p">,</span>
+        <span class="n">group_id</span><span class="o">=</span><span class="n">group_id</span><span class="p">,</span>
+        <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">_path</span><span class="p">(</span><span class="n">artifact_url</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+        <span class="n">versions</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">versions</span> <span class="o">=</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">))</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">path</span> <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">is_dir</span><span class="p">]</span>
+        <span class="n">versions</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">versions</span> <span class="k">if</span> <span class="n">audeer</span><span class="o">.</span><span class="n">is_semantic_version</span><span class="p">(</span><span class="n">v</span><span class="p">)]</span>
+    <span class="k">return</span> <span class="n">audeer</span><span class="o">.</span><span class="n">sort_versions</span><span class="p">(</span><span class="n">versions</span><span class="p">)</span></div>
+
+
+<span class="c1"># To use avoid path() be hidden by path arguments</span>
+<span class="n">_path</span> <span class="o">=</span> <span class="n">path</span>
+
+
+<span class="k">def</span> <span class="nf">_strip_url</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>  <span class="c1"># pragma: nocover</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Returns a URL without http(s):// prefixes and ending /&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">url</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;http://&#39;</span><span class="p">):</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">url</span><span class="p">[</span><span class="mi">7</span><span class="p">:]</span>
+    <span class="k">elif</span> <span class="n">url</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;https://&#39;</span><span class="p">):</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">url</span><span class="p">[</span><span class="mi">8</span><span class="p">:]</span>
+    <span class="c1"># Remove everything after &quot;/artifactory&quot; from the end</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">url</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/artifactory&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">/artifactory&quot;</span>
+    <span class="k">return</span> <span class="n">url</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div>
+    <p>
+        
+        
+        
+          Built with <a href="https://www.sphinx-doc.org/en/master/">Sphinx</a> on 2021/03/26 using the <a href="https://github.com/audeering/sphinx-audeering-theme/">audEERING theme</a>
+        
+    </p>
+  </div>
+
+  <div role="contentinfo">
+    <p>
+        
+      &copy; 2019-2021 audEERING GmbH
+    </p>
+  </div> 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/clipboard.min.js"></script>
+        <script src="../../../_static/copybutton.js"></script>
+        <script src="../../../_static/thebelab-helper.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
