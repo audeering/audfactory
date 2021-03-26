@@ -11,7 +11,7 @@ for every Artifactory server they want to use:
 
 .. code-block:: cfg
 
-    [https://audeering.jfrog.io/artifactory]
+    [audeering.jfrog.io/artifactory]
     username = MY_USERNAME
     password = MY_API_KEY
 
