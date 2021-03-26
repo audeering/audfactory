@@ -442,7 +442,7 @@ class Lookup:
                     f"Cannot remove lookup table '{name}-{version}' "
                     f"if it is not empty.")
             lookup.clear()
-        audfactory.artifactory_path(lookup.url).parent.rmdir()
+        audfactory.path(lookup.url).parent.rmdir()
 
     @staticmethod
     def exists(
@@ -717,7 +717,7 @@ def _upload(
     writer.writerows(table)
     # Seek to beginning of file, otherwise an empty CSV file wil be written
     fobj.seek(0)
-    artifactory_path = audfactory.artifactory_path(url)
+    artifactory_path = audfactory.path(url)
     if not artifactory_path.parent.exists():
         artifactory_path.parent.mkdir()
     artifactory_path.deploy(fobj)

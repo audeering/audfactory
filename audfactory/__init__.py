@@ -1,10 +1,10 @@
 from audfactory.core.api import (
-    artifactory_path,
     authentification,
     checksum,
     deploy_artifact,
     download_artifact,
     group_id_to_path,
+    path,
     path_to_group_id,
     rest_api_get,
     url,
