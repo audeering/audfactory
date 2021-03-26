@@ -7,7 +7,7 @@ from audfactory.core.api import (
     group_id_to_path,
     path_to_group_id,
     rest_api_get,
-    server_url,
+    url,
     versions,
 )
 from audfactory.core.lookup import Lookup

@@ -23,7 +23,7 @@ CONTENT = 'hello-artifact'
     autouse=True,
 )
 def fixture_publish_artifact():
-    url = audfactory.server_url(
+    url = audfactory.url(
         SERVER,
         repository=REPOSITORY,
         group_id=GROUP_ID,
@@ -121,7 +121,7 @@ def test_checksum(tmpdir):
 def test_deploy_artifact(filename, content, expected_versions):
     # Use random name to ensure parallel running
     # Remove existing path to trigger new creation
-    url = audfactory.server_url(
+    url = audfactory.url(
         SERVER,
         group_id=GROUP_ID,
         repository=REPOSITORY,
@@ -340,8 +340,8 @@ def test_rest_api_get(url, expected_text):
         ),
     ],
 )
-def test_server_url(group_id, name, version, repository, expected_url):
-    url = audfactory.server_url(
+def test_url(group_id, name, version, repository, expected_url):
+    url = audfactory.url(
         SERVER,
         group_id=group_id,
         name=name,

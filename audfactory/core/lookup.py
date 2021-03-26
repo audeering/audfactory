@@ -103,7 +103,7 @@ class Lookup:
             )
 
         if version is None:
-            url = audfactory.server_url(
+            url = audfactory.url(
                 server,
                 repository=repository,
                 group_id=group_id,
@@ -115,7 +115,7 @@ class Lookup:
         elif not Lookup.exists(
                 server, repository, group_id, version, name=name
         ):
-            url = audfactory.server_url(
+            url = audfactory.url(
                 server,
                 repository=repository,
                 group_id=group_id,
@@ -732,7 +732,7 @@ def _url_table(
         name: str,
         version: str,
 ) -> str:
-    url = audfactory.server_url(
+    url = audfactory.url(
         server,
         repository=repository,
         group_id=group_id,

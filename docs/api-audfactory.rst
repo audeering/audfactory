@@ -50,10 +50,10 @@ rest_api_get
 
 .. autofunction:: rest_api_get
 
-server_url
-----------
+url
+---
 
-.. autofunction:: server_url
+.. autofunction:: url
 
 versions
 --------
