@@ -39,7 +39,7 @@ def fixture_publish_artifact():
     audeer.create_archive('.', f'{FILENAME}.txt', f'{FILENAME}.zip')
     # upload artifact
     url = f'{url}/{FILENAME}.zip'
-    audfactory.deploy_artifact(f'{FILENAME}.zip', url)
+    audfactory.deploy(f'{FILENAME}.zip', url)
     # clean up
     os.remove(f'{FILENAME}.txt')
     os.remove(f'{FILENAME}.zip')
@@ -118,7 +118,7 @@ def test_checksum(tmpdir):
         ),
     ]
 )
-def test_deploy_artifact(filename, content, expected_versions):
+def test_deploy(filename, content, expected_versions):
     # Use random name to ensure parallel running
     # Remove existing path to trigger new creation
     url = audfactory.url(
@@ -136,7 +136,7 @@ def test_deploy_artifact(filename, content, expected_versions):
         with open(filename, 'w') as fp:
             fp.write(content)
     # upload artifact
-    returned_url = audfactory.deploy_artifact(filename, url)
+    returned_url = audfactory.deploy(filename, url)
     # clean up
     os.remove(filename)
     # check url
