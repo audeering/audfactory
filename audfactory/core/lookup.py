@@ -715,7 +715,7 @@ def _upload(
         artifactory_path = audfactory.path(url)
         if not artifactory_path.parent.exists():
             artifactory_path.parent.mkdir()
-        audfactory.deploy_artifact(path, url)
+        audfactory.deploy(path, url)
 
     return url
 
