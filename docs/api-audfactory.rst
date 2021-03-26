@@ -3,11 +3,6 @@ audfactory
 
 .. automodule:: audfactory
 
-artifactory_path
-----------------
-
-.. autofunction:: artifactory_path
-
 authentification
 ----------------
 
@@ -39,6 +34,11 @@ Lookup
 .. autoclass:: Lookup
     :members:
     :special-members: __getitem__
+
+path
+----
+
+.. autofunction:: path
 
 path_to_group_id
 ----------------

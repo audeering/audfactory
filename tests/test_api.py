@@ -30,7 +30,7 @@ def fixture_publish_artifact():
         name=NAME,
         version=VERSION,
     )
-    path = audfactory.artifactory_path(url)
+    path = audfactory.path(url)
     if path.exists():
         path.unlink()
     # create local file
@@ -65,8 +65,8 @@ def fixture_publish_artifact():
         ),
     ],
 )
-def test_artifactory_path(url, expected_urls):
-    path = audfactory.artifactory_path(url)
+def test_path(url, expected_urls):
+    path = audfactory.path(url)
     urls = [str(u) for u in path]
     assert expected_urls == urls
 
@@ -141,7 +141,7 @@ def test_deploy_artifact(filename, content, expected_versions):
     os.remove(filename)
     # check url
     assert url == returned_url
-    assert audfactory.artifactory_path(url).exists()
+    assert audfactory.path(url).exists()
 
     # download artifact
     path = audfactory.download_artifact(url, filename)

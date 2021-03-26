@@ -18,7 +18,7 @@ def cleanup():
         group_id=pytest.GROUP_ID,
         repository=pytest.REPOSITORY,
     )
-    path = audfactory.artifactory_path(url)
+    path = audfactory.path(url)
     if path.exists():
         path.rmdir()
     cleanup_files = [

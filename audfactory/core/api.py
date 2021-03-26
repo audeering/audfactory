@@ -15,45 +15,6 @@ import requests
 import audeer
 
 
-def artifactory_path(
-        url: str,
-) -> ArtifactoryPath:
-    r"""Authenticate at Artifactory and get path object.
-
-    You can set your username and API key in the console:
-
-    .. code-block:: bash
-
-        $ export ARTIFACTORY_USERNAME=...
-        $ export ARTIFACTORY_API_KEY=...
-
-    If they are not specified,
-    they are read from :file:`~/.artifactory_python.cfg`
-    by matching ``url`` against the available entries
-    to pick the matching Artifactory server.
-
-    Args:
-        url: URL to path on Artifactory
-
-    Returns:
-        Artifactory path object similar to pathlib.Path
-
-    Example:
-        >>> path = artifactory_path(
-        ...     'https://audeering.jfrog.io/artifactory/data-public/emodb/'
-        ... )
-        >>> for p in path:
-        ...     print(os.path.basename(str(p)))
-        ...
-        db
-        media
-        meta
-
-    """
-    username, apikey = authentification(url)
-    return ArtifactoryPath(url, auth=(username, apikey))
-
-
 def authentification(url) -> typing.Tuple[str, str]:
     """Look for username and API key.
 
@@ -122,7 +83,7 @@ def checksum(path, type='md5') -> str:
 
     """
     if path.startswith('http'):
-        path = artifactory_path(path)
+        path = _path(path)
         if not path.exists():
             raise RuntimeError(f'File not found: {path}')
         if type == 'md5':
@@ -193,7 +154,7 @@ def deploy_artifact(
     if sha256 is None:
         sha256 = sha256sum(src_path)
 
-    dst_path = artifactory_path(url)
+    dst_path = _path(url)
     if not dst_path.parent.exists():
         dst_path.parent.mkdir()
     with open(src_path, "rb") as fobj:
@@ -255,7 +216,7 @@ def download_artifact(
     if os.path.exists(destination) and not force_download:
         return destination
 
-    src_path = artifactory_path(url)
+    src_path = _path(url)
     if not src_path.exists():
         raise RuntimeError(f"Source '{url}' does not exists.")
     src_size = ArtifactoryPath.stat(src_path).size
@@ -305,6 +266,45 @@ def group_id_to_path(
 
     """
     return '/'.join(group_id.split('.'))
+
+
+def path(
+        url: str,
+) -> ArtifactoryPath:
+    r"""Authenticate at Artifactory and get path object.
+
+    You can set your username and API key in the console:
+
+    .. code-block:: bash
+
+        $ export ARTIFACTORY_USERNAME=...
+        $ export ARTIFACTORY_API_KEY=...
+
+    If they are not specified,
+    they are read from :file:`~/.artifactory_python.cfg`
+    by matching ``url`` against the available entries
+    to pick the matching Artifactory server.
+
+    Args:
+        url: URL to path on Artifactory
+
+    Returns:
+        Artifactory path object similar to pathlib.Path
+
+    Example:
+        >>> artifactory_path = path(
+        ...     'https://audeering.jfrog.io/artifactory/data-public/emodb/'
+        ... )
+        >>> for content in artifactory_path:
+        ...     print(os.path.basename(str(content)))
+        ...
+        db
+        media
+        meta
+
+    """
+    username, apikey = authentification(url)
+    return ArtifactoryPath(url, auth=(username, apikey))
 
 
 def path_to_group_id(
@@ -428,13 +428,17 @@ def versions(
         group_id=group_id,
         name=name,
     )
-    path = artifactory_path(artifact_url)
+    path = _path(artifact_url)
     if not path.exists():
         versions = []
     else:
         versions = [os.path.basename(str(p)) for p in path if p.is_dir]
         versions = [v for v in versions if audeer.is_semantic_version(v)]
     return audeer.sort_versions(versions)
+
+
+# To use avoid path() be hidden by path arguments
+_path = path
 
 
 def _strip_url(url):  # pragma: nocover
