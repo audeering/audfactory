@@ -2,7 +2,7 @@ from audfactory.core.api import (
     authentification,
     checksum,
     deploy_artifact,
-    download_artifact,
+    download,
     group_id_to_path,
     path,
     path_to_group_id,

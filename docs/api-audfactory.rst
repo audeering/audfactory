@@ -18,10 +18,10 @@ deploy_artifact
 
 .. autofunction:: deploy_artifact
 
-download_artifact
------------------
+download
+--------
 
-.. autofunction:: download_artifact
+.. autofunction:: download
 
 group_id_to_path
 ----------------
