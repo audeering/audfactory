@@ -35,6 +35,7 @@ extensions = [
     'jupyter_sphinx',
 ]
 intersphinx_mapping = {
+    'audeer': ('https://audeering.github.io/audeer/', None),
     'python': ('https://docs.python.org/3/', None),
     'pandas': ('https://pandas-docs.github.io/pandas-docs-travis/', None),
 }
