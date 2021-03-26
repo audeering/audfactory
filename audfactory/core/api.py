@@ -354,7 +354,7 @@ def rest_api_get(
     return requests.get(url, auth=(username, apikey))
 
 
-def server_url(
+def url(
         server: str,
         *,
         repository: str = None,
@@ -376,7 +376,7 @@ def server_url(
         URL to location on server
 
     Example:
-        >>> server_url(
+        >>> url(
         ...     'https://audeering.jfrog.io/artifactory',
         ...     repository='data-public',
         ...     name='emodb',
@@ -422,13 +422,13 @@ def versions(
         versions of artifact on Artifactory
 
     """
-    url = server_url(
+    artifact_url = url(
         server,
         repository=repository,
         group_id=group_id,
         name=name,
     )
-    path = artifactory_path(url)
+    path = artifactory_path(artifact_url)
     if not path.exists():
         versions = []
     else:

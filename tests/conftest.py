@@ -13,7 +13,7 @@ pytest.VERSION = '1.0.0'
 
 
 def cleanup():
-    url = audfactory.server_url(
+    url = audfactory.url(
         pytest.SERVER,
         group_id=pytest.GROUP_ID,
         repository=pytest.REPOSITORY,
