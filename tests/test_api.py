@@ -85,7 +85,7 @@ def test_checksum(tmpdir):
     )
     cache = str(tmpdir.mkdir('audfactory'))
     destination = audeer.safe_path(cache)
-    path = audfactory.download_artifact(url, destination)
+    path = audfactory.download(url, destination)
 
     assert audfactory.checksum(url, type='md5') == \
         audfactory.checksum(path, type='md5')
@@ -144,7 +144,7 @@ def test_deploy_artifact(filename, content, expected_versions):
     assert audfactory.artifactory_path(url).exists()
 
     # download artifact
-    path = audfactory.download_artifact(url, filename)
+    path = audfactory.download(url, filename)
     # check content
     with open(path, 'r') as fp:
         lines = [line.strip() for line in fp.readlines()]
@@ -221,7 +221,7 @@ def test_deploy_artifact(filename, content, expected_versions):
         ),
     ],
 )
-def test_download_artifact(
+def test_download(
         tmpdir,
         url,
         destination,
@@ -232,7 +232,7 @@ def test_download_artifact(
     destination = audeer.safe_path(
         os.path.join(cache, destination)
     )
-    path = audfactory.download_artifact(
+    path = audfactory.download(
         url,
         destination,
         chunk=4 * 1024,

@@ -83,7 +83,7 @@ def test_columns_ids_table(lookup_table):
     params = {'a': 1, 'b': 2.0, 'c': '3.0.0', 'd': True, 'e': 4.0, 'f': None}
     lookup_table.extend(list(params.keys()))
     lookup_table.append(params)
-    csvfile = audfactory.download_artifact(lookup_table.url)
+    csvfile = audfactory.download(lookup_table.url)
     df = pd.read_csv(csvfile)
     # Replace nan by None
     df['f'] = None
@@ -220,7 +220,7 @@ def test_create(params, expected_columns):
             params,
         )
     # Check content of CSV file
-    lookup_file = audfactory.download_artifact(url)
+    lookup_file = audfactory.download(url)
     with open(lookup_file, newline='') as csvfile:
         reader = csv.reader(csvfile, delimiter=',')
         assert next(reader) == expected_columns

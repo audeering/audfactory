@@ -212,7 +212,7 @@ def deploy_artifact(
     return url
 
 
-def download_artifact(
+def download(
         url: str,
         destination: str = '.',
         *,
@@ -239,7 +239,7 @@ def download_artifact(
             or you don't have access rights to the artifact
 
     Example:
-        >>> file = download_artifact(
+        >>> file = download(
         ...     (
         ...         'https://audeering.jfrog.io/artifactory/'
         ...         'data-public/emodb/db/1.1.0/db-1.1.0.yaml'
