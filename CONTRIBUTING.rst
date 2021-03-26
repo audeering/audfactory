@@ -62,6 +62,15 @@ It can be installed with::
 
     pip install -r tests/requirements.txt
 
+Some of the tests need access
+to the ``unittests-public`` repository
+on https://audeering.jfrog.io,
+which means you first need
+to have a user account there.
+Alternatively you might submit a pull request to Github
+that has saved the credentials
+and can execute the tests.
+
 To execute the tests, simply run::
 
     python -m pytest
