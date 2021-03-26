@@ -7,6 +7,29 @@ The format is based on `Keep a Changelog`_,
 and this project adheres to `Semantic Versioning`_.
 
 
+Version 1.0.0 (2021-03-26)
+--------------------------
+
+* Added: support for anonymous Artifactory user access
+* Changed: renamed ``audfactory.artifactory_path()`` to ``audfactory.path()``
+* Changed: renamed ``audfactory.deploy_artifact()`` to
+  ``audfactory.depoy()``
+* Changed: renamed ``audfactory.download_artifact()`` to
+  ``audfactory.download()``
+* Changed: renamed ``audfactory.server_url()`` to ``audfactory.url()``
+* Removed: ``audfactory.upload_artifact()``
+* Removed: ``audfactory.sort_versions()``
+* Removed: ``audfactory.dependencies()``
+* Removed: ``audfactory.download_pom()``
+* Removed: ``audfactory.exclude_dependencies()``
+* Removed: ``audfactory.include_dependencies()``
+* Removed: ``audfactory.list_artifacts()``
+* Removed: ``audfactory.server_pom_url()``
+* Removed: ``audfactory.transitive_dependencies()``
+* Removed: ``audfactory.transitive_dependencies_as_string()``
+* Removed: ``audfactory.pom``
+
+
 Version 0.8.1 (2021-02-09)
 --------------------------
 
