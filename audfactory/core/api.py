@@ -104,7 +104,7 @@ def checksum(path, type='md5') -> str:
             return sha256sum(path)
 
 
-def deploy_artifact(
+def deploy(
         path: str,
         url: str,
         *,

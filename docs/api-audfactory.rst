@@ -13,10 +13,10 @@ checksum
 
 .. autofunction:: checksum
 
-deploy_artifact
+deploy
 ---------------
 
-.. autofunction:: deploy_artifact
+.. autofunction:: deploy
 
 download
 --------
