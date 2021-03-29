@@ -7,6 +7,12 @@ The format is based on `Keep a Changelog`_,
 and this project adheres to `Semantic Versioning`_.
 
 
+Version 1.0.3 (2021-03-29)
+--------------------------
+
+* Fixed: ``audfactory.versions()`` for missing permissions
+
+
 Version 1.0.2 (2021-03-26)
 --------------------------
 
