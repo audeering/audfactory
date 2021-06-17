@@ -5,28 +5,36 @@ Usage
 Authentication
 --------------
 
-Users have to create a config file :file:`~/.artifactory_python.cfg`,
-that assigns a username and `API key`_
-for every Artifactory server they want to use:
+To access an Artifactory server,
+store your username and `API key`_ in :file:`~/.artifactory_python.cfg`
 
 .. code-block:: cfg
 
-    [audeering.jfrog.io/artifactory]
+    [artifactory.audeering.com/artifactory]
     username = MY_USERNAME
     password = MY_API_KEY
 
-Alternatively, they can provide them as environment variables:
+and replace ``artifactory.audeering.com/artifactory``
+with your Artifactory server address.
+You can add several server entries.
+
+Alternatively, export the credentials as environment variables:
 
 .. code-block:: bash
 
-    $ export ARTIFACTORY_USERNAME="MY_USERNAME"
-    $ export ARTIFACTORY_API_KEY="MY_API_KEY"
+    export ARTIFACTORY_USERNAME="MY_USERNAME"
+    export ARTIFACTORY_API_KEY="MY_API_KEY"
 
-If you want to use multiple Artifactory users
-and environment variables
-instead of the config file
-you need to have the same username and API key
+The environment variables will be applied to all servers,
+which means you need to have the same username and API key
 on every server.
+You might lose access to artifacts on servers
+that are setup for anonymous access
+as it will always try to authenticate
+with the given username and password.
+In this case
+it is recommended to not use the environment variables.
+
 
 .. _API key: https://www.jfrog.com/confluence/display/JFROG/User+Profile#UserProfile-APIKey
 
