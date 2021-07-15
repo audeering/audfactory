@@ -308,10 +308,24 @@ def test_rest_api_get(url, expected_text):
             SERVER,
         ),
         (
+            'group_id',
+            'name',
+            '',
+            '1.0.0',
+            SERVER,
+        ),
+        (
             None,
             None,
             'maven',
             None,
+            f'{SERVER}/maven',
+        ),
+        (
+            '',
+            '',
+            'maven',
+            '',
             f'{SERVER}/maven',
         ),
         (
@@ -337,13 +351,6 @@ def test_rest_api_get(url, expected_text):
                 f'{SERVER}/maven/'
                 f'com/audeering/data/database/1.1.0'
             ),
-        ),
-        (  # ignore group_id == ''
-            '',
-            'database',
-            'maven',
-            '1.1.0',
-            f'{SERVER}/maven/database/1.1.0',
         ),
     ],
 )
