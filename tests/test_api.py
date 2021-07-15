@@ -308,10 +308,24 @@ def test_rest_api_get(url, expected_text):
             SERVER,
         ),
         (
+            'group_id',
+            'name',
+            '',
+            '1.0.0',
+            SERVER,
+        ),
+        (
             None,
             None,
             'maven',
             None,
+            f'{SERVER}/maven',
+        ),
+        (
+            '',
+            '',
+            'maven',
+            '',
             f'{SERVER}/maven',
         ),
         (

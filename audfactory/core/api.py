@@ -385,16 +385,16 @@ def url(
 
     """
     url = server
-    if repository is None:
+    if not repository:
         return url
-    else:
-        url += f'/{repository}'
-    if group_id is not None:
+
+    url += f'/{repository}'
+    if group_id:
         group_id = group_id_to_path(group_id)
         url += f'/{group_id}'
-    if name is not None:
+    if name:
         url += f'/{name}'
-    if version is not None:
+    if version:
         url += f'/{version}'
     return url
 
