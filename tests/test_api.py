@@ -338,6 +338,13 @@ def test_rest_api_get(url, expected_text):
                 f'com/audeering/data/database/1.1.0'
             ),
         ),
+        (  # ignore group_id == ''
+            '',
+            'database',
+            'maven',
+            '1.1.0',
+            f'{SERVER}/maven/database/1.1.0',
+        ),
     ],
 )
 def test_url(group_id, name, version, repository, expected_url):

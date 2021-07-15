@@ -389,7 +389,7 @@ def url(
         return url
     else:
         url += f'/{repository}'
-    if group_id is not None:
+    if group_id:
         group_id = group_id_to_path(group_id)
         url += f'/{group_id}'
     if name is not None:
