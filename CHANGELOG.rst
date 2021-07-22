@@ -7,6 +7,12 @@ The format is based on `Keep a Changelog`_,
 and this project adheres to `Semantic Versioning`_.
 
 
+Version 1.0.5 (2021-07-22)
+--------------------------
+
+* Fixed: ignore empty strings in ``audfactory.url()``
+
+
 Version 1.0.4 (2021-06-17)
 --------------------------
 
