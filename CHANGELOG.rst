@@ -7,6 +7,13 @@ The format is based on `Keep a Changelog`_,
 and this project adheres to `Semantic Versioning`_.
 
 
+Version 1.0.6 (2021-09-23)
+--------------------------
+
+* Fixed: catch 403 errors inside ``audfactory.versions()``
+  when requesting versions for non-existing paths
+
+
 Version 1.0.5 (2021-07-22)
 --------------------------
 
