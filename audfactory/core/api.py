@@ -432,7 +432,7 @@ def versions(
     try:
         versions = [os.path.basename(str(p)) for p in path if p.is_dir]
         versions = [v for v in versions if audeer.is_semantic_version(v)]
-    except (FileNotFoundError, RuntimeError):
+    except (FileNotFoundError, RuntimeError, requests.exceptions.HTTPError):
         versions = []
     return audeer.sort_versions(versions)
 
