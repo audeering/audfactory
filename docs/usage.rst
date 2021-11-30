@@ -17,7 +17,7 @@ This is the default behavior of :mod:`audfactory`.
 
     audfactory.authentification('https://artifactory.domain.com/artifactory')
 
-To access an Artifactory server,
+To access an Artifactory server
 that requires logging in with a username and password,
 store your username and `API key`_
 in :file:`~/.artifactory_python.cfg`
@@ -25,7 +25,7 @@ using separate sections for every server.
 Every section is marked
 by the server URL in square brackets
 without the ``https://`` or ``http://``
-at the beginning.
+at the beginning:
 
 .. code-block:: cfg
 
@@ -45,6 +45,10 @@ at the beginning.
 
     os.environ['ARTIFACTORY_USERNAME'] = 'MY_USERNAME2'
     os.environ['ARTIFACTORY_API_KEY'] = 'MY_API_KEY2'
+
+When request to authenticate for a configured URL,
+the corresponding username and password pair
+is returned.
 
 .. jupyter-execute::
 
