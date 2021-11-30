@@ -37,6 +37,8 @@ at the beginning:
     username = MY_USERNAME2
     password = MY_API_KEY2
 
+.. Workaround to allow correct audfactory.authentification() output
+.. without having an actual config file
 .. jupyter-execute::
     :hide-code:
     :hide-output:
@@ -58,6 +60,8 @@ Anonymous access is still used
 for every server
 not listed in the file.
 
+.. We need to delete the workaround environment variables
+.. to allow anonymous access again
 .. jupyter-execute::
     :hide-code:
     :hide-output:
