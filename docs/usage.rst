@@ -46,7 +46,7 @@ at the beginning:
     os.environ['ARTIFACTORY_USERNAME'] = 'MY_USERNAME2'
     os.environ['ARTIFACTORY_API_KEY'] = 'MY_API_KEY2'
 
-When request to authenticate for a configured URL,
+When request to authenticate for a configured server URL,
 the corresponding username and password pair
 is returned.
 
