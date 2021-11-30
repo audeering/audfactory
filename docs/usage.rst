@@ -5,20 +5,69 @@ Usage
 Authentication
 --------------
 
+Artifactory servers can allow anonymous access
+by logging in with a fixed pair
+of ``'anonymous'`` as username
+and ``''`` as password.
+This is the default behavior of :mod:`audfactory`.
+
+.. jupyter-execute::
+
+    import audfactory
+
+    audfactory.authentification('https://artifactory.domain.com/artifactory')
+
 To access an Artifactory server,
-store your username and `API key`_ in :file:`~/.artifactory_python.cfg`
+that requires logging in with a username and password,
+store your username and `API key`_
+in :file:`~/.artifactory_python.cfg`
+using separate sections for every server.
+Every section is marked
+by the server URL in square brackets
+without the ``https://`` or ``http://``
+at the beginning.
 
 .. code-block:: cfg
 
-    [artifactory.audeering.com/artifactory]
-    username = MY_USERNAME
-    password = MY_API_KEY
+    [artifactory1.domain.com/artifactory]
+    username = MY_USERNAME1
+    password = MY_API_KEY1
 
-and replace ``artifactory.audeering.com/artifactory``
-with your Artifactory server address.
-You can add several server entries.
+    [artifactory2.domain.com/artifactory]
+    username = MY_USERNAME2
+    password = MY_API_KEY2
 
-Alternatively, export the credentials as environment variables:
+.. jupyter-execute::
+    :hide-code:
+    :hide-output:
+
+    import os
+
+    os.environ['ARTIFACTORY_USERNAME'] = 'MY_USERNAME2'
+    os.environ['ARTIFACTORY_API_KEY'] = 'MY_API_KEY2'
+
+.. jupyter-execute::
+
+    audfactory.authentification('https://artifactory2.domain.com/artifactory')
+
+Anonymous access is still used
+for every server
+not listed in the file.
+
+.. jupyter-execute::
+    :hide-code:
+    :hide-output:
+
+    del os.environ['ARTIFACTORY_USERNAME']
+    del os.environ['ARTIFACTORY_API_KEY']
+
+.. jupyter-execute::
+
+    audfactory.authentification('https://artifactory3.domain.com/artifactory')
+
+Alternatively,
+you can export
+the credentials as environment variables:
 
 .. code-block:: bash
 
