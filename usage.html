@@ -60,7 +60,7 @@
 
           <a href="index.html">
           
-            <img src="_static/images/audeering.svg" class="logo" alt="audEERING"/>
+            <img src="_static/images/audeering.png" class="logo" alt="audEERING"/>
           
           
             <span> audfactory</span>
@@ -71,7 +71,7 @@
             
             
               <div class="version">
-                v1.0.6
+                v1.0.7
               </div>
             
           
@@ -137,44 +137,14 @@
         
         <div class="rst-content">
         
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="index.html">Docs</a> &raquo;</li>
-        
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
       <li>Usage</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-            
-            
-              <a href="https://github.com/audeering/audfactory/blob/v1.0.6/docs/usage.rst" class="fa fa-github"> Edit on GitHub</a>
-            
-          
-        
+              <a href="https://github.com/audeering/audfactory/" class="fa fa-github"> GitHub</a>
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -184,17 +154,84 @@
 <h1>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="authentication">
 <h2>Authentication<a class="headerlink" href="#authentication" title="Permalink to this headline">¶</a></h2>
-<p>To access an Artifactory server,
-store your username and <a class="reference external" href="https://www.jfrog.com/confluence/display/JFROG/User+Profile#UserProfile-APIKey">API key</a> in <code class="file docutils literal notranslate"><span class="pre">~/.artifactory_python.cfg</span></code></p>
-<div class="highlight-cfg notranslate"><div class="highlight"><pre><span></span><span class="k">[artifactory.audeering.com/artifactory]</span>
-<span class="na">username</span> <span class="o">=</span> <span class="s">MY_USERNAME</span>
-<span class="na">password</span> <span class="o">=</span> <span class="s">MY_API_KEY</span>
+<p>Artifactory servers can allow anonymous access
+by logging in with a fixed pair
+of <code class="docutils literal notranslate"><span class="pre">'anonymous'</span></code> as username
+and <code class="docutils literal notranslate"><span class="pre">''</span></code> as password.
+This is the default behavior of <a class="reference internal" href="api-audfactory.html#module-audfactory" title="audfactory"><code class="xref py py-mod docutils literal notranslate"><span class="pre">audfactory</span></code></a>.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">audfactory</span>
+
+<span class="n">audfactory</span><span class="o">.</span><span class="n">authentification</span><span class="p">(</span><span class="s1">&#39;https://artifactory.domain.com/artifactory&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>and replace <code class="docutils literal notranslate"><span class="pre">artifactory.audeering.com/artifactory</span></code>
-with your Artifactory server address.
-You can add several server entries.</p>
-<p>Alternatively, export the credentials as environment variables:</p>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>(&#39;anonymous&#39;, &#39;&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>To access an Artifactory server
+that requires logging in with a username and password,
+store your username and <a class="reference external" href="https://www.jfrog.com/confluence/display/JFROG/User+Profile#UserProfile-APIKey">API key</a>
+in <code class="file docutils literal notranslate"><span class="pre">~/.artifactory_python.cfg</span></code>
+using separate sections for every server.
+Every section is marked
+by the server URL in square brackets
+without the <code class="docutils literal notranslate"><span class="pre">https://</span></code> or <code class="docutils literal notranslate"><span class="pre">http://</span></code>
+at the beginning:</p>
+<div class="highlight-cfg notranslate"><div class="highlight"><pre><span></span><span class="k">[artifactory1.domain.com/artifactory]</span>
+<span class="na">username</span> <span class="o">=</span> <span class="s">MY_USERNAME1</span>
+<span class="na">password</span> <span class="o">=</span> <span class="s">MY_API_KEY1</span>
+
+<span class="k">[artifactory2.domain.com/artifactory]</span>
+<span class="na">username</span> <span class="o">=</span> <span class="s">MY_USERNAME2</span>
+<span class="na">password</span> <span class="o">=</span> <span class="s">MY_API_KEY2</span>
+</pre></div>
+</div>
+<div class="jupyter_cell docutils container">
+<div class="cell_output docutils container">
+</div>
+</div>
+<p>When authentication is requested for a configured server URL,
+the corresponding username and password pair
+is returned.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">audfactory</span><span class="o">.</span><span class="n">authentification</span><span class="p">(</span><span class="s1">&#39;https://artifactory2.domain.com/artifactory&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>(&#39;MY_USERNAME2&#39;, &#39;MY_API_KEY2&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Anonymous access is still used
+for every server
+not listed in the file.</p>
+<div class="jupyter_cell docutils container">
+<div class="cell_output docutils container">
+</div>
+</div>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">audfactory</span><span class="o">.</span><span class="n">authentification</span><span class="p">(</span><span class="s1">&#39;https://artifactory3.domain.com/artifactory&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>(&#39;anonymous&#39;, &#39;&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Alternatively,
+you can export
+the credentials as environment variables:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">ARTIFACTORY_USERNAME</span><span class="o">=</span><span class="s2">&quot;MY_USERNAME&quot;</span>
 <span class="nb">export</span> <span class="nv">ARTIFACTORY_API_KEY</span><span class="o">=</span><span class="s2">&quot;MY_API_KEY&quot;</span>
 </pre></div>
@@ -237,7 +274,7 @@ inside <a class="reference internal" href="api-audfactory.html#module-audfactory
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>[&#39;1.1.0&#39;, &#39;1.1.1&#39;]
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>[]
 </pre></div>
 </div>
 </div>
@@ -268,7 +305,7 @@ inside <a class="reference internal" href="api-audfactory.html#module-audfactory
         
         
         
-          Built with <a href="https://www.sphinx-doc.org/en/master/">Sphinx</a> on 2021/09/23 using the <a href="https://github.com/audeering/sphinx-audeering-theme/">audEERING theme</a>
+          Built with <a href="https://www.sphinx-doc.org/en/master/">Sphinx</a> on 2021/11/30 using the <a href="https://github.com/audeering/sphinx-audeering-theme/">audEERING theme</a>
         
     </p>
   </div>
