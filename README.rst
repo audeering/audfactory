@@ -14,7 +14,7 @@ Have a look at the installation_ and usage_ instructions.
 
 .. _Artifactory: https://jfrog.com/artifactory/
 .. _dohq-artifactory: https://github.com/devopshq/artifactory
-.. _installation: https://audeering.github.io/audfactory/install.html
+.. _installation: https://audeering.github.io/audfactory/installation.html
 .. _usage: https://audeering.github.io/audfactory/usage.html
 
 
