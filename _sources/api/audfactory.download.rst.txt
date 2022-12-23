@@ -1,0 +1,6 @@
+﻿download\(\)
+============
+
+.. currentmodule:: audfactory
+
+.. autofunction:: audfactory.download

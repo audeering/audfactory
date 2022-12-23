@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Changelog &mdash; audfactory Documentation</title>
+  <title>Changelog &mdash; Documentation</title>
   
 
   
@@ -25,12 +25,8 @@
     
 
   
-
-  
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/css/audeering.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="_static/css/audeering.css" type="text/css" />
   <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
   <link rel="stylesheet" href="_static/jupyter-sphinx.css" type="text/css" />
@@ -70,7 +66,7 @@
             
             
               <div class="version">
-                v1.0.8
+                v1.0.9
               </div>
             
           
@@ -101,13 +97,14 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">API Documentation</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="api-audfactory.html">audfactory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/audfactory.html">audfactory</a></li>
 <li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Development</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#version-1-0-9-2022-12-23">Version 1.0.9 (2022-12-23)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#version-1-0-8-2022-01-03">Version 1.0.8 (2022-01-03)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#version-1-0-7-2021-11-30">Version 1.0.7 (2021-11-30)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#version-1-0-6-2021-09-23">Version 1.0.6 (2021-09-23)</a></li>
@@ -185,63 +182,71 @@
            <div itemprop="articleBody">
             
   <div class="section" id="changelog">
-<h1>Changelog<a class="headerlink" href="#changelog" title="Permalink to this headline">¶</a></h1>
+<h1>Changelog<a class="headerlink" href="#changelog" title="Permalink to this heading">¶</a></h1>
 <p>All notable changes to this project will be documented in this file.</p>
 <p>The format is based on <a class="reference external" href="https://keepachangelog.com/en/1.0.0/">Keep a Changelog</a>,
 and this project adheres to <a class="reference external" href="https://semver.org/spec/v2.0.0.html">Semantic Versioning</a>.</p>
+<div class="section" id="version-1-0-9-2022-12-23">
+<h2>Version 1.0.9 (2022-12-23)<a class="headerlink" href="#version-1-0-9-2022-12-23" title="Permalink to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Added: support for Python 3.10</p></li>
+<li><p>Changed: split API documentation into sub-pages
+for each function</p></li>
+</ul>
+</div>
 <div class="section" id="version-1-0-8-2022-01-03">
-<h2>Version 1.0.8 (2022-01-03)<a class="headerlink" href="#version-1-0-8-2022-01-03" title="Permalink to this headline">¶</a></h2>
+<h2>Version 1.0.8 (2022-01-03)<a class="headerlink" href="#version-1-0-8-2022-01-03" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Added: Python 3.9 support</p></li>
 <li><p>Removed: Python 3.6 support</p></li>
 </ul>
 </div>
 <div class="section" id="version-1-0-7-2021-11-30">
-<h2>Version 1.0.7 (2021-11-30)<a class="headerlink" href="#version-1-0-7-2021-11-30" title="Permalink to this headline">¶</a></h2>
+<h2>Version 1.0.7 (2021-11-30)<a class="headerlink" href="#version-1-0-7-2021-11-30" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Changed: extend discussion of authentication
 in usage section of docs</p></li>
 </ul>
 </div>
 <div class="section" id="version-1-0-6-2021-09-23">
-<h2>Version 1.0.6 (2021-09-23)<a class="headerlink" href="#version-1-0-6-2021-09-23" title="Permalink to this headline">¶</a></h2>
+<h2>Version 1.0.6 (2021-09-23)<a class="headerlink" href="#version-1-0-6-2021-09-23" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Fixed: catch 403 errors inside <code class="docutils literal notranslate"><span class="pre">audfactory.versions()</span></code>
 when requesting versions for non-existing paths</p></li>
 </ul>
 </div>
 <div class="section" id="version-1-0-5-2021-07-22">
-<h2>Version 1.0.5 (2021-07-22)<a class="headerlink" href="#version-1-0-5-2021-07-22" title="Permalink to this headline">¶</a></h2>
+<h2>Version 1.0.5 (2021-07-22)<a class="headerlink" href="#version-1-0-5-2021-07-22" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Fixed: ignore empty strings in <code class="docutils literal notranslate"><span class="pre">audfactory.url()</span></code></p></li>
 </ul>
 </div>
 <div class="section" id="version-1-0-4-2021-06-17">
-<h2>Version 1.0.4 (2021-06-17)<a class="headerlink" href="#version-1-0-4-2021-06-17" title="Permalink to this headline">¶</a></h2>
+<h2>Version 1.0.4 (2021-06-17)<a class="headerlink" href="#version-1-0-4-2021-06-17" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Changed: expanded the authentication docs for Artifactory</p></li>
 </ul>
 </div>
 <div class="section" id="version-1-0-3-2021-03-29">
-<h2>Version 1.0.3 (2021-03-29)<a class="headerlink" href="#version-1-0-3-2021-03-29" title="Permalink to this headline">¶</a></h2>
+<h2>Version 1.0.3 (2021-03-29)<a class="headerlink" href="#version-1-0-3-2021-03-29" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Fixed: <code class="docutils literal notranslate"><span class="pre">audfactory.versions()</span></code> for missing permissions</p></li>
 </ul>
 </div>
 <div class="section" id="version-1-0-2-2021-03-26">
-<h2>Version 1.0.2 (2021-03-26)<a class="headerlink" href="#version-1-0-2-2021-03-26" title="Permalink to this headline">¶</a></h2>
+<h2>Version 1.0.2 (2021-03-26)<a class="headerlink" href="#version-1-0-2-2021-03-26" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Fixed: link “Edit on Github”</p></li>
 </ul>
 </div>
 <div class="section" id="version-1-0-1-2021-03-26">
-<h2>Version 1.0.1 (2021-03-26)<a class="headerlink" href="#version-1-0-1-2021-03-26" title="Permalink to this headline">¶</a></h2>
+<h2>Version 1.0.1 (2021-03-26)<a class="headerlink" href="#version-1-0-1-2021-03-26" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Fixed: Python package metadata</p></li>
 </ul>
 </div>
 <div class="section" id="version-1-0-0-2021-03-26">
-<h2>Version 1.0.0 (2021-03-26)<a class="headerlink" href="#version-1-0-0-2021-03-26" title="Permalink to this headline">¶</a></h2>
+<h2>Version 1.0.0 (2021-03-26)<a class="headerlink" href="#version-1-0-0-2021-03-26" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Added: support for anonymous Artifactory user access</p></li>
 <li><p>Changed: renamed <code class="docutils literal notranslate"><span class="pre">audfactory.artifactory_path()</span></code> to <code class="docutils literal notranslate"><span class="pre">audfactory.path()</span></code></p></li>
@@ -264,13 +269,13 @@ when requesting versions for non-existing paths</p></li>
 </ul>
 </div>
 <div class="section" id="version-0-8-1-2021-02-09">
-<h2>Version 0.8.1 (2021-02-09)<a class="headerlink" href="#version-0-8-1-2021-02-09" title="Permalink to this headline">¶</a></h2>
+<h2>Version 0.8.1 (2021-02-09)<a class="headerlink" href="#version-0-8-1-2021-02-09" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Fixed: use <code class="docutils literal notranslate"><span class="pre">audeer.sort_versions()</span></code> in <code class="docutils literal notranslate"><span class="pre">audfactory.versions()</span></code></p></li>
 </ul>
 </div>
 <div class="section" id="version-0-8-0-2021-02-09">
-<h2>Version 0.8.0 (2021-02-09)<a class="headerlink" href="#version-0-8-0-2021-02-09" title="Permalink to this headline">¶</a></h2>
+<h2>Version 0.8.0 (2021-02-09)<a class="headerlink" href="#version-0-8-0-2021-02-09" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Deprecated: <code class="docutils literal notranslate"><span class="pre">audfactory.sort_versions()</span></code></p></li>
 <li><p>Deprecated: <code class="docutils literal notranslate"><span class="pre">audfactory.dependencies()</span></code></p></li>
@@ -285,19 +290,19 @@ when requesting versions for non-existing paths</p></li>
 </ul>
 </div>
 <div class="section" id="version-0-7-2-2021-01-27">
-<h2>Version 0.7.2 (2021-01-27)<a class="headerlink" href="#version-0-7-2-2021-01-27" title="Permalink to this headline">¶</a></h2>
+<h2>Version 0.7.2 (2021-01-27)<a class="headerlink" href="#version-0-7-2-2021-01-27" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Fixed: copyright year in documentation</p></li>
 </ul>
 </div>
 <div class="section" id="version-0-7-1-2021-01-27">
-<h2>Version 0.7.1 (2021-01-27)<a class="headerlink" href="#version-0-7-1-2021-01-27" title="Permalink to this headline">¶</a></h2>
+<h2>Version 0.7.1 (2021-01-27)<a class="headerlink" href="#version-0-7-1-2021-01-27" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Fixed: sorting of versions for, e.g. <code class="docutils literal notranslate"><span class="pre">'10.0.0'</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">'9.0.0'</span></code></p></li>
 </ul>
 </div>
 <div class="section" id="version-0-7-0-2021-01-12">
-<h2>Version 0.7.0 (2021-01-12)<a class="headerlink" href="#version-0-7-0-2021-01-12" title="Permalink to this headline">¶</a></h2>
+<h2>Version 0.7.0 (2021-01-12)<a class="headerlink" href="#version-0-7-0-2021-01-12" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Added: <code class="docutils literal notranslate"><span class="pre">audfactory.checksum()</span></code></p></li>
 <li><p>Added: <code class="docutils literal notranslate"><span class="pre">audfactory.deploy_artifact()</span></code></p></li>
@@ -306,25 +311,25 @@ to <code class="docutils literal notranslate"><span class="pre">audfactory.uploa
 </ul>
 </div>
 <div class="section" id="version-0-6-3-2020-10-01">
-<h2>Version 0.6.3 (2020-10-01)<a class="headerlink" href="#version-0-6-3-2020-10-01" title="Permalink to this headline">¶</a></h2>
+<h2>Version 0.6.3 (2020-10-01)<a class="headerlink" href="#version-0-6-3-2020-10-01" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Added: official support for Windows</p></li>
 </ul>
 </div>
 <div class="section" id="version-0-6-2-2020-09-14">
-<h2>Version 0.6.2 (2020-09-14)<a class="headerlink" href="#version-0-6-2-2020-09-14" title="Permalink to this headline">¶</a></h2>
+<h2>Version 0.6.2 (2020-09-14)<a class="headerlink" href="#version-0-6-2-2020-09-14" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Added: extend documentation examples of <code class="docutils literal notranslate"><span class="pre">audfactory.Lookup</span></code></p></li>
 </ul>
 </div>
 <div class="section" id="version-0-6-1-2020-09-10">
-<h2>Version 0.6.1 (2020-09-10)<a class="headerlink" href="#version-0-6-1-2020-09-10" title="Permalink to this headline">¶</a></h2>
+<h2>Version 0.6.1 (2020-09-10)<a class="headerlink" href="#version-0-6-1-2020-09-10" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Fixed: added documentation for <code class="docutils literal notranslate"><span class="pre">audfactory.Lookup.__getitem__()</span></code></p></li>
 </ul>
 </div>
 <div class="section" id="version-0-6-0-2020-09-09">
-<h2>Version 0.6.0 (2020-09-09)<a class="headerlink" href="#version-0-6-0-2020-09-09" title="Permalink to this headline">¶</a></h2>
+<h2>Version 0.6.0 (2020-09-09)<a class="headerlink" href="#version-0-6-0-2020-09-09" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Added: static method <code class="docutils literal notranslate"><span class="pre">audfactory.Lookup.generate_uid()</span></code>
 to generate UID by hashing a string</p></li>
@@ -332,21 +337,21 @@ to generate UID by hashing a string</p></li>
 </ul>
 </div>
 <div class="section" id="version-0-5-9-2020-09-08">
-<h2>Version 0.5.9 (2020-09-08)<a class="headerlink" href="#version-0-5-9-2020-09-08" title="Permalink to this headline">¶</a></h2>
+<h2>Version 0.5.9 (2020-09-08)<a class="headerlink" href="#version-0-5-9-2020-09-08" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Added: link to HTML documentation to <code class="docutils literal notranslate"><span class="pre">setup.cfg</span></code></p></li>
 <li><p>Added: cleanup after tests on Artifactory</p></li>
 </ul>
 </div>
 <div class="section" id="version-0-5-8-2020-06-22">
-<h2>Version 0.5.8 (2020-06-22)<a class="headerlink" href="#version-0-5-8-2020-06-22" title="Permalink to this headline">¶</a></h2>
+<h2>Version 0.5.8 (2020-06-22)<a class="headerlink" href="#version-0-5-8-2020-06-22" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Fixed: repository argument of <code class="docutils literal notranslate"><span class="pre">audfactory.list_artifacts()</span></code>
 was ignored before</p></li>
 </ul>
 </div>
 <div class="section" id="version-0-5-7-2020-06-22">
-<h2>Version 0.5.7 (2020-06-22)<a class="headerlink" href="#version-0-5-7-2020-06-22" title="Permalink to this headline">¶</a></h2>
+<h2>Version 0.5.7 (2020-06-22)<a class="headerlink" href="#version-0-5-7-2020-06-22" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Added: documentation on how to convert <code class="docutils literal notranslate"><span class="pre">audfactory.Lookup</span></code>
 to a <code class="docutils literal notranslate"><span class="pre">pandas.Dataframe</span></code></p></li>
@@ -355,7 +360,7 @@ in <code class="docutils literal notranslate"><span class="pre">audfactory.Looku
 </ul>
 </div>
 <div class="section" id="version-0-5-6-2020-06-10">
-<h2>Version 0.5.6 (2020-06-10)<a class="headerlink" href="#version-0-5-6-2020-06-10" title="Permalink to this headline">¶</a></h2>
+<h2>Version 0.5.6 (2020-06-10)<a class="headerlink" href="#version-0-5-6-2020-06-10" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Added: <code class="docutils literal notranslate"><span class="pre">audfactory.Lookup.columns</span></code></p></li>
 <li><p>Added: <code class="docutils literal notranslate"><span class="pre">audfactory.Lookup.ids</span></code></p></li>
@@ -365,13 +370,13 @@ to avoid storing the same parameter twice in a lookup table</p></li>
 </ul>
 </div>
 <div class="section" id="version-0-5-5-2020-06-06">
-<h2>Version 0.5.5 (2020-06-06)<a class="headerlink" href="#version-0-5-5-2020-06-06" title="Permalink to this headline">¶</a></h2>
+<h2>Version 0.5.5 (2020-06-06)<a class="headerlink" href="#version-0-5-5-2020-06-06" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Fixed: clear print line without new line</p></li>
 </ul>
 </div>
 <div class="section" id="version-0-5-4-2020-06-05">
-<h2>Version 0.5.4 (2020-06-05)<a class="headerlink" href="#version-0-5-4-2020-06-05" title="Permalink to this headline">¶</a></h2>
+<h2>Version 0.5.4 (2020-06-05)<a class="headerlink" href="#version-0-5-4-2020-06-05" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Fixed: print line was not cleared at the end of
 <code class="docutils literal notranslate"><span class="pre">audfactory.upload_artifact()</span></code>
@@ -379,7 +384,7 @@ and <code class="docutils literal notranslate"><span class="pre">audfactory.tran
 </ul>
 </div>
 <div class="section" id="version-0-5-3-2020-06-02">
-<h2>Version 0.5.3 (2020-06-02)<a class="headerlink" href="#version-0-5-3-2020-06-02" title="Permalink to this headline">¶</a></h2>
+<h2>Version 0.5.3 (2020-06-02)<a class="headerlink" href="#version-0-5-3-2020-06-02" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Changed: error message handling in <code class="docutils literal notranslate"><span class="pre">audb.download_artifact()</span></code>
 is now handled inside <code class="docutils literal notranslate"><span class="pre">dohq-artifactory</span></code></p></li>
@@ -387,20 +392,20 @@ is now handled inside <code class="docutils literal notranslate"><span class="pr
 </ul>
 </div>
 <div class="section" id="version-0-5-2-2020-05-25">
-<h2>Version 0.5.2 (2020-05-25)<a class="headerlink" href="#version-0-5-2-2020-05-25" title="Permalink to this headline">¶</a></h2>
+<h2>Version 0.5.2 (2020-05-25)<a class="headerlink" href="#version-0-5-2-2020-05-25" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Fixed: description of <code class="docutils literal notranslate"><span class="pre">params</span></code> argument of <code class="docutils literal notranslate"><span class="pre">audfactory.Lookup.create()</span></code>
 in the documentation</p></li>
 </ul>
 </div>
 <div class="section" id="version-0-5-1-2020-05-20">
-<h2>Version 0.5.1 (2020-05-20)<a class="headerlink" href="#version-0-5-1-2020-05-20" title="Permalink to this headline">¶</a></h2>
+<h2>Version 0.5.1 (2020-05-20)<a class="headerlink" href="#version-0-5-1-2020-05-20" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Added: <code class="docutils literal notranslate"><span class="pre">audfactory.Lookup</span></code></p></li>
 </ul>
 </div>
 <div class="section" id="version-0-5-0-2020-05-19">
-<h2>Version 0.5.0 (2020-05-19)<a class="headerlink" href="#version-0-5-0-2020-05-19" title="Permalink to this headline">¶</a></h2>
+<h2>Version 0.5.0 (2020-05-19)<a class="headerlink" href="#version-0-5-0-2020-05-19" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Added: error messages to <code class="docutils literal notranslate"><span class="pre">audb.download_artifact()</span></code></p></li>
 <li><p>Added: error handling to <code class="docutils literal notranslate"><span class="pre">audfactory.download_pom()</span></code></p></li>
@@ -414,20 +419,20 @@ are found</p></li>
 </ul>
 </div>
 <div class="section" id="version-0-4-2-2020-05-11">
-<h2>Version 0.4.2 (2020-05-11)<a class="headerlink" href="#version-0-4-2-2020-05-11" title="Permalink to this headline">¶</a></h2>
+<h2>Version 0.4.2 (2020-05-11)<a class="headerlink" href="#version-0-4-2-2020-05-11" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Changed: raise error if Artfactory config cannot be found for
 authentication</p></li>
 </ul>
 </div>
 <div class="section" id="version-0-4-1-2020-04-22">
-<h2>Version 0.4.1 (2020-04-22)<a class="headerlink" href="#version-0-4-1-2020-04-22" title="Permalink to this headline">¶</a></h2>
+<h2>Version 0.4.1 (2020-04-22)<a class="headerlink" href="#version-0-4-1-2020-04-22" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Added: <code class="docutils literal notranslate"><span class="pre">audfactory.path_to_group_id()</span></code></p></li>
 </ul>
 </div>
 <div class="section" id="version-0-4-0-2020-04-01">
-<h2>Version 0.4.0 (2020-04-01)<a class="headerlink" href="#version-0-4-0-2020-04-01" title="Permalink to this headline">¶</a></h2>
+<h2>Version 0.4.0 (2020-04-01)<a class="headerlink" href="#version-0-4-0-2020-04-01" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Added: test coverage</p></li>
 <li><p>Added: <code class="docutils literal notranslate"><span class="pre">audfactory.rest_api_get()</span></code></p></li>
@@ -438,20 +443,20 @@ authentication</p></li>
 </ul>
 </div>
 <div class="section" id="version-0-3-2-2020-03-06">
-<h2>Version 0.3.2 (2020-03-06)<a class="headerlink" href="#version-0-3-2-2020-03-06" title="Permalink to this headline">¶</a></h2>
+<h2>Version 0.3.2 (2020-03-06)<a class="headerlink" href="#version-0-3-2-2020-03-06" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Fixed: <code class="docutils literal notranslate"><span class="pre">audfactory.pom.license()</span></code> now doesn’t fail for empty license
 entries</p></li>
 </ul>
 </div>
 <div class="section" id="version-0-3-1-2020-02-14">
-<h2>Version 0.3.1 (2020-02-14)<a class="headerlink" href="#version-0-3-1-2020-02-14" title="Permalink to this headline">¶</a></h2>
+<h2>Version 0.3.1 (2020-02-14)<a class="headerlink" href="#version-0-3-1-2020-02-14" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Changed: improve progress bars for downloads</p></li>
 </ul>
 </div>
 <div class="section" id="version-0-3-0-2020-02-14">
-<h2>Version 0.3.0 (2020-02-14)<a class="headerlink" href="#version-0-3-0-2020-02-14" title="Permalink to this headline">¶</a></h2>
+<h2>Version 0.3.0 (2020-02-14)<a class="headerlink" href="#version-0-3-0-2020-02-14" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Added: Python 3.8 support</p></li>
 <li><p>Added: <code class="docutils literal notranslate"><span class="pre">audfactory.upload_artifact()</span></code></p></li>
@@ -462,26 +467,26 @@ entries</p></li>
 </ul>
 </div>
 <div class="section" id="version-0-2-0-2020-02-07">
-<h2>Version 0.2.0 (2020-02-07)<a class="headerlink" href="#version-0-2-0-2020-02-07" title="Permalink to this headline">¶</a></h2>
+<h2>Version 0.2.0 (2020-02-07)<a class="headerlink" href="#version-0-2-0-2020-02-07" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Added: <code class="docutils literal notranslate"><span class="pre">audfactory.sort_versions()</span></code></p></li>
 </ul>
 </div>
 <div class="section" id="version-0-1-2-2020-02-07">
-<h2>Version 0.1.2 (2020-02-07)<a class="headerlink" href="#version-0-1-2-2020-02-07" title="Permalink to this headline">¶</a></h2>
+<h2>Version 0.1.2 (2020-02-07)<a class="headerlink" href="#version-0-1-2-2020-02-07" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Changed: add more examples to documentation</p></li>
 <li><p>Fixed: typos in documentation</p></li>
 </ul>
 </div>
 <div class="section" id="version-0-1-1-2020-02-07">
-<h2>Version 0.1.1 (2020-02-07)<a class="headerlink" href="#version-0-1-1-2020-02-07" title="Permalink to this headline">¶</a></h2>
+<h2>Version 0.1.1 (2020-02-07)<a class="headerlink" href="#version-0-1-1-2020-02-07" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Changed: improve documentation</p></li>
 </ul>
 </div>
 <div class="section" id="version-0-1-0-2020-02-06">
-<h2>Version 0.1.0 (2020-02-06)<a class="headerlink" href="#version-0-1-0-2020-02-06" title="Permalink to this headline">¶</a></h2>
+<h2>Version 0.1.0 (2020-02-06)<a class="headerlink" href="#version-0-1-0-2020-02-06" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Added: initial release</p></li>
 </ul>
@@ -509,7 +514,7 @@ entries</p></li>
         
         
         
-          Built with <a href="https://www.sphinx-doc.org/en/master/">Sphinx</a> on 2022/01/03 using the <a href="https://github.com/audeering/sphinx-audeering-theme/">audEERING theme</a>
+          Built with <a href="https://www.sphinx-doc.org/en/master/">Sphinx</a> on 2022/12/23 using the <a href="https://github.com/audeering/sphinx-audeering-theme/">audEERING theme</a>
         
     </p>
   </div>
@@ -544,12 +549,14 @@ entries</p></li>
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
         <script src="_static/clipboard.min.js"></script>
         <script src="_static/copybutton.js"></script>
         <script src="_static/thebelab-helper.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
     
 
   

@@ -1,0 +1,6 @@
+﻿rest\_api\_get\(\)
+==================
+
+.. currentmodule:: audfactory
+
+.. autofunction:: audfactory.rest_api_get

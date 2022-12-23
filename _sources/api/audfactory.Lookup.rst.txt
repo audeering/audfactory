@@ -1,0 +1,96 @@
+﻿Lookup
+======
+
+.. currentmodule:: audfactory
+
+.. autoclass:: Lookup
+
+
+\_\_getitem\_\_\(\)
+-------------------
+.. automethod:: Lookup.__getitem__
+    
+append\(\)
+----------
+.. automethod:: Lookup.append
+    
+clear\(\)
+---------
+.. automethod:: Lookup.clear
+    
+columns
+-------
+.. autoattribute:: Lookup.columns
+    
+contains\(\)
+------------
+.. automethod:: Lookup.contains
+    
+create\(\)
+----------
+.. automethod:: Lookup.create
+    
+delete\(\)
+----------
+.. automethod:: Lookup.delete
+    
+exists\(\)
+----------
+.. automethod:: Lookup.exists
+    
+extend\(\)
+----------
+.. automethod:: Lookup.extend
+    
+find\(\)
+--------
+.. automethod:: Lookup.find
+    
+generate\_uid\(\)
+-----------------
+.. automethod:: Lookup.generate_uid
+    
+group\_id
+---------
+.. autoattribute:: Lookup.group_id
+    
+ids
+---
+.. autoattribute:: Lookup.ids
+    
+latest\_version\(\)
+-------------------
+.. automethod:: Lookup.latest_version
+    
+name
+----
+.. autoattribute:: Lookup.name
+    
+remove\(\)
+----------
+.. automethod:: Lookup.remove
+    
+repository
+----------
+.. autoattribute:: Lookup.repository
+    
+server
+------
+.. autoattribute:: Lookup.server
+    
+table
+-----
+.. autoattribute:: Lookup.table
+    
+url
+---
+.. autoattribute:: Lookup.url
+    
+version
+-------
+.. autoattribute:: Lookup.version
+    
+versions\(\)
+------------
+.. automethod:: Lookup.versions
+    

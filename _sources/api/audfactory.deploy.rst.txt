@@ -1,0 +1,6 @@
+﻿deploy\(\)
+==========
+
+.. currentmodule:: audfactory
+
+.. autofunction:: audfactory.deploy

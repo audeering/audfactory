@@ -1,0 +1,6 @@
+﻿versions\(\)
+============
+
+.. currentmodule:: audfactory
+
+.. autofunction:: audfactory.versions

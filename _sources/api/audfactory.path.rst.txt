@@ -1,0 +1,6 @@
+﻿path\(\)
+========
+
+.. currentmodule:: audfactory
+
+.. autofunction:: audfactory.path

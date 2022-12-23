@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>audfactory.core.api &mdash; audfactory Documentation</title>
+  <title>audfactory.core.api &mdash; Documentation</title>
   
 
   
@@ -25,12 +25,8 @@
     
 
   
-
-  
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/css/audeering.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/css/audeering.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/jupyter-sphinx.css" type="text/css" />
@@ -69,7 +65,7 @@
             
             
               <div class="version">
-                v1.0.8
+                v1.0.9
               </div>
             
           
@@ -100,7 +96,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">API Documentation</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../api-audfactory.html">audfactory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/audfactory.html">audfactory</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../genindex.html">Index</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Development</span></p>
@@ -161,7 +157,7 @@
 <span class="kn">import</span> <span class="nn">audeer</span>
 
 
-<div class="viewcode-block" id="authentification"><a class="viewcode-back" href="../../../api-audfactory.html#audfactory.authentification">[docs]</a><span class="k">def</span> <span class="nf">authentification</span><span class="p">(</span><span class="n">url</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+<div class="viewcode-block" id="authentification"><a class="viewcode-back" href="../../../api/audfactory.authentification.html#audfactory.authentification">[docs]</a><span class="k">def</span> <span class="nf">authentification</span><span class="p">(</span><span class="n">url</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;Look for username and API key.</span>
 
 <span class="sd">    It first looks for the two environment variables</span>
@@ -208,7 +204,7 @@
     <span class="k">return</span> <span class="n">username</span><span class="p">,</span> <span class="n">apikey</span></div>
 
 
-<div class="viewcode-block" id="checksum"><a class="viewcode-back" href="../../../api-audfactory.html#audfactory.checksum">[docs]</a><span class="k">def</span> <span class="nf">checksum</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;md5&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<div class="viewcode-block" id="checksum"><a class="viewcode-back" href="../../../api/audfactory.checksum.html#audfactory.checksum">[docs]</a><span class="k">def</span> <span class="nf">checksum</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;md5&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Calculate checksum for local or remote file.</span>
 
 <span class="sd">    Args:</span>
@@ -220,7 +216,7 @@
 <span class="sd">    Returns:</span>
 <span class="sd">        checksum</span>
 
-<span class="sd">    Example:</span>
+<span class="sd">    Examples:</span>
 <span class="sd">        &gt;&gt;&gt; checksum(</span>
 <span class="sd">        ...     &#39;https://audeering.jfrog.io/artifactory/&#39;</span>
 <span class="sd">        ...     &#39;data-public/emodb/db/1.1.0/db-1.1.0.zip&#39;</span>
@@ -250,7 +246,7 @@
             <span class="k">return</span> <span class="n">sha256sum</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="deploy"><a class="viewcode-back" href="../../../api-audfactory.html#audfactory.deploy">[docs]</a><span class="k">def</span> <span class="nf">deploy</span><span class="p">(</span>
+<div class="viewcode-block" id="deploy"><a class="viewcode-back" href="../../../api/audfactory.deploy.html#audfactory.deploy">[docs]</a><span class="k">def</span> <span class="nf">deploy</span><span class="p">(</span>
         <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="o">*</span><span class="p">,</span>
@@ -319,7 +315,7 @@
     <span class="k">return</span> <span class="n">url</span></div>
 
 
-<div class="viewcode-block" id="download"><a class="viewcode-back" href="../../../api-audfactory.html#audfactory.download">[docs]</a><span class="k">def</span> <span class="nf">download</span><span class="p">(</span>
+<div class="viewcode-block" id="download"><a class="viewcode-back" href="../../../api/audfactory.download.html#audfactory.download">[docs]</a><span class="k">def</span> <span class="nf">download</span><span class="p">(</span>
         <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">destination</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;.&#39;</span><span class="p">,</span>
         <span class="o">*</span><span class="p">,</span>
@@ -345,7 +341,7 @@
 <span class="sd">        RuntimeError: if artifact cannot be found,</span>
 <span class="sd">            or you don&#39;t have access rights to the artifact</span>
 
-<span class="sd">    Example:</span>
+<span class="sd">    Examples:</span>
 <span class="sd">        &gt;&gt;&gt; file = download(</span>
 <span class="sd">        ...     (</span>
 <span class="sd">        ...         &#39;https://audeering.jfrog.io/artifactory/&#39;</span>
@@ -395,7 +391,7 @@
     <span class="k">return</span> <span class="n">destination</span></div>
 
 
-<div class="viewcode-block" id="group_id_to_path"><a class="viewcode-back" href="../../../api-audfactory.html#audfactory.group_id_to_path">[docs]</a><span class="k">def</span> <span class="nf">group_id_to_path</span><span class="p">(</span>
+<div class="viewcode-block" id="group_id_to_path"><a class="viewcode-back" href="../../../api/audfactory.group_id_to_path.html#audfactory.group_id_to_path">[docs]</a><span class="k">def</span> <span class="nf">group_id_to_path</span><span class="p">(</span>
         <span class="n">group_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Replaces ``.`` by ``/`` in group ID.</span>
@@ -406,7 +402,7 @@
 <span class="sd">    Returns:</span>
 <span class="sd">        group ID path</span>
 
-<span class="sd">    Example:</span>
+<span class="sd">    Examples:</span>
 <span class="sd">        &gt;&gt;&gt; group_id_to_path(&#39;com.audeering.data.emodb&#39;)</span>
 <span class="sd">        &#39;com/audeering/data/emodb&#39;</span>
 
@@ -414,7 +410,7 @@
     <span class="k">return</span> <span class="s1">&#39;/&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">group_id</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">))</span></div>
 
 
-<div class="viewcode-block" id="path"><a class="viewcode-back" href="../../../api-audfactory.html#audfactory.path">[docs]</a><span class="k">def</span> <span class="nf">path</span><span class="p">(</span>
+<div class="viewcode-block" id="path"><a class="viewcode-back" href="../../../api/audfactory.path.html#audfactory.path">[docs]</a><span class="k">def</span> <span class="nf">path</span><span class="p">(</span>
         <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ArtifactoryPath</span><span class="p">:</span>
     <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Authenticate at Artifactory and get path object.</span>
@@ -437,7 +433,7 @@
 <span class="sd">    Returns:</span>
 <span class="sd">        Artifactory path object similar to pathlib.Path</span>
 
-<span class="sd">    Example:</span>
+<span class="sd">    Examples:</span>
 <span class="sd">        &gt;&gt;&gt; artifactory_path = path(</span>
 <span class="sd">        ...     &#39;https://audeering.jfrog.io/artifactory/data-public/emodb/&#39;</span>
 <span class="sd">        ... )</span>
@@ -453,7 +449,7 @@
     <span class="k">return</span> <span class="n">ArtifactoryPath</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">apikey</span><span class="p">))</span></div>
 
 
-<div class="viewcode-block" id="path_to_group_id"><a class="viewcode-back" href="../../../api-audfactory.html#audfactory.path_to_group_id">[docs]</a><span class="k">def</span> <span class="nf">path_to_group_id</span><span class="p">(</span>
+<div class="viewcode-block" id="path_to_group_id"><a class="viewcode-back" href="../../../api/audfactory.path_to_group_id.html#audfactory.path_to_group_id">[docs]</a><span class="k">def</span> <span class="nf">path_to_group_id</span><span class="p">(</span>
         <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Replaces ``/`` by ``.`` in group ID.</span>
@@ -464,7 +460,7 @@
 <span class="sd">    Returns:</span>
 <span class="sd">        group ID</span>
 
-<span class="sd">    Example:</span>
+<span class="sd">    Examples:</span>
 <span class="sd">        &gt;&gt;&gt; path_to_group_id(&#39;com/audeering/data/emodb&#39;)</span>
 <span class="sd">        &#39;com.audeering.data.emodb&#39;</span>
 
@@ -472,7 +468,7 @@
     <span class="k">return</span> <span class="s1">&#39;.&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">))</span></div>
 
 
-<div class="viewcode-block" id="rest_api_get"><a class="viewcode-back" href="../../../api-audfactory.html#audfactory.rest_api_get">[docs]</a><span class="k">def</span> <span class="nf">rest_api_get</span><span class="p">(</span>
+<div class="viewcode-block" id="rest_api_get"><a class="viewcode-back" href="../../../api/audfactory.rest_api_get.html#audfactory.rest_api_get">[docs]</a><span class="k">def</span> <span class="nf">rest_api_get</span><span class="p">(</span>
         <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">requests</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">Response</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Execute a GET REST API request.</span>
@@ -486,7 +482,7 @@
 <span class="sd">    Returns:</span>
 <span class="sd">        server response</span>
 
-<span class="sd">    Example:</span>
+<span class="sd">    Examples:</span>
 <span class="sd">        &gt;&gt;&gt; r = rest_api_get(</span>
 <span class="sd">        ...     &#39;https://audeering.jfrog.io/artifactory/&#39;</span>
 <span class="sd">        ...     &#39;data-public/emodb/meta/files/1.1.0/&#39;</span>
@@ -500,7 +496,7 @@
     <span class="k">return</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">apikey</span><span class="p">))</span></div>
 
 
-<div class="viewcode-block" id="url"><a class="viewcode-back" href="../../../api-audfactory.html#audfactory.url">[docs]</a><span class="k">def</span> <span class="nf">url</span><span class="p">(</span>
+<div class="viewcode-block" id="url"><a class="viewcode-back" href="../../../api/audfactory.url.html#audfactory.url">[docs]</a><span class="k">def</span> <span class="nf">url</span><span class="p">(</span>
         <span class="n">server</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="o">*</span><span class="p">,</span>
         <span class="n">repository</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -521,7 +517,7 @@
 <span class="sd">    Returns:</span>
 <span class="sd">        URL to location on server</span>
 
-<span class="sd">    Example:</span>
+<span class="sd">    Examples:</span>
 <span class="sd">        &gt;&gt;&gt; url(</span>
 <span class="sd">        ...     &#39;https://audeering.jfrog.io/artifactory&#39;,</span>
 <span class="sd">        ...     repository=&#39;data-public&#39;,</span>
@@ -545,7 +541,7 @@
     <span class="k">return</span> <span class="n">url</span></div>
 
 
-<div class="viewcode-block" id="versions"><a class="viewcode-back" href="../../../api-audfactory.html#audfactory.versions">[docs]</a><span class="k">def</span> <span class="nf">versions</span><span class="p">(</span>
+<div class="viewcode-block" id="versions"><a class="viewcode-back" href="../../../api/audfactory.versions.html#audfactory.versions">[docs]</a><span class="k">def</span> <span class="nf">versions</span><span class="p">(</span>
         <span class="n">server</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">repository</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">group_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
@@ -611,7 +607,7 @@
         
         
         
-          Built with <a href="https://www.sphinx-doc.org/en/master/">Sphinx</a> on 2022/01/03 using the <a href="https://github.com/audeering/sphinx-audeering-theme/">audEERING theme</a>
+          Built with <a href="https://www.sphinx-doc.org/en/master/">Sphinx</a> on 2022/12/23 using the <a href="https://github.com/audeering/sphinx-audeering-theme/">audEERING theme</a>
         
     </p>
   </div>
@@ -646,12 +642,14 @@
         <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
         <script src="../../../_static/clipboard.min.js"></script>
         <script src="../../../_static/copybutton.js"></script>
         <script src="../../../_static/thebelab-helper.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
     
 
   

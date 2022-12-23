@@ -1,0 +1,6 @@
+﻿checksum\(\)
+============
+
+.. currentmodule:: audfactory
+
+.. autofunction:: audfactory.checksum

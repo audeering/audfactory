@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>audfactory.core.lookup &mdash; audfactory Documentation</title>
+  <title>audfactory.core.lookup &mdash; Documentation</title>
   
 
   
@@ -25,12 +25,8 @@
     
 
   
-
-  
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/css/audeering.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/css/audeering.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/jupyter-sphinx.css" type="text/css" />
@@ -69,7 +65,7 @@
             
             
               <div class="version">
-                v1.0.8
+                v1.0.9
               </div>
             
           
@@ -100,7 +96,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">API Documentation</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../api-audfactory.html">audfactory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/audfactory.html">audfactory</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../genindex.html">Index</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Development</span></p>
@@ -160,7 +156,7 @@
 <span class="n">LOOKUP_EXT</span> <span class="o">=</span> <span class="s1">&#39;csv&#39;</span>
 
 
-<div class="viewcode-block" id="Lookup"><a class="viewcode-back" href="../../../api-audfactory.html#audfactory.Lookup">[docs]</a><span class="k">class</span> <span class="nc">Lookup</span><span class="p">:</span>
+<div class="viewcode-block" id="Lookup"><a class="viewcode-back" href="../../../api/audfactory.Lookup.html#audfactory.Lookup">[docs]</a><span class="k">class</span> <span class="nc">Lookup</span><span class="p">:</span>
     <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Lookup table for managing artifact flavors on Artifactory.</span>
 
 <span class="sd">    It creates one row for every flavor,</span>
@@ -204,7 +200,7 @@
 <span class="sd">        RuntimeError: if no lookup tables or no lookup</span>
 <span class="sd">            table with the specified version can be found</span>
 
-<span class="sd">    Example:</span>
+<span class="sd">    Examples:</span>
 <span class="sd">        &gt;&gt;&gt; lookup = Lookup(</span>
 <span class="sd">        ...     &#39;https://artifactory.audeering.com/artifactory&#39;,</span>
 <span class="sd">        ...     &#39;models-public-local&#39;,</span>
@@ -278,7 +274,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">url</span> <span class="o">=</span> <span class="n">_url_table</span><span class="p">(</span><span class="n">server</span><span class="p">,</span> <span class="n">repository</span><span class="p">,</span> <span class="n">group_id</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">version</span><span class="p">)</span>
         <span class="sd">&quot;&quot;&quot;Artifactory URL of lookup table&quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="Lookup.__getitem__"><a class="viewcode-back" href="../../../api-audfactory.html#audfactory.Lookup.__getitem__">[docs]</a>    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uid</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Dict</span><span class="p">:</span>
+<div class="viewcode-block" id="Lookup.__getitem__"><a class="viewcode-back" href="../../../api/audfactory.Lookup.html#audfactory.Lookup.__getitem__">[docs]</a>    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uid</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Dict</span><span class="p">:</span>
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Get lookup table entry by ID.</span>
 
 <span class="sd">        Args:</span>
@@ -334,7 +330,7 @@
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Lookup table.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">_download</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
 
-<div class="viewcode-block" id="Lookup.append"><a class="viewcode-back" href="../../../api-audfactory.html#audfactory.Lookup.append">[docs]</a>    <span class="k">def</span> <span class="nf">append</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<div class="viewcode-block" id="Lookup.append"><a class="viewcode-back" href="../../../api/audfactory.Lookup.html#audfactory.Lookup.append">[docs]</a>    <span class="k">def</span> <span class="nf">append</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Append entry to lookup table.</span>
 
 <span class="sd">        The lookup table entry gets a unique ID</span>
@@ -383,14 +379,14 @@
 
         <span class="k">return</span> <span class="n">uid</span></div>
 
-<div class="viewcode-block" id="Lookup.clear"><a class="viewcode-back" href="../../../api-audfactory.html#audfactory.Lookup.clear">[docs]</a>    <span class="k">def</span> <span class="nf">clear</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<div class="viewcode-block" id="Lookup.clear"><a class="viewcode-back" href="../../../api/audfactory.Lookup.html#audfactory.Lookup.clear">[docs]</a>    <span class="k">def</span> <span class="nf">clear</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Clear lookup table.&quot;&quot;&quot;</span>
         <span class="n">table</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">table</span>
 
         <span class="n">table</span> <span class="o">=</span> <span class="p">[</span><span class="n">table</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>  <span class="c1"># empty table with header</span>
         <span class="n">_upload</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Lookup.contains"><a class="viewcode-back" href="../../../api-audfactory.html#audfactory.Lookup.contains">[docs]</a>    <span class="k">def</span> <span class="nf">contains</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<div class="viewcode-block" id="Lookup.contains"><a class="viewcode-back" href="../../../api/audfactory.Lookup.html#audfactory.Lookup.contains">[docs]</a>    <span class="k">def</span> <span class="nf">contains</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Check if lookup table contains entry.</span>
 
 <span class="sd">        Args:</span>
@@ -406,7 +402,7 @@
             <span class="k">return</span> <span class="kc">False</span>
         <span class="k">return</span> <span class="kc">True</span></div>
 
-<div class="viewcode-block" id="Lookup.extend"><a class="viewcode-back" href="../../../api-audfactory.html#audfactory.Lookup.extend">[docs]</a>    <span class="k">def</span> <span class="nf">extend</span><span class="p">(</span>
+<div class="viewcode-block" id="Lookup.extend"><a class="viewcode-back" href="../../../api/audfactory.Lookup.html#audfactory.Lookup.extend">[docs]</a>    <span class="k">def</span> <span class="nf">extend</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span>
             <span class="n">params</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span>
                 <span class="nb">str</span><span class="p">,</span>
@@ -460,7 +456,7 @@
 
         <span class="k">return</span> <span class="n">table</span></div>
 
-<div class="viewcode-block" id="Lookup.find"><a class="viewcode-back" href="../../../api-audfactory.html#audfactory.Lookup.find">[docs]</a>    <span class="k">def</span> <span class="nf">find</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<div class="viewcode-block" id="Lookup.find"><a class="viewcode-back" href="../../../api/audfactory.Lookup.html#audfactory.Lookup.find">[docs]</a>    <span class="k">def</span> <span class="nf">find</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Find entry in lookup table.</span>
 
 <span class="sd">        Args:</span>
@@ -487,7 +483,7 @@
             <span class="sa">f</span><span class="s2">&quot;in version </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">version</span><span class="si">}</span><span class="s2">:</span><span class="se">\n\n</span><span class="si">{</span><span class="n">table</span><span class="si">}</span><span class="s2">&quot;</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="Lookup.remove"><a class="viewcode-back" href="../../../api-audfactory.html#audfactory.Lookup.remove">[docs]</a>    <span class="k">def</span> <span class="nf">remove</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<div class="viewcode-block" id="Lookup.remove"><a class="viewcode-back" href="../../../api/audfactory.Lookup.html#audfactory.Lookup.remove">[docs]</a>    <span class="k">def</span> <span class="nf">remove</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Remove entry from lookup table.</span>
 
 <span class="sd">        Args:</span>
@@ -507,7 +503,7 @@
 
         <span class="k">return</span> <span class="n">uid</span></div>
 
-<div class="viewcode-block" id="Lookup.create"><a class="viewcode-back" href="../../../api-audfactory.html#audfactory.Lookup.create">[docs]</a>    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="Lookup.create"><a class="viewcode-back" href="../../../api/audfactory.Lookup.html#audfactory.Lookup.create">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">create</span><span class="p">(</span>
             <span class="n">server</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
             <span class="n">repository</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
@@ -549,7 +545,7 @@
             <span class="p">)</span>
         <span class="k">return</span> <span class="n">url</span></div>
 
-<div class="viewcode-block" id="Lookup.delete"><a class="viewcode-back" href="../../../api-audfactory.html#audfactory.Lookup.delete">[docs]</a>    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="Lookup.delete"><a class="viewcode-back" href="../../../api/audfactory.Lookup.html#audfactory.Lookup.delete">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span>
             <span class="n">server</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
             <span class="n">repository</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
@@ -590,7 +586,7 @@
             <span class="n">lookup</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
         <span class="n">audfactory</span><span class="o">.</span><span class="n">path</span><span class="p">(</span><span class="n">lookup</span><span class="o">.</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">rmdir</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="Lookup.exists"><a class="viewcode-back" href="../../../api-audfactory.html#audfactory.Lookup.exists">[docs]</a>    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="Lookup.exists"><a class="viewcode-back" href="../../../api/audfactory.Lookup.html#audfactory.Lookup.exists">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">exists</span><span class="p">(</span>
             <span class="n">server</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
             <span class="n">repository</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
@@ -612,7 +608,7 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            ``True`` if lookup table exists</span>
 
-<span class="sd">        Example:</span>
+<span class="sd">        Examples:</span>
 <span class="sd">            &gt;&gt;&gt; Lookup.exists(</span>
 <span class="sd">            ...     &#39;https://artifactory.audeering.com/artifactory&#39;,</span>
 <span class="sd">            ...     &#39;models-public-local&#39;,</span>
@@ -625,7 +621,7 @@
         <span class="n">versions</span> <span class="o">=</span> <span class="n">audfactory</span><span class="o">.</span><span class="n">versions</span><span class="p">(</span><span class="n">server</span><span class="p">,</span> <span class="n">repository</span><span class="p">,</span> <span class="n">group_id</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">version</span> <span class="ow">in</span> <span class="n">versions</span></div>
 
-<div class="viewcode-block" id="Lookup.latest_version"><a class="viewcode-back" href="../../../api-audfactory.html#audfactory.Lookup.latest_version">[docs]</a>    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="Lookup.latest_version"><a class="viewcode-back" href="../../../api/audfactory.Lookup.html#audfactory.Lookup.latest_version">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">latest_version</span><span class="p">(</span>
             <span class="n">server</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
             <span class="n">repository</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
@@ -647,7 +643,7 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            latest version of lookup table</span>
 
-<span class="sd">        Example:</span>
+<span class="sd">        Examples:</span>
 <span class="sd">            &gt;&gt;&gt; Lookup.latest_version(</span>
 <span class="sd">            ...     &#39;https://artifactory.audeering.com/artifactory&#39;,</span>
 <span class="sd">            ...     &#39;models-public-local&#39;,</span>
@@ -662,7 +658,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">None</span></div>
 
-<div class="viewcode-block" id="Lookup.generate_uid"><a class="viewcode-back" href="../../../api-audfactory.html#audfactory.Lookup.generate_uid">[docs]</a>    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="Lookup.generate_uid"><a class="viewcode-back" href="../../../api/audfactory.Lookup.html#audfactory.Lookup.generate_uid">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">generate_uid</span><span class="p">(</span>
             <span class="o">*</span><span class="p">,</span>
             <span class="n">params</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">],</span>
@@ -688,7 +684,7 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            unique identifier of length 36</span>
 
-<span class="sd">        Example:</span>
+<span class="sd">        Examples:</span>
 <span class="sd">            &gt;&gt;&gt; Lookup.generate_uid(</span>
 <span class="sd">            ...     params={0: None},</span>
 <span class="sd">            ...     name=&#39;name&#39;,</span>
@@ -709,7 +705,7 @@
         <span class="n">uid</span> <span class="o">=</span> <span class="n">audeer</span><span class="o">.</span><span class="n">uid</span><span class="p">(</span><span class="n">from_string</span><span class="o">=</span><span class="n">unique_string</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">uid</span></div>
 
-<div class="viewcode-block" id="Lookup.versions"><a class="viewcode-back" href="../../../api-audfactory.html#audfactory.Lookup.versions">[docs]</a>    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="Lookup.versions"><a class="viewcode-back" href="../../../api/audfactory.Lookup.html#audfactory.Lookup.versions">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">versions</span><span class="p">(</span>
             <span class="n">server</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
             <span class="n">repository</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
@@ -731,7 +727,7 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            available versions of lookup table</span>
 
-<span class="sd">        Example:</span>
+<span class="sd">        Examples:</span>
 <span class="sd">            &gt;&gt;&gt; Lookup.versions(</span>
 <span class="sd">            ...     &#39;https://artifactory.audeering.com/artifactory&#39;,</span>
 <span class="sd">            ...     &#39;models-public-local&#39;,</span>
@@ -901,7 +897,7 @@
         
         
         
-          Built with <a href="https://www.sphinx-doc.org/en/master/">Sphinx</a> on 2022/01/03 using the <a href="https://github.com/audeering/sphinx-audeering-theme/">audEERING theme</a>
+          Built with <a href="https://www.sphinx-doc.org/en/master/">Sphinx</a> on 2022/12/23 using the <a href="https://github.com/audeering/sphinx-audeering-theme/">audEERING theme</a>
         
     </p>
   </div>
@@ -936,12 +932,14 @@
         <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
         <script src="../../../_static/clipboard.min.js"></script>
         <script src="../../../_static/copybutton.js"></script>
         <script src="../../../_static/thebelab-helper.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
     
 
   

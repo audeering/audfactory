@@ -1,0 +1,6 @@
+﻿group\_id\_to\_path\(\)
+=======================
+
+.. currentmodule:: audfactory
+
+.. autofunction:: audfactory.group_id_to_path
