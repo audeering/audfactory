@@ -74,7 +74,7 @@ def checksum(path, type='md5') -> str:
     Returns:
         checksum
 
-    Example:
+    Examples:
         >>> checksum(
         ...     'https://audeering.jfrog.io/artifactory/'
         ...     'data-public/emodb/db/1.1.0/db-1.1.0.zip'
@@ -199,7 +199,7 @@ def download(
         RuntimeError: if artifact cannot be found,
             or you don't have access rights to the artifact
 
-    Example:
+    Examples:
         >>> file = download(
         ...     (
         ...         'https://audeering.jfrog.io/artifactory/'
@@ -260,7 +260,7 @@ def group_id_to_path(
     Returns:
         group ID path
 
-    Example:
+    Examples:
         >>> group_id_to_path('com.audeering.data.emodb')
         'com/audeering/data/emodb'
 
@@ -291,7 +291,7 @@ def path(
     Returns:
         Artifactory path object similar to pathlib.Path
 
-    Example:
+    Examples:
         >>> artifactory_path = path(
         ...     'https://audeering.jfrog.io/artifactory/data-public/emodb/'
         ... )
@@ -318,7 +318,7 @@ def path_to_group_id(
     Returns:
         group ID
 
-    Example:
+    Examples:
         >>> path_to_group_id('com/audeering/data/emodb')
         'com.audeering.data.emodb'
 
@@ -340,7 +340,7 @@ def rest_api_get(
     Returns:
         server response
 
-    Example:
+    Examples:
         >>> r = rest_api_get(
         ...     'https://audeering.jfrog.io/artifactory/'
         ...     'data-public/emodb/meta/files/1.1.0/'
@@ -375,7 +375,7 @@ def url(
     Returns:
         URL to location on server
 
-    Example:
+    Examples:
         >>> url(
         ...     'https://audeering.jfrog.io/artifactory',
         ...     repository='data-public',

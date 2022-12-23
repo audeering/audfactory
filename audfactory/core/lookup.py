@@ -58,7 +58,7 @@ class Lookup:
         RuntimeError: if no lookup tables or no lookup
             table with the specified version can be found
 
-    Example:
+    Examples:
         >>> lookup = Lookup(
         ...     'https://artifactory.audeering.com/artifactory',
         ...     'models-public-local',
@@ -466,7 +466,7 @@ class Lookup:
         Returns:
             ``True`` if lookup table exists
 
-        Example:
+        Examples:
             >>> Lookup.exists(
             ...     'https://artifactory.audeering.com/artifactory',
             ...     'models-public-local',
@@ -501,7 +501,7 @@ class Lookup:
         Returns:
             latest version of lookup table
 
-        Example:
+        Examples:
             >>> Lookup.latest_version(
             ...     'https://artifactory.audeering.com/artifactory',
             ...     'models-public-local',
@@ -542,7 +542,7 @@ class Lookup:
         Returns:
             unique identifier of length 36
 
-        Example:
+        Examples:
             >>> Lookup.generate_uid(
             ...     params={0: None},
             ...     name='name',
@@ -585,7 +585,7 @@ class Lookup:
         Returns:
             available versions of lookup table
 
-        Example:
+        Examples:
             >>> Lookup.versions(
             ...     'https://artifactory.audeering.com/artifactory',
             ...     'models-public-local',

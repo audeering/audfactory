@@ -17,7 +17,7 @@
     :caption: API Documentation
     :hidden:
 
-    api-audfactory
+    api/audfactory
     genindex
 
 .. toctree::
