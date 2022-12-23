@@ -36,8 +36,8 @@ extensions = [
 ]
 intersphinx_mapping = {
     'audeer': ('https://audeering.github.io/audeer/', None),
+    'pandas': ('https://pandas.pydata.org/pandas-docs/stable/', None),
     'python': ('https://docs.python.org/3/', None),
-    'pandas': ('https://pandas-docs.github.io/pandas-docs-travis/', None),
 }
 # Disable Gitlab as we need to sign in
 linkcheck_ignore = [
