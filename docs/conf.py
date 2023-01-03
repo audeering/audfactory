@@ -2,7 +2,6 @@ import configparser
 from datetime import date
 import os
 import shutil
-import sys
 
 import audeer
 
