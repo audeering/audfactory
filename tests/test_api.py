@@ -1,6 +1,4 @@
-import copy
 import os
-import uuid
 
 import pytest
 
