@@ -25,8 +25,12 @@
     
 
   
-  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+
+  
   <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/audeering.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/css/audeering.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/jupyter-sphinx.css" type="text/css" />
@@ -54,7 +58,7 @@
 
           <a href="../../../index.html">
           
-            <img src="../../../_static/images/audeering.png" class="logo" alt="audEERING"/>
+            <img src="../../../_static/images/audeering.svg" class="logo" alt="audEERING"/>
           
           
             <span> audfactory</span>
@@ -65,7 +69,7 @@
             
             
               <div class="version">
-                v1.0.9
+                v1.0.10
               </div>
             
           
@@ -126,14 +130,40 @@
         
         <div class="rst-content">
         
-          <div role="navigation" aria-label="Page navigation">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
-      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
           <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
       <li>audfactory.core.lookup</li>
+    
+    
       <li class="wy-breadcrumbs-aside">
+        
       </li>
+    
   </ul>
+
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -157,7 +187,7 @@
 
 
 <div class="viewcode-block" id="Lookup"><a class="viewcode-back" href="../../../api/audfactory.Lookup.html#audfactory.Lookup">[docs]</a><span class="k">class</span> <span class="nc">Lookup</span><span class="p">:</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Lookup table for managing artifact flavors on Artifactory.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Lookup table for managing artifact flavors on Artifactory.</span>
 
 <span class="sd">    It creates one row for every flavor,</span>
 <span class="sd">    and assigns a unique ID to it.</span>
@@ -228,13 +258,13 @@
             <span class="n">version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">server</span> <span class="o">=</span> <span class="n">server</span>
-        <span class="sd">&quot;&quot;&quot;server URL&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;server URL&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">group_id</span> <span class="o">=</span> <span class="n">group_id</span>
-        <span class="sd">&quot;&quot;&quot;group ID of lookup table&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;group ID of lookup table&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
-        <span class="sd">&quot;&quot;&quot;name of lookup table&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;name of lookup table&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">repository</span> <span class="o">=</span> <span class="n">repository</span>
-        <span class="sd">&quot;&quot;&quot;repository of lookup table&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;repository of lookup table&quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="n">version</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">version</span> <span class="o">=</span> <span class="n">Lookup</span><span class="o">.</span><span class="n">latest_version</span><span class="p">(</span>
@@ -270,12 +300,12 @@
             <span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">version</span> <span class="o">=</span> <span class="n">version</span>
-        <span class="sd">&quot;&quot;&quot;version of lookup table&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;version of lookup table&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">url</span> <span class="o">=</span> <span class="n">_url_table</span><span class="p">(</span><span class="n">server</span><span class="p">,</span> <span class="n">repository</span><span class="p">,</span> <span class="n">group_id</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">version</span><span class="p">)</span>
-        <span class="sd">&quot;&quot;&quot;Artifactory URL of lookup table&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Artifactory URL of lookup table&quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="Lookup.__getitem__"><a class="viewcode-back" href="../../../api/audfactory.Lookup.html#audfactory.Lookup.__getitem__">[docs]</a>    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uid</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Dict</span><span class="p">:</span>
-        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Get lookup table entry by ID.</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Get lookup table entry by ID.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            uid: ID of lookup table entry</span>
@@ -294,7 +324,7 @@
         <span class="k">return</span> <span class="n">item</span></div>
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;String representation of lokkup table.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;String representation of lokkup table.&quot;&quot;&quot;</span>
         <span class="n">table</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">table</span>
         <span class="n">padding</span> <span class="o">=</span> <span class="mi">2</span>
         <span class="c1"># Longest string in each column</span>
@@ -315,23 +345,23 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">columns</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">List</span><span class="p">:</span>
-        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Lookup table column names.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Lookup table column names.&quot;&quot;&quot;</span>
         <span class="n">table</span> <span class="o">=</span> <span class="n">_download</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">_columns</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">ids</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">List</span><span class="p">:</span>
-        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Lookup table ids.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Lookup table ids.&quot;&quot;&quot;</span>
         <span class="n">table</span> <span class="o">=</span> <span class="n">_download</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">_ids</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">table</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">List</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">List</span><span class="p">]:</span>
-        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Lookup table.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Lookup table.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">_download</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Lookup.append"><a class="viewcode-back" href="../../../api/audfactory.Lookup.html#audfactory.Lookup.append">[docs]</a>    <span class="k">def</span> <span class="nf">append</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Append entry to lookup table.</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Append entry to lookup table.</span>
 
 <span class="sd">        The lookup table entry gets a unique ID</span>
 <span class="sd">        from ``params``,</span>
@@ -380,14 +410,14 @@
         <span class="k">return</span> <span class="n">uid</span></div>
 
 <div class="viewcode-block" id="Lookup.clear"><a class="viewcode-back" href="../../../api/audfactory.Lookup.html#audfactory.Lookup.clear">[docs]</a>    <span class="k">def</span> <span class="nf">clear</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Clear lookup table.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Clear lookup table.&quot;&quot;&quot;</span>
         <span class="n">table</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">table</span>
 
         <span class="n">table</span> <span class="o">=</span> <span class="p">[</span><span class="n">table</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>  <span class="c1"># empty table with header</span>
         <span class="n">_upload</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Lookup.contains"><a class="viewcode-back" href="../../../api/audfactory.Lookup.html#audfactory.Lookup.contains">[docs]</a>    <span class="k">def</span> <span class="nf">contains</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Check if lookup table contains entry.</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Check if lookup table contains entry.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            params: lookup table entry in the form of ``{column: parameter}``</span>
@@ -410,7 +440,7 @@
                 <span class="n">typing</span><span class="o">.</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">],</span>
             <span class="p">],</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">List</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">List</span><span class="p">]:</span>
-        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Extend columns of lookup table.</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Extend columns of lookup table.</span>
 
 <span class="sd">        If no parameter values are given for the new columns,</span>
 <span class="sd">        they are set to ``None``.</span>
@@ -457,7 +487,7 @@
         <span class="k">return</span> <span class="n">table</span></div>
 
 <div class="viewcode-block" id="Lookup.find"><a class="viewcode-back" href="../../../api/audfactory.Lookup.html#audfactory.Lookup.find">[docs]</a>    <span class="k">def</span> <span class="nf">find</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Find entry in lookup table.</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Find entry in lookup table.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            params: lookup table entry in the form of ``{column: parameter}``</span>
@@ -484,7 +514,7 @@
         <span class="p">)</span></div>
 
 <div class="viewcode-block" id="Lookup.remove"><a class="viewcode-back" href="../../../api/audfactory.Lookup.html#audfactory.Lookup.remove">[docs]</a>    <span class="k">def</span> <span class="nf">remove</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Remove entry from lookup table.</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Remove entry from lookup table.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            params: lookup table entry in the form of ``{column: parameter}``</span>
@@ -514,7 +544,7 @@
             <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;lookup&#39;</span><span class="p">,</span>
             <span class="n">force</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Create lookup table on server.</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Create lookup table on server.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            server: URL of Artifactory server,</span>
@@ -555,7 +585,7 @@
             <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;lookup&#39;</span><span class="p">,</span>
             <span class="n">force</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Delete lookup table on server.</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Delete lookup table on server.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            server: URL of Artifactory server,</span>
@@ -595,7 +625,7 @@
             <span class="o">*</span><span class="p">,</span>
             <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;lookup&#39;</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Check if lookup table exists on server.</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Check if lookup table exists on server.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            server: URL of Artifactory server,</span>
@@ -630,7 +660,7 @@
             <span class="n">params</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
             <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;lookup&#39;</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Latest version of lookup table on server.</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Latest version of lookup table on server.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            server: URL of Artifactory server,</span>
@@ -667,7 +697,7 @@
             <span class="n">version</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
             <span class="n">repository</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Generate unique ID.</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Generate unique ID.</span>
 
 <span class="sd">        It converts ``params`` to a string,</span>
 <span class="sd">        and concatenates it with ``name``, ``group_id``, ``version``,</span>
@@ -714,7 +744,7 @@
             <span class="o">*</span><span class="p">,</span>
             <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;lookup&#39;</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
-        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Available versions of lookup table on server.</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Available versions of lookup table on server.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            server: URL of Artifactory server,</span>
@@ -754,7 +784,7 @@
 
 
 <span class="k">def</span> <span class="nf">_check_params_type</span><span class="p">(</span><span class="n">params</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Raise error if params includes wrong data types.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Raise error if params includes wrong data types.&quot;&quot;&quot;</span>
     <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">params</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="p">(</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="kc">None</span><span class="p">),</span> <span class="nb">str</span><span class="p">)):</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
@@ -799,7 +829,7 @@
 
 
 <span class="k">def</span> <span class="nf">_import_csv</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Convert strings to int, float, and None.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Convert strings to int, float, and None.</span>
 
 <span class="sd">    The build in CSV reader returns only strings.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -853,7 +883,7 @@
         <span class="n">table</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">List</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">List</span><span class="p">],</span>
         <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Upload table to a CSV file on Artifactory without using a tmp file.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Upload table to a CSV file on Artifactory without using a tmp file.&quot;&quot;&quot;</span>
     <span class="n">fobj</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">StringIO</span><span class="p">()</span>
     <span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">fobj</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
     <span class="n">writer</span><span class="o">.</span><span class="n">writerows</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
@@ -897,7 +927,7 @@
         
         
         
-          Built with <a href="https://www.sphinx-doc.org/en/master/">Sphinx</a> on 2022/12/23 using the <a href="https://github.com/audeering/sphinx-audeering-theme/">audEERING theme</a>
+          Built with <a href="https://www.sphinx-doc.org/en/master/">Sphinx</a> on 2023/02/13 using the <a href="https://github.com/audeering/sphinx-audeering-theme/">audEERING theme</a>
         
     </p>
   </div>
@@ -905,7 +935,7 @@
   <div role="contentinfo">
     <p>
         
-      &copy; 2019-2022 audEERING GmbH
+      &copy; 2019-2023 audEERING GmbH
     </p>
   </div> 
 
@@ -930,9 +960,6 @@
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
         <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-        <script src="../../../_static/jquery.js"></script>
-        <script src="../../../_static/underscore.js"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../../_static/doctools.js"></script>
         <script src="../../../_static/sphinx_highlight.js"></script>
         <script src="../../../_static/clipboard.min.js"></script>
