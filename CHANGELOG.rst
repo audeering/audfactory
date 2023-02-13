@@ -7,6 +7,13 @@ The format is based on `Keep a Changelog`_,
 and this project adheres to `Semantic Versioning`_.
 
 
+Version 1.0.10 (2023-02-13)
+---------------------------
+
+* Fixed: support for Python 3.10
+  by requiring ``dohq-artifactory>=0.8.1``
+
+
 Version 1.0.9 (2022-12-23)
 --------------------------
 
