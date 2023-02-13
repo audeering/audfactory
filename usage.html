@@ -5,8 +5,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
-
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <title>Usage &mdash; Documentation</title>
@@ -26,12 +25,8 @@
     
 
   
-
-  
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/css/audeering.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="_static/css/audeering.css" type="text/css" />
   <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
   <link rel="stylesheet" href="_static/jupyter-sphinx.css" type="text/css" />
@@ -61,7 +56,7 @@
 
           <a href="index.html">
           
-            <img src="_static/images/audeering.svg" class="logo" alt="audEERING"/>
+            <img src="_static/images/audeering.png" class="logo" alt="audEERING"/>
           
           
             <span> audfactory</span>
@@ -72,7 +67,7 @@
             
             
               <div class="version">
-                v1.0.10
+                v1.0.11
               </div>
             
           
@@ -138,52 +133,22 @@
         
         <div class="rst-content">
         
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="index.html">Docs</a> &raquo;</li>
-        
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
       <li>Usage</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-            
-            
-              <a href="https://github.com/audeering/audfactory/blob/v1.0.10/docs/usage.rst" class="fa fa-github"> Edit on GitHub</a>
-            
-          
-        
+              <a href="https://github.com/audeering/audfactory/" class="fa fa-github"> GitHub</a>
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <section id="usage">
+  <div class="section" id="usage">
 <h1>Usage<a class="headerlink" href="#usage" title="Permalink to this heading">¶</a></h1>
-<section id="authentication">
+<div class="section" id="authentication">
 <h2>Authentication<a class="headerlink" href="#authentication" title="Permalink to this heading">¶</a></h2>
 <p>Artifactory servers can allow anonymous access
 by logging in with a fixed pair
@@ -276,8 +241,8 @@ as it will always try to authenticate
 with the given username and password.
 In this case
 it is recommended to not use the environment variables.</p>
-</section>
-<section id="artifactory">
+</div>
+<div class="section" id="artifactory">
 <h2>Artifactory<a class="headerlink" href="#artifactory" title="Permalink to this heading">¶</a></h2>
 <p>Artifacts are stored under the following name space on Artifactory:</p>
 <ul class="simple">
@@ -287,8 +252,8 @@ it is recommended to not use the environment variables.</p>
 </ul>
 <p>Those three parts are arguments to most of the functions
 inside <a class="reference internal" href="api/audfactory.html#module-audfactory" title="audfactory"><code class="xref py py-mod docutils literal notranslate"><span class="pre">audfactory</span></code></a>.</p>
-</section>
-<section id="examples">
+</div>
+<div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading">¶</a></h2>
 <p>You can query the available versions of an artifact:</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -310,8 +275,8 @@ inside <a class="reference internal" href="api/audfactory.html#module-audfactory
 </div>
 </div>
 </div>
-</section>
-</section>
+</div>
+</div>
 
 
            </div>
@@ -369,6 +334,9 @@ inside <a class="reference internal" href="api/audfactory.html#module-audfactory
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/sphinx_highlight.js"></script>
         <script src="_static/clipboard.min.js"></script>

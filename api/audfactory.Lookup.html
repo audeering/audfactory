@@ -5,8 +5,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
-
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <title>Lookup &mdash; Documentation</title>
@@ -26,12 +25,8 @@
     
 
   
-
-  
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/css/audeering.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../_static/css/audeering.css" type="text/css" />
   <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
   <link rel="stylesheet" href="../_static/jupyter-sphinx.css" type="text/css" />
@@ -61,7 +56,7 @@
 
           <a href="../index.html">
           
-            <img src="../_static/images/audeering.svg" class="logo" alt="audEERING"/>
+            <img src="../_static/images/audeering.png" class="logo" alt="audEERING"/>
           
           
             <span> audfactory</span>
@@ -72,7 +67,7 @@
             
             
               <div class="version">
-                v1.0.10
+                v1.0.11
               </div>
             
           
@@ -170,52 +165,21 @@
         
         <div class="rst-content">
         
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="../index.html">Docs</a> &raquo;</li>
-        
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
           <li><a href="audfactory.html">audfactory</a> &raquo;</li>
-        
       <li>Lookup</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-            
-            
-              <a href="https://github.com/audeering/audfactory/blob/v1.0.10/docs/api/audfactory.Lookup.rst" class="fa fa-github"> Edit on GitHub</a>
-            
-          
-        
+              <a href="https://github.com/audeering/audfactory/" class="fa fa-github"> GitHub</a>
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <section id="lookup">
+  <div class="section" id="lookup">
 <h1>Lookup<a class="headerlink" href="#lookup" title="Permalink to this heading">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="audfactory.Lookup">
@@ -248,7 +212,7 @@ into a <a class="reference external" href="https://pandas.pydata.org/pandas-docs
 </pre></div>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>server</strong> – URL of Artifactory server,
 e.g. <a class="reference external" href="https://audeering.jfrog.io/artifactory">https://audeering.jfrog.io/artifactory</a></p></li>
@@ -258,7 +222,7 @@ e.g. <a class="reference external" href="https://audeering.jfrog.io/artifactory"
 <li><p><strong>version</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.11)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]) – version of lookup table</p></li>
 </ul>
 </dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dt class="field-even">Raises</dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#RuntimeError" title="(in Python v3.11)"><strong>RuntimeError</strong></a> – if no lookup tables or no lookup
     table with the specified version can be found</p>
 </dd>
@@ -282,27 +246,27 @@ e.g. <a class="reference external" href="https://audeering.jfrog.io/artifactory"
 </div>
 </dd></dl>
 
-<section id="getitem">
+<div class="section" id="getitem">
 <h2>__getitem__()<a class="headerlink" href="#getitem" title="Permalink to this heading">¶</a></h2>
 <dl class="py method">
 <dt class="sig sig-object py" id="audfactory.Lookup.__getitem__">
 <span class="sig-prename descclassname"><span class="pre">Lookup.</span></span><span class="sig-name descname"><span class="pre">__getitem__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uid</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/audfactory/core/lookup.html#Lookup.__getitem__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#audfactory.Lookup.__getitem__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get lookup table entry by ID.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>uid</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – ID of lookup table entry</p>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dt class="field-even">Return type</dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
 </dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>lookup table entry</p>
 </dd>
 </dl>
 </dd></dl>
 
-</section>
-<section id="append">
+</div>
+<div class="section" id="append">
 <h2>append()<a class="headerlink" href="#append" title="Permalink to this heading">¶</a></h2>
 <dl class="py method">
 <dt class="sig sig-object py" id="audfactory.Lookup.append">
@@ -315,16 +279,16 @@ from <code class="docutils literal notranslate"><span class="pre">params</span><
 <code class="xref py py-attr docutils literal notranslate"><span class="pre">self.version</span></code>,
 and <code class="xref py py-attr docutils literal notranslate"><span class="pre">self.repository</span></code>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>params</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.11)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>]) – lookup table entry in the form of <code class="docutils literal notranslate"><span class="pre">{column:</span> <span class="pre">parameter}</span></code></p>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dt class="field-even">Return type</dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>ID of added lookup table entry</p>
 </dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dt class="field-even">Raises</dt>
 <dd class="field-even"><ul class="simple">
 <li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#RuntimeError" title="(in Python v3.11)"><strong>RuntimeError</strong></a> – if entry for given <code class="docutils literal notranslate"><span class="pre">params</span></code> exists already,
     or the columns <code class="docutils literal notranslate"><span class="pre">params</span></code> do not match the columns
@@ -335,22 +299,22 @@ and <code class="xref py py-attr docutils literal notranslate"><span class="pre"
 </dl>
 </dd></dl>
 
-</section>
-<section id="clear">
+</div>
+<div class="section" id="clear">
 <h2>clear()<a class="headerlink" href="#clear" title="Permalink to this heading">¶</a></h2>
 <dl class="py method">
 <dt class="sig sig-object py" id="audfactory.Lookup.clear">
 <span class="sig-prename descclassname"><span class="pre">Lookup.</span></span><span class="sig-name descname"><span class="pre">clear</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/audfactory/core/lookup.html#Lookup.clear"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#audfactory.Lookup.clear" title="Permalink to this definition">¶</a></dt>
 <dd><p>Clear lookup table.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
 
-</section>
-<section id="columns">
+</div>
+<div class="section" id="columns">
 <h2>columns<a class="headerlink" href="#columns" title="Permalink to this heading">¶</a></h2>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="audfactory.Lookup.columns">
@@ -358,35 +322,35 @@ and <code class="xref py py-attr docutils literal notranslate"><span class="pre"
 <dd><p>Lookup table column names.</p>
 </dd></dl>
 
-</section>
-<section id="contains">
+</div>
+<div class="section" id="contains">
 <h2>contains()<a class="headerlink" href="#contains" title="Permalink to this heading">¶</a></h2>
 <dl class="py method">
 <dt class="sig sig-object py" id="audfactory.Lookup.contains">
 <span class="sig-prename descclassname"><span class="pre">Lookup.</span></span><span class="sig-name descname"><span class="pre">contains</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/audfactory/core/lookup.html#Lookup.contains"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#audfactory.Lookup.contains" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check if lookup table contains entry.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>params</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.11)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>]) – lookup table entry in the form of <code class="docutils literal notranslate"><span class="pre">{column:</span> <span class="pre">parameter}</span></code></p>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dt class="field-even">Return type</dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></p>
 </dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if lookup table contains entry</p>
 </dd>
 </dl>
 </dd></dl>
 
-</section>
-<section id="create">
+</div>
+<div class="section" id="create">
 <h2>create()<a class="headerlink" href="#create" title="Permalink to this heading">¶</a></h2>
 <dl class="py method">
 <dt class="sig sig-object py" id="audfactory.Lookup.create">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Lookup.</span></span><span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">server</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">repository</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'lookup'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/audfactory/core/lookup.html#Lookup.create"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#audfactory.Lookup.create" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create lookup table on server.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>server</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – URL of Artifactory server,
 e.g. <a class="reference external" href="https://audeering.jfrog.io/artifactory">https://audeering.jfrog.io/artifactory</a></p></li>
@@ -398,28 +362,28 @@ e.g. <a class="reference external" href="https://audeering.jfrog.io/artifactory"
 <li><p><strong>force</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – if <code class="docutils literal notranslate"><span class="pre">True</span></code> an existing lookup table is overwritten</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dt class="field-even">Return type</dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>URL of lookup table</p>
 </dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dt class="field-even">Raises</dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#RuntimeError" title="(in Python v3.11)"><strong>RuntimeError</strong></a> – if lookup table exists already
     and <code class="docutils literal notranslate"><span class="pre">force=False</span></code></p>
 </dd>
 </dl>
 </dd></dl>
 
-</section>
-<section id="delete">
+</div>
+<div class="section" id="delete">
 <h2>delete()<a class="headerlink" href="#delete" title="Permalink to this heading">¶</a></h2>
 <dl class="py method">
 <dt class="sig sig-object py" id="audfactory.Lookup.delete">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Lookup.</span></span><span class="sig-name descname"><span class="pre">delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">server</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">repository</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'lookup'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/audfactory/core/lookup.html#Lookup.delete"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#audfactory.Lookup.delete" title="Permalink to this definition">¶</a></dt>
 <dd><p>Delete lookup table on server.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>server</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – URL of Artifactory server,
 e.g. <a class="reference external" href="https://audeering.jfrog.io/artifactory">https://audeering.jfrog.io/artifactory</a></p></li>
@@ -430,25 +394,25 @@ e.g. <a class="reference external" href="https://audeering.jfrog.io/artifactory"
 <li><p><strong>force</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – if <code class="docutils literal notranslate"><span class="pre">True</span></code> removes lookup table even if not empty</p></li>
 </ul>
 </dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dt class="field-even">Raises</dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#RuntimeError" title="(in Python v3.11)"><strong>RuntimeError</strong></a> – if lookup table is not empty
     and <code class="docutils literal notranslate"><span class="pre">force=False</span></code></p>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
 
-</section>
-<section id="exists">
+</div>
+<div class="section" id="exists">
 <h2>exists()<a class="headerlink" href="#exists" title="Permalink to this heading">¶</a></h2>
 <dl class="py method">
 <dt class="sig sig-object py" id="audfactory.Lookup.exists">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Lookup.</span></span><span class="sig-name descname"><span class="pre">exists</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">server</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">repository</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'lookup'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/audfactory/core/lookup.html#Lookup.exists"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#audfactory.Lookup.exists" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check if lookup table exists on server.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>server</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – URL of Artifactory server,
 e.g. <a class="reference external" href="https://audeering.jfrog.io/artifactory">https://audeering.jfrog.io/artifactory</a></p></li>
@@ -458,10 +422,10 @@ e.g. <a class="reference external" href="https://audeering.jfrog.io/artifactory"
 <li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – name of lookup table</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dt class="field-even">Return type</dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></p>
 </dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if lookup table exists</p>
 </dd>
 </dl>
@@ -477,8 +441,8 @@ e.g. <a class="reference external" href="https://audeering.jfrog.io/artifactory"
 </div>
 </dd></dl>
 
-</section>
-<section id="extend">
+</div>
+<div class="section" id="extend">
 <h2>extend()<a class="headerlink" href="#extend" title="Permalink to this heading">¶</a></h2>
 <dl class="py method">
 <dt class="sig sig-object py" id="audfactory.Lookup.extend">
@@ -487,47 +451,47 @@ e.g. <a class="reference external" href="https://audeering.jfrog.io/artifactory"
 <p>If no parameter values are given for the new columns,
 they are set to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>params</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.11)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Sequence" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>], <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.11)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>]]) – lookup table entry in the form of <code class="docutils literal notranslate"><span class="pre">{column:</span> <span class="pre">parameter}</span></code>
 or <code class="docutils literal notranslate"><span class="pre">[column]</span></code> or <code class="docutils literal notranslate"><span class="pre">column</span></code></p>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dt class="field-even">Return type</dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>]</p>
 </dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>lookup table</p>
 </dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dt class="field-even">Raises</dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.11)"><strong>ValueError</strong></a> – if <code class="docutils literal notranslate"><span class="pre">params</span></code> contain unsupported data types</p>
 </dd>
 </dl>
 </dd></dl>
 
-</section>
-<section id="find">
+</div>
+<div class="section" id="find">
 <h2>find()<a class="headerlink" href="#find" title="Permalink to this heading">¶</a></h2>
 <dl class="py method">
 <dt class="sig sig-object py" id="audfactory.Lookup.find">
 <span class="sig-prename descclassname"><span class="pre">Lookup.</span></span><span class="sig-name descname"><span class="pre">find</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/audfactory/core/lookup.html#Lookup.find"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#audfactory.Lookup.find" title="Permalink to this definition">¶</a></dt>
 <dd><p>Find entry in lookup table.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>params</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.11)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>]) – lookup table entry in the form of <code class="docutils literal notranslate"><span class="pre">{column:</span> <span class="pre">parameter}</span></code></p>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dt class="field-even">Return type</dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>ID of lookup table entry</p>
 </dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dt class="field-even">Raises</dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#RuntimeError" title="(in Python v3.11)"><strong>RuntimeError</strong></a> – if lookup table entry cannot be found</p>
 </dd>
 </dl>
 </dd></dl>
 
-</section>
-<section id="generate-uid">
+</div>
+<div class="section" id="generate-uid">
 <h2>generate_uid()<a class="headerlink" href="#generate-uid" title="Permalink to this heading">¶</a></h2>
 <dl class="py method">
 <dt class="sig sig-object py" id="audfactory.Lookup.generate_uid">
@@ -538,7 +502,7 @@ and concatenates it with <code class="docutils literal notranslate"><span class=
 and <code class="docutils literal notranslate"><span class="pre">repository</span></code>.
 From that concatenated string a unique ID is derived.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>params</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.11)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>]) – params in the form of <code class="docutils literal notranslate"><span class="pre">{column:</span> <span class="pre">parameter}</span></code></p></li>
 <li><p><strong>group_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – group ID of lookup table</p></li>
@@ -547,10 +511,10 @@ From that concatenated string a unique ID is derived.</p>
 <li><p><strong>repository</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – repository of lookup table</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dt class="field-even">Return type</dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>unique identifier of length 36</p>
 </dd>
 </dl>
@@ -567,8 +531,8 @@ From that concatenated string a unique ID is derived.</p>
 </div>
 </dd></dl>
 
-</section>
-<section id="group-id">
+</div>
+<div class="section" id="group-id">
 <h2>group_id<a class="headerlink" href="#group-id" title="Permalink to this heading">¶</a></h2>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="audfactory.Lookup.group_id">
@@ -576,8 +540,8 @@ From that concatenated string a unique ID is derived.</p>
 <dd><p>group ID of lookup table</p>
 </dd></dl>
 
-</section>
-<section id="ids">
+</div>
+<div class="section" id="ids">
 <h2>ids<a class="headerlink" href="#ids" title="Permalink to this heading">¶</a></h2>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="audfactory.Lookup.ids">
@@ -585,15 +549,15 @@ From that concatenated string a unique ID is derived.</p>
 <dd><p>Lookup table ids.</p>
 </dd></dl>
 
-</section>
-<section id="latest-version">
+</div>
+<div class="section" id="latest-version">
 <h2>latest_version()<a class="headerlink" href="#latest-version" title="Permalink to this heading">¶</a></h2>
 <dl class="py method">
 <dt class="sig sig-object py" id="audfactory.Lookup.latest_version">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Lookup.</span></span><span class="sig-name descname"><span class="pre">latest_version</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">server</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">repository</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group_id</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'lookup'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/audfactory/core/lookup.html#Lookup.latest_version"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#audfactory.Lookup.latest_version" title="Permalink to this definition">¶</a></dt>
 <dd><p>Latest version of lookup table on server.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>server</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – URL of Artifactory server,
 e.g. <a class="reference external" href="https://audeering.jfrog.io/artifactory">https://audeering.jfrog.io/artifactory</a></p></li>
@@ -603,10 +567,10 @@ e.g. <a class="reference external" href="https://audeering.jfrog.io/artifactory"
 <li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – name of lookup table</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dt class="field-even">Return type</dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.11)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</p>
 </dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>latest version of lookup table</p>
 </dd>
 </dl>
@@ -621,8 +585,8 @@ e.g. <a class="reference external" href="https://audeering.jfrog.io/artifactory"
 </div>
 </dd></dl>
 
-</section>
-<section id="name">
+</div>
+<div class="section" id="name">
 <h2>name<a class="headerlink" href="#name" title="Permalink to this heading">¶</a></h2>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="audfactory.Lookup.name">
@@ -630,28 +594,28 @@ e.g. <a class="reference external" href="https://audeering.jfrog.io/artifactory"
 <dd><p>name of lookup table</p>
 </dd></dl>
 
-</section>
-<section id="remove">
+</div>
+<div class="section" id="remove">
 <h2>remove()<a class="headerlink" href="#remove" title="Permalink to this heading">¶</a></h2>
 <dl class="py method">
 <dt class="sig sig-object py" id="audfactory.Lookup.remove">
 <span class="sig-prename descclassname"><span class="pre">Lookup.</span></span><span class="sig-name descname"><span class="pre">remove</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/audfactory/core/lookup.html#Lookup.remove"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#audfactory.Lookup.remove" title="Permalink to this definition">¶</a></dt>
 <dd><p>Remove entry from lookup table.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>params</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.11)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>]) – lookup table entry in the form of <code class="docutils literal notranslate"><span class="pre">{column:</span> <span class="pre">parameter}</span></code></p>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dt class="field-even">Return type</dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>ID of removed entry</p>
 </dd>
 </dl>
 </dd></dl>
 
-</section>
-<section id="repository">
+</div>
+<div class="section" id="repository">
 <h2>repository<a class="headerlink" href="#repository" title="Permalink to this heading">¶</a></h2>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="audfactory.Lookup.repository">
@@ -659,8 +623,8 @@ e.g. <a class="reference external" href="https://audeering.jfrog.io/artifactory"
 <dd><p>repository of lookup table</p>
 </dd></dl>
 
-</section>
-<section id="server">
+</div>
+<div class="section" id="server">
 <h2>server<a class="headerlink" href="#server" title="Permalink to this heading">¶</a></h2>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="audfactory.Lookup.server">
@@ -668,8 +632,8 @@ e.g. <a class="reference external" href="https://audeering.jfrog.io/artifactory"
 <dd><p>server URL</p>
 </dd></dl>
 
-</section>
-<section id="table">
+</div>
+<div class="section" id="table">
 <h2>table<a class="headerlink" href="#table" title="Permalink to this heading">¶</a></h2>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="audfactory.Lookup.table">
@@ -677,8 +641,8 @@ e.g. <a class="reference external" href="https://audeering.jfrog.io/artifactory"
 <dd><p>Lookup table.</p>
 </dd></dl>
 
-</section>
-<section id="url">
+</div>
+<div class="section" id="url">
 <h2>url<a class="headerlink" href="#url" title="Permalink to this heading">¶</a></h2>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="audfactory.Lookup.url">
@@ -686,8 +650,8 @@ e.g. <a class="reference external" href="https://audeering.jfrog.io/artifactory"
 <dd><p>Artifactory URL of lookup table</p>
 </dd></dl>
 
-</section>
-<section id="version">
+</div>
+<div class="section" id="version">
 <h2>version<a class="headerlink" href="#version" title="Permalink to this heading">¶</a></h2>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="audfactory.Lookup.version">
@@ -695,15 +659,15 @@ e.g. <a class="reference external" href="https://audeering.jfrog.io/artifactory"
 <dd><p>version of lookup table</p>
 </dd></dl>
 
-</section>
-<section id="versions">
+</div>
+<div class="section" id="versions">
 <h2>versions()<a class="headerlink" href="#versions" title="Permalink to this heading">¶</a></h2>
 <dl class="py method">
 <dt class="sig sig-object py" id="audfactory.Lookup.versions">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Lookup.</span></span><span class="sig-name descname"><span class="pre">versions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">server</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">repository</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'lookup'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/audfactory/core/lookup.html#Lookup.versions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#audfactory.Lookup.versions" title="Permalink to this definition">¶</a></dt>
 <dd><p>Available versions of lookup table on server.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>server</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – URL of Artifactory server,
 e.g. <a class="reference external" href="https://audeering.jfrog.io/artifactory">https://audeering.jfrog.io/artifactory</a></p></li>
@@ -713,10 +677,10 @@ e.g. <a class="reference external" href="https://audeering.jfrog.io/artifactory"
 <li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – name of lookup table</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dt class="field-even">Return type</dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a></p>
 </dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>available versions of lookup table</p>
 </dd>
 </dl>
@@ -731,8 +695,8 @@ e.g. <a class="reference external" href="https://audeering.jfrog.io/artifactory"
 </div>
 </dd></dl>
 
-</section>
-</section>
+</div>
+</div>
 
 
            </div>
@@ -790,6 +754,9 @@ e.g. <a class="reference external" href="https://audeering.jfrog.io/artifactory"
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/sphinx_highlight.js"></script>
         <script src="../_static/clipboard.min.js"></script>
