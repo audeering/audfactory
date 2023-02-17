@@ -9,6 +9,7 @@ from artifactory import (
     sha1sum,
     sha256sum,
 )
+import dohq_artifactory
 import requests
 
 import audeer
@@ -431,7 +432,14 @@ def versions(
     try:
         versions = [os.path.basename(str(p)) for p in path if p.is_dir]
         versions = [v for v in versions if audeer.is_semantic_version(v)]
-    except (FileNotFoundError, RuntimeError, requests.exceptions.HTTPError):
+    except (
+            FileNotFoundError,
+            RuntimeError,
+            # no access rights to server with dohq-artifactory<0.8
+            requests.exceptions.HTTPError,
+            # no access rights to server with dohq-artifactory>=0.8
+            dohq_artifactory.exception.ArtifactoryException,
+    ):
         versions = []
     return audeer.sort_versions(versions)
 
