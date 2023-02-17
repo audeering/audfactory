@@ -7,6 +7,14 @@ The format is based on `Keep a Changelog`_,
 and this project adheres to `Semantic Versioning`_.
 
 
+Version 1.0.12 (2023-02-17)
+---------------------------
+
+* Fixed: ``audfactory.versions()``
+  for server with no access rights
+  and ``dohq-artifactory>=0.8``
+
+
 Version 1.0.11 (2023-02-13)
 ---------------------------
 
