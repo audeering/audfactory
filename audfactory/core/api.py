@@ -435,6 +435,9 @@ def versions(
     except (
             FileNotFoundError,
             RuntimeError,
+    ):
+        versions = []
+    except (
             # no access rights to server with dohq-artifactory<0.8
             requests.exceptions.HTTPError,
             # no access rights to server with dohq-artifactory>=0.8
