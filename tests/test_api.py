@@ -388,3 +388,7 @@ def test_versions(group_id, name, expected_versions):
         name,
     )
     assert versions == expected_versions
+
+
+def test_versions_no_access(no_artifactory_access_rights):
+    assert audfactory.versions(SERVER, REPOSITORY, 'group_id') == []
