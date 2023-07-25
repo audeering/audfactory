@@ -1,15 +1,13 @@
-from audfactory.core.api import (
-    authentification,
-    checksum,
-    deploy,
-    download,
-    group_id_to_path,
-    path,
-    path_to_group_id,
-    rest_api_get,
-    url,
-    versions,
-)
+from audfactory.core.api import authentification
+from audfactory.core.api import checksum
+from audfactory.core.api import deploy
+from audfactory.core.api import download
+from audfactory.core.api import group_id_to_path
+from audfactory.core.api import path
+from audfactory.core.api import path_to_group_id
+from audfactory.core.api import rest_api_get
+from audfactory.core.api import url
+from audfactory.core.api import versions
 from audfactory.core.lookup import Lookup
 
 
