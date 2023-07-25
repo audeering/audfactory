@@ -164,6 +164,7 @@ def deploy(
             sha1=sha1,
             sha256=sha256,
             parameters=parameters,
+            quote_parameters=True,
         )
 
     if verbose:  # pragma: no cover
@@ -298,6 +299,7 @@ def path(
         >>> for content in artifactory_path:
         ...     print(os.path.basename(str(content)))
         ...
+        attachment
         db
         media
         meta

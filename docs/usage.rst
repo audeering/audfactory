@@ -93,7 +93,7 @@ In this case
 it is recommended to not use the environment variables.
 
 
-.. _API key: https://www.jfrog.com/confluence/display/JFROG/User+Profile#UserProfile-APIKey
+.. _API key: https://jfrog.com/help/r/jfrog-platform-administration-documentation/api-key
 
 
 Artifactory
