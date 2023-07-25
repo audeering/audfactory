@@ -94,7 +94,7 @@ Version 1.0.0 (2021-03-26)
 * Added: support for anonymous Artifactory user access
 * Changed: renamed ``audfactory.artifactory_path()`` to ``audfactory.path()``
 * Changed: renamed ``audfactory.deploy_artifact()`` to
-  ``audfactory.depoy()``
+  ``audfactory.deploy()``
 * Changed: renamed ``audfactory.download_artifact()`` to
   ``audfactory.download()``
 * Changed: renamed ``audfactory.server_url()`` to ``audfactory.url()``

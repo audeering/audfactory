@@ -2,13 +2,11 @@ import errno
 import os
 import typing
 
-from artifactory import (
-    ArtifactoryPath,
-    get_global_config_entry,
-    md5sum,
-    sha1sum,
-    sha256sum,
-)
+from artifactory import ArtifactoryPath
+from artifactory import get_global_config_entry
+from artifactory import md5sum
+from artifactory import sha1sum
+from artifactory import sha256sum
 import dohq_artifactory
 import requests
 
@@ -454,7 +452,7 @@ _path = path
 
 
 def _strip_url(url):  # pragma: nocover
-    r"""Returns a URL without http(s):// prefixes and ending /"""
+    r"""Returns a URL without http(s):// prefixes and ending /."""
     if url.startswith('http://'):
         url = url[7:]
     elif url.startswith('https://'):

@@ -715,7 +715,7 @@ def _upload(
     fobj = io.StringIO()
     writer = csv.writer(fobj, delimiter=',')
     writer.writerows(table)
-    # Seek to beginning of file, otherwise an empty CSV file wil be written
+    # Seek to beginning of file, otherwise an empty CSV file will be written
     fobj.seek(0)
     artifactory_path = audfactory.path(url)
     if not artifactory_path.parent.exists():

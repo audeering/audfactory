@@ -22,14 +22,14 @@ Have a look at the installation_ and usage_ instructions.
 .. |tests| image:: https://github.com/audeering/audfactory/workflows/Test/badge.svg
     :target: https://github.com/audeering/audfactory/actions?query=workflow%3ATest
     :alt: Test status
-.. |coverage| image:: https://codecov.io/gh/audeering/audfactory/branch/master/graph/badge.svg?token=LGV5O708V3
+.. |coverage| image:: https://codecov.io/gh/audeering/audfactory/branch/main/graph/badge.svg?token=LGV5O708V3
     :target: https://codecov.io/gh/audeering/audfactory/
     :alt: code coverage
 .. |docs| image:: https://img.shields.io/pypi/v/audfactory?label=docs
     :target: https://audeering.github.io/audfactory/
     :alt: audfactory's documentation
 .. |license| image:: https://img.shields.io/badge/license-MIT-green.svg
-    :target: https://github.com/audeering/audfactory/blob/master/LICENSE
+    :target: https://github.com/audeering/audfactory/blob/main/LICENSE
     :alt: audfactory's MIT license
 .. |python-versions| image:: https://img.shields.io/pypi/pyversions/audfactory.svg
     :target: https://pypi.org/project/audfactory/
