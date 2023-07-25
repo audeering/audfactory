@@ -12,6 +12,7 @@ Version 1.0.13 (2023-07-25)
 
 * Changed: require ``dohq-artifactory>=0.9.0``
 * Fixed: suppress warning with newer ``dohq-artifactory`` versions
+* Removed: support for Python 3.7
 
 
 Version 1.0.12 (2023-02-17)
