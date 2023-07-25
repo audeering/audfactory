@@ -11,7 +11,7 @@ Version 1.0.13 (2023-07-25)
 ---------------------------
 
 * Changed: require ``dohq-artifactory>=0.9.0``
-* Fixed: suppress warning with newer ``artifactory`` versions
+* Fixed: suppress warning with newer ``dohq-artifactory`` versions
 
 
 Version 1.0.12 (2023-02-17)
