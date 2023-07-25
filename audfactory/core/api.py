@@ -299,6 +299,7 @@ def path(
         >>> for content in artifactory_path:
         ...     print(os.path.basename(str(content)))
         ...
+        attachment
         db
         media
         meta
