@@ -164,6 +164,7 @@ def deploy(
             sha1=sha1,
             sha256=sha256,
             parameters=parameters,
+            quote_parameters=True,
         )
 
     if verbose:  # pragma: no cover
